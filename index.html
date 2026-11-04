@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>البتول - حمص المخرم</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#0f172a;color:#fff}
+
+/* === أضواء حواف الشاشة + وميض === */
+.edge-light{position:fixed;z-index:9998;pointer-events:none;box-shadow:0 0 12px #00b4d8, 0 0 25px rgba(0,180,216,.6)}
+.edge-light.top,.edge-light.bottom{left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00b4d8,#00e5ff,#fff,#00b4d8,transparent);background-size:200% 100%;animation:moveLight 2.5s linear infinite, shimmer 1.5s ease-in-out infinite alternate}
+.edge-light.left,.edge-light.right{top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,#00b4d8,#00e5ff,#fff,#00b4d8,transparent);background-size:100% 200%;animation:moveLightV 2.5s linear infinite, shimmer 1.5s ease-in-out infinite alternate}
+.edge-light.top{top:0}.edge-light.bottom{bottom:0}.edge-light.left{left:0}.edge-light.right{right:0}
+@keyframes moveLight{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes moveLightV{0%{background-position:0 -200%}100%{background-position:0 200%}}
+@keyframes shimmer{0%{opacity:.7;box-shadow:0 0 8px #00b4d8}100%{opacity:1;box-shadow:0 0 18px #00e5ff, 0 0 35px rgba(0,180,216,.8)}}
+
+/* === قسم المصداقية === */
+.trust-section{padding:50px 8%;background:linear-gradient(135deg,#131c31,#0f172a);text-align:center;border-top:1px solid rgba(0,180,216,.15);border-bottom:1px solid rgba(0,180,216,.15)}
+.trust-title{font-size:2rem;font-weight:900;margin-bottom:8px}.trust-title span{color:#00b4d8}
+.trust-sub{color:#94a3b8;margin-bottom:30px;font-size:1rem}
+.trust-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.trust-card{background:#1e293b;border:1px solid rgba(0,180,216,.15);border-radius:18px;padding:22px}
+.trust-card i{font-size:32px;color:#00b4d8;margin-bottom:10px;display:block}
+.trust-card h4{font-weight:800;margin-bottom:6px}
+.trust-card p{color:#cbd5e1;font-size:.9rem;line-height:1.6}
+
+.pulse-img{animation:pulseBorder 0.8s ease}
+@keyframes pulseBorder{0%{box-shadow:0 0 0 0 rgba(0,180,216,0.8)}50%{box-shadow:0 0 0 18px rgba(0,180,216,0);transform:scale(1.02)}100%{box-shadow:0 0 0 0 rgba(0,180,216,0);transform:scale(1)}}
+
+header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;color:#00b4d8;font-size:26px}.logo span{color:#fff}
+.views-badge{background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.3);padding:6px 14px;border-radius:20px;font-size:.85rem;color:#00b4d8;font-weight:800}
+.hero{min-height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 8% 40px;background:radial-gradient(800px 400px at 50% 0%,#1e293b,#0f172a)}
+.hero-content{background:rgba(30,41,59,.6);padding:35px;border-radius:28px;max-width:650px;border:1px solid rgba(255,255,255,.08)}
+.hero-img{width:100%;max-height:220px;object-fit:cover;border-radius:16px;margin-bottom:15px;cursor:pointer}
+.contact-badge{background:#00b4d8;padding:10px 28px;border-radius:30px;font-weight:800;display:inline-block;margin-top:10px}
+.products{padding:80px 8%}.section-title{text-align:center;font-size:2.4rem;margin-bottom:50px}.section-title span{color:#00b4d8}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:25px;max-width:1200px;margin:0 auto}
+.card{background:#1e293b;border-radius:22px;padding:22px;text-align:center;border:1px solid rgba(255,255,255,.06);position:relative}
+.card img{width:100%;height:230px;object-fit:contain;background:#0f172a;border-radius:14px;margin-bottom:12px;cursor:pointer;transition:0.3s}
+.price{color:#00b4d8;font-weight:800;font-size:1.3rem}.price-old{text-decoration:line-through;color:#94a3b8}
+.badge{display:inline-block;margin-top:10px;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem;line-height:1.6}
+.badge-sold{background:rgba(234,179,8,.15);color:#eab308;border:1px solid rgba(234,179,8,.35)}
+.view-count{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:20px;font-size:.8rem;color:#fff;display:flex;gap:5px;align-items:center}
+.device-title-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0}
+.share-mini{width:32px;height:32px;border-radius:50%;background:#25D366;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;box-shadow:0 2px 8px rgba(37,211,102,.4)}
+.sell-section{padding:80px 8%}.sell-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
+.sell-form-box{background:#1e293b;padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,.07)}
+.input-group{margin-bottom:12px;text-align:right}.input-group label{font-weight:700;color:#cbd5e1;display:block;margin-bottom:5px}.input-group label span{color:#ef4444}
+.input-group input,.input-group select{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f172a;color:#fff;outline:none}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.upload-area{border:2px dashed #00b4d8;padding:16px;border-radius:14px;text-align:center;cursor:pointer;background:rgba(0,180,216,.06)}
+#previewBox{display:none;margin-top:10px}#previewBox img{width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px}
+.radio-group{display:flex;gap:8px}.radio-group label{background:#0f172a;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;display:flex;gap:5px;align-items:center}
+.error-msg{color:#f87171;font-size:.8rem;display:none;margin-top:4px}
+.btn{padding:12px 22px;border-radius:30px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn-whatsapp{background:#25D366;color:#fff;width:100%}.btn-invite{background:#00b4d8;color:#fff}.btn-buy{background:#00b4d8;color:#fff;width:100%;margin-top:10px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
+.modal-box{background:#1e293b;padding:24px;border-radius:20px;max-width:400px;width:100%;border:1px solid rgba(255,255,255,.1);text-align:center}
+.whatsapp-float{position:fixed;bottom:22px;left:22px;background:#25D366;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;border:none;z-index:9999;cursor:pointer}
+footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
+@media(max-width:768px){.sell-container{grid-template-columns:1fr}header{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<div class="edge-light top"></div><div class="edge-light bottom"></div><div class="edge-light left"></div><div class="edge-light right"></div>
+<header><div class="logo">البتول <span>للجوالات</span></div><div class="views-badge"><i class="fa-solid fa-eye"></i> المشاهدات: <span id="totalViews">0</span></div></header>
+<section class="hero"><div class="hero-content"><img src="https://i.ibb.co/Z1TFXQVF/dd46cd6b14f82e05cced6710d0664a45.jpg" class="hero-img" onclick="pulseThis(this)"><h1>معرض <span>البتول</span></h1><p>حمص - المخرم الفوقاني - أم التين</p><div class="contact-badge"><i class="fa-solid fa-phone"></i> 0930688067</div></div></section>
+
+<!-- قسم وجهتكم الأولى الجديد -->
+<section class="trust-section">
+<h2 class="trust-title">وجهتكم الأولى <span>مصداقية وشفافية</span></h2>
+<p class="trust-sub">في معرض البتول نضمن لكم تجربة بيع وشراء آمنة وواضحة</p>
+<div class="trust-grid">
+<div class="trust-card"><i class="fa-solid fa-shield-halved"></i><h4>مصداقية تامة</h4><p>كل جهاز يفحص ويعرض بحالته الحقيقية بدون غش</p></div>
+<div class="trust-card"><i class="fa-solid fa-eye"></i><h4>شفافية مطلقة</h4><p>السعر والمواصفات والكرتونة واضحة قبل أي تواصل</p></div>
+<div class="trust-card"><i class="fa-solid fa-handshake"></i><h4>وساطة مضمونة</h4><p>البيع والشراء يتم عبر صاحب الموقع 0930688067 لضمان حق الطرفين</p></div>
+</div>
+</section>
+
+<section class="products"><h2 class="section-title">جوالات <span>متوفرة</span></h2><div class="cards-grid"><div class="card"><div class="view-count"><i class="fa-solid fa-eye"></i> <span class="static-view">0</span></div><img src="https://mobelat.com/wp-content/uploads/2025/08/samsung-galaxy-a07-4g-thumb-mobelat.jpg" onclick="pulseThis(this)"><div class="device-title-row"><h3>Samsung Galaxy A07</h3><button class="share-mini" onclick="shareDevice('Samsung Galaxy A07','150$')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price price-old">150$</p><span class="badge badge-sold">مباع - الله يهني صاحب النصيب</span></div><div class="card"><div class="view-count"><i class="fa-solid fa-eye"></i> <span class="static-view">0</span></div><img src="https://i.ibb.co/svw2Ppx3/61-X6-CZex-COL-AC-UF894-1000-QL80-FMwebp.webp" onclick="pulseThis(this)"><div class="device-title-row"><h3>Redmi 10 2022</h3><button class="share-mini" onclick="shareDevice('Redmi 10 2022','50$')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price">50$</p><span class="badge">متوفر بعقد الهوية<br>نظافة جيدة جدا</span></div><div class="card"><div class="view-count"><i class="fa-solid fa-eye"></i> <span class="static-view">0</span></div><img src="https://i.ibb.co/3KRzGdJ/5ac4fb46a4997e817bbc20560be2370d.jpg" onclick="pulseThis(this)"><div class="device-title-row"><h3>Samsung S10</h3><button class="share-mini" onclick="shareDevice('Samsung S10','70$')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price price-old">70$</p><span class="badge badge-sold">مباع - الله يهني صاحب النصيب</span></div></div></section>
+<section class="products" id="customerSection" style="background:#131c31"><div class="cards-grid" id="customerGrid"></div></section>
+<section class="sell-section"><div class="sell-container"><div><h2 style="font-size:2.2rem;font-weight:900">هل تريد <span style="color:#00b4d8">بيع جهازك؟</span></h2><div class="sell-form-box" style="margin-top:20px"><div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('deviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="deviceImage" accept="image/*" hidden><div id="previewBox"><img id="previewImg" onclick="pulseThis(this)"></div><div class="error-msg" id="errImage">صورة الجهاز إلزامية</div></div><div class="input-group"><label>نوع الجهاز <span>*</span></label><select id="deviceModel"><option value="">اختر نوع الجهاز</option><option>Apple iPhone</option><option>Samsung Galaxy</option><option>Xiaomi Redmi</option><option>Xiaomi Poco</option><option>Infinix</option><option>Tecno</option><option>Realme</option><option>Honor</option><option>Huawei</option><option>Nokia</option><option>Itel</option><option>أخرى</option></select><div class="error-msg" id="errModel">اختر نوع الجهاز</div></div><div class="input-group" id="otherModelGroup" style="display:none"><label>اكتب موديل الجهاز</label><input type="text" id="otherModel" placeholder="مثال: iPhone 13 Pro Max"></div><div class="input-row"><div class="input-group"><label>الرام <span>*</span></label><select id="deviceRam"><option value="">اختر الرام</option><option>2GB</option><option>3GB</option><option>4GB</option><option>6GB</option><option>8GB</option><option>12GB</option></select><div class="error-msg" id="errRam">الرام مطلوب</div></div><div class="input-group"><label>الذاكرة <span>*</span></label><select id="deviceStorage"><option value="">اختر الذاكرة</option><option>32GB</option><option>64GB</option><option>128GB</option><option>256GB</option><option>512GB</option></select><div class="error-msg" id="errStorage">الذاكرة مطلوبة</div></div></div><div class="input-row"><div class="input-group"><label>السعر <span>*</span></label><input type="number" id="devicePrice" placeholder="100"><div class="error-msg" id="errPrice">السعر مطلوب</div></div><div class="input-group"><label>العملة <span>*</span></label><select id="deviceCurrency"><option value="$">دولار $</option><option value="ل.س">ليرة سورية ل.س</option></select></div></div><div class="input-group"><label>الكرتونة <span>*</span></label><div class="radio-group"><label><input type="radio" name="box" value="معه كرتونة"> معه</label><label><input type="radio" name="box" value="بدون كرتونة"> بدون</label></div><div class="error-msg" id="errBox">حدد الكرتونة</div></div><div class="input-group"><label>رقمك للتواصل <span>*</span></label><input type="tel" id="devicePhone" placeholder="09xxxxxxxx"><div class="error-msg" id="errPhone">رقمك إلزامي</div></div><div style="display:flex;gap:10px"><button class="btn btn-whatsapp" onclick="publishDevice()" style="flex:1.4"><i class="fa-solid fa-store"></i> اعرض جهازي للبيع</button><button class="btn btn-invite" onclick="inviteFriend()" style="flex:1"><i class="fa-solid fa-share-nodes"></i> ادعو صديقك</button></div></div></div><div style="background:linear-gradient(135deg,#1e293b,#0f172a);border-radius:22px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,.06)"><i class="fa-solid fa-mobile-screen-button" style="font-size:70px;color:#00b4d8"></i><p style="margin-top:15px;color:#e2e8f0;line-height:1.8">الشراء يتم عبر واتساب صاحب الموقع فقط<br>تواصل: 0930688067</p></div></div></section>
+<div class="modal-overlay" id="buyModal"><div class="modal-box"><h3><i class="fa-solid fa-cart-shopping" style="color:#00b4d8"></i> إتمام عملية الشراء</h3><p style="color:#e2e8f0;font-size:.95rem;margin:14px 0">للشراء تواصل مع صاحب الموقع مباشرة:</p><div style="background:#0f172a;border:1px solid #00b4d8;border-radius:30px;padding:10px 18px;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;font-weight:900;font-size:1.2rem;color:#00b4d8"><i class="fa-solid fa-phone"></i> 0930688067</div><div class="input-group" style="text-align:right"><label>رقمك انت (المشتري) <span>*</span></label><input type="tel" id="buyerPhone" placeholder="09xxxxxxxx"></div><div class="error-msg" id="errBuyerPhone">رقمك إلزامي</div><div style="display:flex;gap:10px;margin-top:16px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeBuyModal()">إلغاء</button><button class="btn btn-whatsapp" style="flex:1" onclick="confirmBuy()"><i class="fa-brands fa-whatsapp"></i> تواصل على 0930688067</button></div></div></div>
+<button class="whatsapp-float" onclick="openWA()"><i class="fa-brands fa-whatsapp"></i></button>
+<footer>البتول للجوالات - حمص المخرم الفوقاني أم التين - 0930688067 © 2026<br><span style="font-size:.85rem"><i class="fa-solid fa-eye"></i> إجمالي المشاهدات: <span id="footerViews">0</span></span></footer>
+<script>
+let selectedImage=null;let currentBuyDevice=null;let currentBuyIndex=null;
+function pulseThis(img){img.classList.remove('pulse-img');void img.offsetWidth;img.classList.add('pulse-img');setTimeout(()=>img.classList.remove('pulse-img'),800);}
+function shareDevice(name,price){const link=window.location.href;const text=`شوف هالجهاز على معرض البتول 📱\n${name} - ${price}\n${link}`;window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");}
+document.getElementById('deviceImage').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;selectedImage=f;const r=new FileReader();r.onload=ev=>{document.getElementById('previewImg').src=ev.target.result;document.getElementById('previewBox').style.display='block';};r.readAsDataURL(f);});
+document.getElementById('deviceModel').addEventListener('change',function(){const other=document.getElementById('otherModelGroup');if(this.value==='أخرى'){other.style.display='block';}else{other.style.display='none';}});
+function openWA(){window.open("https://wa.me/963930688067?text="+encodeURIComponent("السلام عليكم معرض البتول"),"_blank");}
+function updateTotalViews(){let total=parseInt(localStorage.getItem('batoul_total_views')||'0');total++;localStorage.setItem('batoul_total_views',total);document.getElementById('totalViews').textContent=total;document.getElementById('footerViews').textContent=total;let staticViews=parseInt(localStorage.getItem('batoul_static_views')||'0');staticViews++;localStorage.setItem('batoul_static_views',staticViews);document.querySelectorAll('.static-view').forEach(el=>el.textContent=staticViews);}
+function loadDevices(){const list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');const grid=document.getElementById('customerGrid');grid.innerHTML='';list.forEach((d,i)=>{const div=document.createElement('div');div.className='card';div.innerHTML=`<div class="view-count"><i class="fa-solid fa-eye"></i> ${d.views||0}</div><img src="${d.img}" onclick="pulseThis(this)"><div class="device-title-row"><h3>${d.model}</h3><button class="share-mini" onclick="shareDevice('${d.model}','${d.price} ${d.currency}')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price">${d.price} ${d.currency}</p><span class="badge">رام ${d.ram} - ${d.storage}<br>${d.box}<br><i class="fa-solid fa-phone"></i> ${d.phone}</span><button class="btn btn-buy" onclick="openBuyModal(${i})"><i class="fa-brands fa-whatsapp"></i> شراء عبر 0930688067</button>`;grid.appendChild(div);});}
+function publishDevice(){let ok=true;document.querySelectorAll('.error-msg').forEach(el=>{if(el.id!='errBuyerPhone')el.style.display='none'});const modelSelect=document.getElementById('deviceModel').value;const otherModel=document.getElementById('otherModel').value.trim();const finalModel=modelSelect==='أخرى' && otherModel ? otherModel : modelSelect;const ram=document.getElementById('deviceRam').value;const storage=document.getElementById('deviceStorage').value;const price=document.getElementById('devicePrice').value;const currency=document.getElementById('deviceCurrency').value;const phone=document.getElementById('devicePhone').value.trim();const box=document.querySelector('input[name="box"]:checked')?.value||'';if(!selectedImage){document.getElementById('errImage').style.display='block';ok=false}if(!modelSelect){document.getElementById('errModel').style.display='block';ok=false}if(!ram){document.getElementById('errRam').style.display='block';ok=false}if(!storage){document.getElementById('errStorage').style.display='block';ok=false}if(!price){document.getElementById('errPrice').style.display='block';ok=false}if(!box){document.getElementById('errBox').style.display='block';ok=false}if(!phone){document.getElementById('errPhone').style.display='block';ok=false}if(!ok)return;const reader=new FileReader();reader.onload=ev=>{const list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');list.unshift({img:ev.target.result,model:finalModel,ram,storage,price,currency,box,phone,views:0});localStorage.setItem('batoul_customer_devices',JSON.stringify(list));loadDevices();const msg=`السلام عليكم معرض البتول - اريد بيع جهاز:\n📱 الجهاز: ${finalModel}\n💾 الرام: ${ram} - الذاكرة: ${storage}\n📦 الكرتونة: ${box}\n💲 السعر: ${price} ${currency}\n📞 رقمي: ${phone}`;window.open("https://wa.me/963930688067?text="+encodeURIComponent(msg),"_blank");};reader.readAsDataURL(selectedImage);}
+function openBuyModal(idx){const list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');currentBuyDevice=list[idx];currentBuyIndex=idx;list[idx].views=(list[idx].views||0)+1;localStorage.setItem('batoul_customer_devices',JSON.stringify(list));loadDevices();document.getElementById('buyModal').style.display='flex';}
+function closeBuyModal(){document.getElementById('buyModal').style.display='none';document.getElementById('errBuyerPhone').style.display='none'}
+function confirmBuy(){const buyer=document.getElementById('buyerPhone').value.trim();if(!buyer){document.getElementById('errBuyerPhone').style.display='block';return}const d=currentBuyDevice;const msg=`السلام عليكم معرض البتول - اريد شراء جهاز:\n📱 الجهاز: ${d.model}\n💾 الرام: ${d.ram} - الذاكرة: ${d.storage}\n📦 الكرتونة: ${d.box}\n💲 سعر البائع: ${d.price} ${d.currency}\n📞 رقم البائع: ${d.phone}\n📞 رقمي انا المشتري: ${buyer}`;window.open("https://wa.me/963930688067?text="+encodeURIComponent(msg),"_blank");closeBuyModal();}
+function inviteFriend(){const siteLink=window.location.href;const text=`تعال بيع جوالك على معرض البتول 📱\nاعرض جهازك مجانا وبيعو بسرعة على موقع البتول - حمص المخرم:\n${siteLink}`;if(navigator.share){navigator.share({title:'معرض البتول للجوالات', text:text, url:siteLink}).catch(()=>{});}else{window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");}}
+updateTotalViews();loadDevices();
+</script>
+</body>
+</html>
