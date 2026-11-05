@@ -83,11 +83,8 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 </head>
 <body>
 <div class="edge-light top"></div><div class="edge-light bottom"></div><div class="edge-light left"></div><div class="edge-light right"></div>
-
 <header><div class="logo">البتول <span>للجوالات</span></div><div class="header-actions"><button class="admin-btn-header" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> لوحة التحكم</button><div class="views-badge"><i class="fa-solid fa-eye"></i> المشاهدات: <span id="totalViews">0</span></div></div></header>
-
 <section class="hero"><div class="hero-content"><img src="https://i.ibb.co/Z1TFXQVF/dd46cd6b14f82e05cced6710d0664a45.jpg" class="hero-img" onclick="pulseThis(this)"><h1>معرض <span>البتول</span></h1><p>حمص - المخرم الفوقاني - أم التين</p><div class="contact-badge"><i class="fa-solid fa-phone"></i> 0930688067</div><p style="margin-top:14px;color:#a5f3fc;font-size:.9rem">بيع • بدل • فحص مضمون</p></div></section>
-
 <section class="trust-section">
 <h2 class="trust-title">وجهتكم الأولى <span>مصداقية وشفافية</span></h2>
 <p class="trust-sub">في معرض البتول نضمن لكم تجربة بيع وشراء آمنة وواضحة</p>
@@ -97,46 +94,13 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 <div class="trust-card"><i class="fa-solid fa-handshake"></i><h4>وساطة مضمونة</h4><p>البيع والشراء يتم عبر صاحب الموقع 0930688067 لضمان حق الطرفين</p></div>
 </div>
 </section>
-
 <section class="products"><h2 class="section-title">جوالات <span>متوفرة</span></h2>
 <p class="section-sub">اضغط على "تقرير الفحص" لتشوف حالة الجهاز الحقيقية - فيكي تعدليها من لوحة التحكم بأي وقت</p>
 <div class="cards-grid" id="storeGrid"></div></section>
-
-<!-- مزايا فريدة - بدون تقسيط وبدون صفقة اليوم -->
-<section class="products" style="background:#131c31">
-<h2 class="section-title">مزايا <span>فريدة</span> بس عند البتول</h2>
-<div class="unique-grid">
-<div class="unique-box">
-<h3>📱⇄📱 بدّل جهازك بجهاز</h3><p>حط سعر جهازك القديم، واختار الجهاز اللي بدك ياه من المعرض، ونحنا منحسبلك الفرق فوراً.</p>
-<div class="input-group"><label>سعر جهازك القديم ($)</label><input type="number" id="oldPrice" placeholder="مثال: 40" oninput="calcSwap()"></div>
-<div class="input-group"><label>الجهاز اللي بدك ياه</label><select id="newPrice" onchange="calcSwap()"><option value="50">Redmi 10 2022 - 50$</option><option value="150">Samsung A07 - 150$</option><option value="70">Samsung S10 - 70$</option><option value="120">iPhone 11 - 120$</option></select></div>
-<div class="result-box" id="swapResult"></div>
-<button class="btn btn-whatsapp" onclick="sendSwap()" style="margin-top:12px">أرسل طلب البدل واتساب</button>
-</div>
-<div class="unique-box">
-<h3>⚡ قيّم جهازك فوراً</h3><p>اعرف سعر جهازك التقريبي قبل ما تعرضه، بدون ما تسأل حدا.</p>
-<div class="input-group"><label>نوع جهازك</label><select id="valModel"><option value="120">iPhone 11</option><option value="70">Samsung S10</option><option value="50">Redmi 10</option><option value="150">Samsung A07</option><option value="90">Poco X3</option></select></div>
-<div class="input-group"><label>حالة الجهاز</label><select id="valCond"><option value="1">ممتازة - كأنه جديد</option><option value="0.85">جيدة جداً</option><option value="0.7">متوسطة - فيه خدوش</option></select></div>
-<button class="btn" style="background:#eab308;color:#0f172a;width:100%" onclick="calcVal()">اعرف سعره هلأ</button>
-<div class="result-box" id="valResult"></div>
-</div>
-<div class="unique-box">
-<h3>🔔 نبهني إذا رخص</h3><p>حط الجهاز اللي بدك ياه والسعر اللي بيناسبك، وأول ما ينزل بنخبرك واتساب.</p>
-<div class="input-group"><label>الجهاز اللي بدك ياه</label><input type="text" id="alertDevice" placeholder="مثال: iPhone 11"></div>
-<div class="input-row"><div class="input-group"><label>السعر اللي بيناسبك</label><input type="number" id="alertPrice" placeholder="100"></div><div class="input-group"><label>رقمك</label><input type="tel" id="alertPhone" placeholder="09xxxxxxxx"></div></div>
-<button class="btn btn-whatsapp" onclick="sendAlert()">فعّل التنبيه</button>
-</div>
-<div class="unique-box" style="border-color:#eab308">
-<h3 style="color:#eab308">⚙️ كيف تعدلي المواصفات؟</h3><p>من فوق بالموقع اضغطي <b style="color:#fff">لوحة التحكم</b>، حطي كلمة المرور <b style="color:#fff">123</b>، رح يطلعلك كل الأجهزة.<br>جنب كل جهاز في زر <b style="color:#00b4d8">تعديل</b>، بتعدلي السعر، الرام، الذاكرة، الكرتونة، البطارية، الشاشة، البصمة، وبتكبسي حفظ، بيتعدل فوراً.</p><p style="color:#22c55e">فيكي تعدلي بأي وقت، من جوالك، بدون ما ترجعي لعندي.</p>
-</div>
-</div>
-</section>
-
 <section class="products" id="customerSection" style="background:#131c31">
 <div style="text-align:center;max-width:800px;margin:0 auto 30px"><span class="customer-label"><i class="fa-solid fa-users"></i> قسم خاص بالزبائن</span><h2 class="section-title" style="margin-bottom:10px">أجهزة <span>الزبائن</span></h2><p style="color:#cbd5e1;line-height:1.8">هاد القسم غير قسم المعرض تماماً<br>هون بتنعرض أجهزة الزبائن يلي عرضوها للبيع من خلال الموقع، والبيع بيتم عبر صاحب المعرض 0930688067</p></div>
 <div id="customerGrid"></div>
 </section>
-
 <section class="sell-section">
 <div class="sell-container">
 <div>
@@ -155,40 +119,30 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 <div style="background:linear-gradient(135deg,#1e293b,#0f172a);border-radius:22px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,.06)"><i class="fa-solid fa-mobile-screen-button" style="font-size:70px;color:#00b4d8"></i><p style="margin-top:15px;color:#e2e8f0;line-height:1.8">الشراء يتم عبر واتساب صاحب الموقع فقط<br>تواصل: 0930688067</p></div>
 </div>
 </section>
-
 <footer>البتول للجوالات - حمص المخرم الفوقاني أم التين - 0930688067 © 2026<br><span style="font-size:.85rem"><i class="fa-solid fa-eye"></i> إجمالي المشاهدات: <span id="footerViews">0</span></span></footer>
-
 <section class="reviews-section">
-  <div style="text-align:center;margin-bottom:30px"><h2 class="section-title" style="margin-bottom:10px">آراء <span>الزبائن</span></h2><p style="color:#94a3b8">تجارب من زارونا وتعاملوا معنا في معرض البتول</p></div>
-  <div class="reviews-grid" id="reviewsGrid"></div>
-  <div class="add-review-box">
-    <h3 style="margin-bottom:15px;color:#00b4d8;text-align:center"><i class="fa-solid fa-comment-dots"></i> أضف رأيك بمعرضنا</h3>
-    <div class="input-group"><label>اسمك <span>*</span></label><input type="text" id="reviewAuthor" placeholder="مثال: أحمد محمد"></div>
-    <div class="input-group"><label>رأيك أو تقييمك <span>*</span></label><textarea id="reviewText" rows="3" placeholder="اكتب تجربتك بكل شفافية..."></textarea></div>
-    <button class="btn btn-whatsapp" onclick="submitReview()" style="width:100%;margin-top:10px;background:#00b4d8"><i class="fa-solid fa-paper-plane"></i> إرسال الرأي</button>
-  </div>
+<div style="text-align:center;margin-bottom:30px"><h2 class="section-title" style="margin-bottom:10px">آراء <span>الزبائن</span></h2><p style="color:#94a3b8">تجارب من زارونا وتعاملوا معنا في معرض البتول</p></div>
+<div class="reviews-grid" id="reviewsGrid"></div>
+<div class="add-review-box">
+<h3 style="margin-bottom:15px;color:#00b4d8;text-align:center"><i class="fa-solid fa-comment-dots"></i> أضف رأيك بمعرضنا</h3>
+<div class="input-group"><label>اسمك <span>*</span></label><input type="text" id="reviewAuthor" placeholder="مثال: أحمد محمد"></div>
+<div class="input-group"><label>رأيك أو تقييمك <span>*</span></label><textarea id="reviewText" rows="3" placeholder="اكتب تجربتك بكل شفافية..."></textarea></div>
+<button class="btn btn-whatsapp" onclick="submitReview()" style="width:100%;margin-top:10px;background:#00b4d8"><i class="fa-solid fa-paper-plane"></i> إرسال الرأي</button>
+</div>
 </section>
-
 <div class="modal-overlay" id="checkModal"><div class="modal-box" style="text-align:right"><h3 style="text-align:center;color:#00b4d8">✅ تقرير فحص البتول</h3><p id="checkTitle" style="text-align:center;font-weight:900;margin:8px 0"></p><ul class="check-list"><li><span>🔋 البطارية</span><span id="checkBat"></span></li><li><span>📱 الشاشة</span><span id="checkScreen"></span></li><li><span>👆 البصمة</span><span id="checkFinger"></span></li><li><span>📦 الكرتونة</span><span id="checkBox"></span></li><li><span>💾 الرام / الذاكرة</span><span id="checkSpecs"></span></li><li><span>🛡️ الضمان</span><span>فحص معتمد من البتول</span></li></ul><button class="btn" style="background:#334155;color:#fff;width:100%;margin-top:16px" onclick="document.getElementById('checkModal').style.display='none'">إغلاق</button></div></div>
-
 <div class="modal-overlay" id="buyModal"><div class="modal-box"><h3><i class="fa-solid fa-cart-shopping" style="color:#00b4d8"></i> إتمام عملية الشراء</h3><p style="color:#e2e8f0;font-size:.95rem;margin:14px 0">للشراء تواصل مع صاحب الموقع مباشرة:</p><div style="background:#0f172a;border:1px solid #00b4d8;border-radius:30px;padding:10px 18px;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;font-weight:900;font-size:1.2rem;color:#00b4d8"><i class="fa-solid fa-phone"></i> 0930688067</div><div class="input-group" style="text-align:right"><label>رقمك انت (المشتري) <span>*</span></label><input type="tel" id="buyerPhone" placeholder="09xxxxxxxx"></div><div class="error-msg" id="errBuyerPhone">رقمك إلزامي</div><div style="display:flex;gap:10px;margin-top:16px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeBuyModal()">إلغاء</button><button class="btn btn-whatsapp" style="flex:1" onclick="confirmBuy()"><i class="fa-brands fa-whatsapp"></i> تواصل على 0930688067</button></div></div></div>
-
 <div class="modal-overlay" id="successModal"><div class="modal-box"><div style="font-size:50px">✅</div><h3 style="margin:10px 0;color:#00b4d8">سيتم إرساله إليك بالتفاصيل مباشرة على واتساب</h3><p style="color:#e2e8f0;line-height:1.7;font-size:.95rem">جهازك صار معروض بالموقع، انقر أدناه لإرسال تفاصيل جهازك مباشرة لصاحب المعرض عبر واتساب:</p><div style="display:flex;flex-direction:column;gap:10px;margin-top:18px"><button class="btn btn-whatsapp" onclick="sendToOwnerFromModal()"><i class="fa-brands fa-whatsapp"></i> إرسال التفاصيل للمعرض 0930688067</button><button class="btn" style="background:#334155;color:#fff;width:100%" onclick="closeSuccessModal()">إغلاق</button></div></div></div>
-
-<!-- لوحة التحكم - مع تعديل المواصفات -->
 <div class="modal-overlay" id="adminModal"><div class="modal-box" style="max-width:560px; text-align:right;max-height:90vh;overflow-y:auto">
 <div id="adminLoginBox"><h3 style="text-align:center;color:#eab308;margin-bottom:15px"><i class="fa-solid fa-lock"></i> دخول لوحة التحكم</h3><div class="input-group"><label>كلمة المرور</label><input type="password" id="adminPass" placeholder="أدخل كلمة المرور"></div><div class="error-msg" id="errAdminPass" style="display:none">كلمة المرور غير صحيحة</div><div style="display:flex;gap:10px;margin-top:15px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeAdminModal()">إلغاء</button><button class="btn" style="background:#eab308;color:#0f172a;flex:1;font-weight:900" onclick="checkAdminLogin()">دخول</button></div></div>
 <div id="adminPanelBox" style="display:none">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="color:#eab308">لوحة تحكم المعرض</h3><button class="btn" style="background:#ef4444;color:#fff;padding:6px 12px;font-size:.8rem" onclick="closeAdminModal()">إغلاق</button></div>
-<p style="color:#22c55e;font-size:.9rem;margin-bottom:12px">فيكي تعدلي أي جهاز بأي وقت من هون، التعديل بيظهر فوراً بالموقع.</p>
 <h4 style="color:#00b4d8;margin:12px 0 8px">📱 أجهزة المعرض (الأساسية)</h4>
 <div id="adminStoreList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"></div>
 <h4 style="color:#00b4d8;margin:12px 0 8px">👥 أجهزة الزبائن</h4>
 <div id="adminDevicesList" style="display:flex;flex-direction:column;gap:8px"></div>
 </div>
 </div></div>
-
-<!-- مودال التعديل -->
 <div class="modal-overlay" id="editModal"><div class="modal-box" style="text-align:right;max-height:90vh;overflow-y:auto">
 <h3 style="text-align:center;color:#00b4d8;margin-bottom:14px">✏️ تعديل الجهاز</h3>
 <div class="input-group"><label>اسم الجهاز</label><input type="text" id="editModel"></div>
@@ -201,19 +155,16 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 </div>
 <div style="display:flex;gap:10px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeEditModal()">إلغاء</button><button class="btn" style="background:#00b4d8;color:#fff;flex:1" onclick="saveEdit()">💾 حفظ التعديل</button></div>
 </div></div>
-
 <button class="whatsapp-float" onclick="openWA()"><i class="fa-brands fa-whatsapp"></i></button>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-  const firebaseConfig = {apiKey: "AIzaSyCCbgvpXKpKYukvCljJp8I1b2cJo1HxIZI",authDomain: "albatoul-d85b7.firebaseapp.com",projectId: "albatoul-d85b7",storageBucket: "albatoul-d85b7.firebasestorage.app",messagingSenderId: "297915951560",appId: "1:297915951560:web:19a6000f906d2bc5fab8fd",measurementId: "G-SSMG8WH4LE"};
-  firebase.initializeApp(firebaseConfig);const db = firebase.firestore();
+const firebaseConfig = {apiKey: "AIzaSyCCbgvpXKpKYukvCljJp8I1b2cJo1HxIZI",authDomain: "albatoul-d85b7.firebaseapp.com",projectId: "albatoul-d85b7",storageBucket: "albatoul-d85b7.firebasestorage.app",messagingSenderId: "297915951560",appId: "1:297915951560:web:19a6000f906d2bc5fab8fd",measurementId: "G-SSMG8WH4LE"};
+firebase.initializeApp(firebaseConfig);const db = firebase.firestore();
 </script>
 <script>
 let selectedImage=null;let currentBuyDevice=null;let currentDevices=[];let lastPublished=null;let editingType=null;let editingId=null;let editingIndex=null;
 const ADMIN_PASSWORD="123";
-// أجهزة المعرض الأساسية - قابلة للتعديل من لوحة التحكم
 let storeDevices = JSON.parse(localStorage.getItem('batoul_store_devices')||'null') || [
 {id:'s1',model:'Samsung Galaxy A07',price:'150',status:'sold',img:'https://mobelat.com/wp-content/uploads/2025/08/samsung-galaxy-a07-4g-thumb-mobelat.jpg',ram:'4GB',storage:'128GB',box:'معه كرتونة',bat:'92%',screen:'أصلية',finger:'شغالة'},
 {id:'s2',model:'Redmi 10 2022',price:'50',status:'available',img:'https://i.ibb.co/svw2Ppx3/61-X6-CZex-COL-AC-UF894-1000-QL80-FMwebp.webp',ram:'4GB',storage:'64GB',box:'بدون كرتونة',bat:'88%',screen:'أصلية',finger:'شغالة'},
@@ -221,14 +172,14 @@ let storeDevices = JSON.parse(localStorage.getItem('batoul_store_devices')||'nul
 ];
 function saveStore(){localStorage.setItem('batoul_store_devices',JSON.stringify(storeDevices));}
 function renderStore(){
-  const grid=document.getElementById('storeGrid');grid.innerHTML='';
-  storeDevices.forEach(d=>{
-    const div=document.createElement('div');div.className='card';
-    const isSold=d.status==='sold';
-    div.innerHTML=`<div class="view-count"><i class="fa-solid fa-eye"></i> <span class="static-view">0</span></div><img src="${d.img}" onclick="pulseThis(this)"><div class="device-title-row"><h3>${d.model}</h3><button class="share-mini" onclick="shareDevice('${d.model}','${d.price}$')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price ${isSold?'price-old':''}">${d.price}$</p><span class="badge ${isSold?'badge-sold':''}">${isSold?'مباع - الله يهني صاحب النصيب':'متوفر - رام '+d.ram+' - '+d.storage+'<br>'+d.box}</span><button class="btn" style="background:#0f172a;border:1px solid #00b4d8;color:#00b4d8;width:100%;margin-top:10px" onclick="openCheck('${d.model}','${d.bat}','${d.screen}','${d.finger}','${d.box}','${d.ram} / ${d.storage}')">📋 تقرير الفحص</button>`;
-    grid.appendChild(div);
-  });
-  updateTotalViewsText();
+const grid=document.getElementById('storeGrid');grid.innerHTML='';
+storeDevices.forEach(d=>{
+const div=document.createElement('div');div.className='card';
+const isSold=d.status==='sold';
+div.innerHTML=`<div class="view-count"><i class="fa-solid fa-eye"></i> <span class="static-view">0</span></div><img src="${d.img}" onclick="pulseThis(this)"><div class="device-title-row"><h3>${d.model}</h3><button class="share-mini" onclick="shareDevice('${d.model}','${d.price}$')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price ${isSold?'price-old':''}">${d.price}$</p><span class="badge ${isSold?'badge-sold':''}">${isSold?'مباع - الله يهني صاحب النصيب':'متوفر - رام '+d.ram+' - '+d.storage+'<br>'+d.box}</span><button class="btn" style="background:#0f172a;border:1px solid #00b4d8;color:#00b4d8;width:100%;margin-top:10px" onclick="openCheck('${d.model}','${d.bat}','${d.screen}','${d.finger}','${d.box}','${d.ram} / ${d.storage}')">📋 تقرير الفحص</button>`;
+grid.appendChild(div);
+});
+updateTotalViewsText();
 }
 function updateTotalViewsText(){let v=document.getElementById('totalViews').textContent;document.querySelectorAll('.static-view').forEach(el=>el.textContent=v);}
 function pulseThis(img){img.classList.remove('pulse-img');void img.offsetWidth;img.classList.add('pulse-img');setTimeout(()=>img.classList.remove('pulse-img'),800);}
@@ -239,7 +190,6 @@ function openWA(){window.open("https://wa.me/963930688067?text="+encodeURICompon
 function openCheck(name,bat,screen,finger,box,specs){document.getElementById('checkTitle').textContent=name;document.getElementById('checkBat').textContent=bat;document.getElementById('checkScreen').textContent=screen;document.getElementById('checkFinger').textContent=finger;document.getElementById('checkBox').textContent=box;document.getElementById('checkSpecs').textContent=specs||'-';document.getElementById('checkModal').style.display='flex';}
 function calcSwap(){let oldP=parseFloat(document.getElementById('oldPrice').value)||0;let newP=parseFloat(document.getElementById('newPrice').value)||0;let diff=newP-oldP;let box=document.getElementById('swapResult');box.style.display='block';if(oldP==0){box.innerHTML='حط سعر جهازك القديم لحتى نحسبلك الفرق';return;}if(diff<=0){box.innerHTML=`ممتاز! جهازك أغلى 😍<br>منرجعلك ${Math.abs(diff)}$ فرق`;}else{box.innerHTML=`الفرق اللي بتدفعو: <span style="color:#00b4d8;font-size:1.3rem">${diff}$</span><br>جهازك ${oldP}$ + فرق ${diff}$ = الجهاز الجديد`;} }
 function sendSwap(){let oldP=document.getElementById('oldPrice').value;let newP=document.getElementById('newPrice').value;window.open("https://wa.me/963930688067?text="+encodeURIComponent(`بدي بدل جهازي\nجهازي القديم سعره: ${oldP}$\nالجهاز اللي بدي ياه سعره: ${newP}$`),"_blank");}
-function calcVal(){let base=parseFloat(document.getElementById('valModel').value);let cond=parseFloat(document.getElementById('valCond').value);let price=Math.round(base*cond);let box=document.getElementById('valResult');box.style.display='block';box.innerHTML=`سعر جهازك التقريبي: <span style="color:#eab308;font-size:1.4rem">${price}$</span><br>السعر النهائي بعد الفحص عندنا بالمعرض`;}
 function sendAlert(){let d=document.getElementById('alertDevice').value;let p=document.getElementById('alertPrice').value;let ph=document.getElementById('alertPhone').value;if(!d||!p||!ph){alert('عبي كل الخانات');return;}window.open("https://wa.me/963930688067?text="+encodeURIComponent(`🔔 فعّل تنبيه سعر\nالجهاز: ${d}\nالسعر المطلوب: ${p}$\nرقمي: ${ph}`),"_blank");alert('تم تفعيل التنبيه! رح نخبرك أول ما ينزل');}
 async function updateTotalViews(){try{const ref=db.collection('stats').doc('total');await db.runTransaction(async t=>{const doc=await t.get(ref);const v=(doc.exists?doc.data().views:0)+1;t.set(ref,{views:v});document.getElementById('totalViews').textContent=v;document.getElementById('footerViews').textContent=v;document.querySelectorAll('.static-view').forEach(el=>el.textContent=v);});}catch(e){let total=parseInt(localStorage.getItem('batoul_total_views')||'0');total++;localStorage.setItem('batoul_total_views',total);document.getElementById('totalViews').textContent=total;document.getElementById('footerViews').textContent=total;document.querySelectorAll('.static-view').forEach(el=>el.textContent=total);}}
 function renderDevices(list){currentDevices=list;const grid=document.getElementById('customerGrid');grid.innerHTML='';if(list.length===0){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#94a3b8;padding:20px">لا توجد أجهزة زبائن معروضة حالياً</p>';return;}list.forEach((d,i)=>{const div=document.createElement('div');div.className='card';div.innerHTML=`<div class="view-count"><i class="fa-solid fa-eye"></i> ${d.views||0}</div><img src="${d.img}" onclick="pulseThis(this)"><div class="device-title-row"><h3>${d.model}</h3><button class="share-mini" onclick="shareDevice('${d.model}','${d.price} ${d.currency}')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price">${d.price} ${d.currency}</p><span class="badge">رام ${d.ram} - ${d.storage}<br>${d.box}<br><i class="fa-solid fa-phone"></i> ${d.phone}</span><button class="btn btn-buy" onclick="openBuyModal(${i})"><i class="fa-brands fa-whatsapp"></i> شراء عبر 0930688067</button>`;grid.appendChild(div);});}
@@ -258,50 +208,50 @@ function openAdminModal(){document.getElementById('adminModal').style.display='f
 function closeAdminModal(){document.getElementById('adminModal').style.display='none';}
 function checkAdminLogin(){const pass=document.getElementById('adminPass').value;if(pass===ADMIN_PASSWORD){document.getElementById('adminLoginBox').style.display='none';document.getElementById('adminPanelBox').style.display='block';loadAdminDevices();}else{document.getElementById('errAdminPass').style.display='block';}}
 function loadAdminDevices(){
-  const storeList=document.getElementById('adminStoreList');storeList.innerHTML='';
-  storeDevices.forEach((d,idx)=>{
-    const item=document.createElement('div');item.style.cssText="background:#0f172a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.08)";
-    item.innerHTML=`<div><strong>${d.model}</strong> (${d.price}$) - ${d.status==='sold'?'مباع':'متوفر'}<br><span style="font-size:.8rem;color:#94a3b8">رام ${d.ram} - ${d.storage} - بطارية ${d.bat}</span></div><div class="admin-edit-row"><button class="edit-btn" onclick="openEdit('store',${idx})">✏️ تعديل</button></div>`;
-    storeList.appendChild(item);
-  });
-  const listContainer=document.getElementById('adminDevicesList');listContainer.innerHTML='';
-  if(currentDevices.length===0){listContainer.innerHTML='<p style="color:#94a3b8;text-align:center">لا توجد أجهزة زبائن حالياً</p>';return;}
-  currentDevices.forEach((d,idx)=>{
-    const item=document.createElement('div');item.style.cssText="background:#0f172a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.08)";
-    item.innerHTML=`<div><strong>${d.model}</strong> (${d.price} ${d.currency})<br><span style="font-size:.8rem;color:#94a3b8">رام ${d.ram} - ${d.storage} - ${d.box} - بطارية ${d.bat||'-'}</span></div><div class="admin-edit-row"><button class="edit-btn" onclick="openEdit('customer',${idx})">✏️ تعديل</button><button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button></div>`;
-    listContainer.appendChild(item);
-  });
+const storeList=document.getElementById('adminStoreList');storeList.innerHTML='';
+storeDevices.forEach((d,idx)=>{
+const item=document.createElement('div');item.style.cssText="background:#0f172a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.08)";
+item.innerHTML=`<div><strong>${d.model}</strong> (${d.price}$) - ${d.status==='sold'?'مباع':'متوفر'}<br><span style="font-size:.8rem;color:#94a3b8">رام ${d.ram} - ${d.storage} - بطارية ${d.bat}</span></div><div class="admin-edit-row"><button class="edit-btn" onclick="openEdit('store',${idx})">✏️ تعديل</button></div>`;
+storeList.appendChild(item);
+});
+const listContainer=document.getElementById('adminDevicesList');listContainer.innerHTML='';
+if(currentDevices.length===0){listContainer.innerHTML='<p style="color:#94a3b8;text-align:center">لا توجد أجهزة زبائن حالياً</p>';return;}
+currentDevices.forEach((d,idx)=>{
+const item=document.createElement('div');item.style.cssText="background:#0f172a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.08)";
+item.innerHTML=`<div><strong>${d.model}</strong> (${d.price} ${d.currency})<br><span style="font-size:.8rem;color:#94a3b8">رام ${d.ram} - ${d.storage} - ${d.box} - بطارية ${d.bat||'-'}</span></div><div class="admin-edit-row"><button class="edit-btn" onclick="openEdit('customer',${idx})">✏️ تعديل</button><button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button></div>`;
+listContainer.appendChild(item);
+});
 }
 function openEdit(type,idx){
-  editingType=type;editingIndex=idx;
-  let d = type==='store' ? storeDevices[idx] : currentDevices[idx];
-  editingId = d.id;
-  document.getElementById('editModel').value=d.model||'';
-  document.getElementById('editPrice').value=d.price||'';
-  document.getElementById('editStatus').value= type==='store' ? (d.status||'available') : 'available';
-  document.getElementById('editRam').value=d.ram||'';
-  document.getElementById('editStorage').value=d.storage||'';
-  document.getElementById('editBox').value=d.box||'معه كرتونة';
-  document.getElementById('editBat').value=d.bat||'';
-  document.getElementById('editScreen').value=d.screen||'';
-  document.getElementById('editFinger').value=d.finger||'';
-  document.getElementById('adminModal').style.display='none';
-  document.getElementById('editModal').style.display='flex';
+editingType=type;editingIndex=idx;
+let d = type==='store' ? storeDevices[idx] : currentDevices[idx];
+editingId = d.id;
+document.getElementById('editModel').value=d.model||'';
+document.getElementById('editPrice').value=d.price||'';
+document.getElementById('editStatus').value= type==='store' ? (d.status||'available') : 'available';
+document.getElementById('editRam').value=d.ram||'';
+document.getElementById('editStorage').value=d.storage||'';
+document.getElementById('editBox').value=d.box||'معه كرتونة';
+document.getElementById('editBat').value=d.bat||'';
+document.getElementById('editScreen').value=d.screen||'';
+document.getElementById('editFinger').value=d.finger||'';
+document.getElementById('adminModal').style.display='none';
+document.getElementById('editModal').style.display='flex';
 }
 function closeEditModal(){document.getElementById('editModal').style.display='none';document.getElementById('adminModal').style.display='flex';}
 async function saveEdit(){
-  const data={model:document.getElementById('editModel').value,price:document.getElementById('editPrice').value,ram:document.getElementById('editRam').value,storage:document.getElementById('editStorage').value,box:document.getElementById('editBox').value,bat:document.getElementById('editBat').value,screen:document.getElementById('editScreen').value,finger:document.getElementById('editFinger').value};
-  if(editingType==='store'){
-    data.status=document.getElementById('editStatus').value;
-    storeDevices[editingIndex]={...storeDevices[editingIndex],...data};
-    saveStore();renderStore();
-  }else{
-    try{await db.collection('devices').doc(editingId).update(data);}catch(e){let list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');list[editingIndex]={...list[editingIndex],...data};localStorage.setItem('batoul_customer_devices',JSON.stringify(list));}
-    currentDevices[editingIndex]={...currentDevices[editingIndex],...data};renderDevices(currentDevices);
-  }
-  document.getElementById('editModal').style.display='none';
-  alert('تم حفظ التعديل بنجاح ✅ وظهر فوراً بالموقع');
-  openAdminModal();checkAdminLoginManual();
+const data={model:document.getElementById('editModel').value,price:document.getElementById('editPrice').value,ram:document.getElementById('editRam').value,storage:document.getElementById('editStorage').value,box:document.getElementById('editBox').value,bat:document.getElementById('editBat').value,screen:document.getElementById('editScreen').value,finger:document.getElementById('editFinger').value};
+if(editingType==='store'){
+data.status=document.getElementById('editStatus').value;
+storeDevices[editingIndex]={...storeDevices[editingIndex],...data};
+saveStore();renderStore();
+}else{
+try{await db.collection('devices').doc(editingId).update(data);}catch(e){let list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');list[editingIndex]={...list[editingIndex],...data};localStorage.setItem('batoul_customer_devices',JSON.stringify(list));}
+currentDevices[editingIndex]={...currentDevices[editingIndex],...data};renderDevices(currentDevices);
+}
+document.getElementById('editModal').style.display='none';
+alert('تم حفظ التعديل بنجاح ✅ وظهر فوراً بالموقع');
+openAdminModal();checkAdminLoginManual();
 }
 function checkAdminLoginManual(){document.getElementById('adminLoginBox').style.display='none';document.getElementById('adminPanelBox').style.display='block';loadAdminDevices();}
 async function deleteDevice(id){if(confirm('هل أنت متأكد من حذف هذا الجهاز من الموقع؟')){try{await db.collection('devices').doc(id).delete();alert('تم حذف الجهاز بنجاح');openAdminModal();checkAdminLoginManual();}catch(e){alert('حدث خطأ أثناء الحذف');}}}
