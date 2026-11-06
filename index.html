@@ -159,8 +159,16 @@ const LS_STORE = "btol_store_devices";
 const LS_CUSTOMER = "btol_customer_devices";
 const LS_REVIEWS = "btol_reviews";
 const LS_VIEWS = "btol_views";
-const ADMIN_PASS = "123";
+const LS_ADMIN_PASS = "btol_admin_pass";
+const DEFAULT_ADMIN_PASS = "0937855802";
 const OWNER_PHONE = "963930688067";
+
+function getAdminPass(){
+  return localStorage.getItem(LS_ADMIN_PASS) || DEFAULT_ADMIN_PASS;
+}
+function setAdminPass(newPass){
+  localStorage.setItem(LS_ADMIN_PASS, newPass);
+}
 
 const DEFAULT_STORE = [
   {id:101,name:"Redmi 10 2022",img:"https://i.ibb.co/Z1TFXQVF/dd46cd6b14f82e05cced6710d0664a45.jpg",price:50,currency:"$",ram:"4GB",storage:"128GB",box:"معه كرتونة",battery:"95%",screen:"أصلية",finger:"يعمل",sold:false},
@@ -186,7 +194,7 @@ function save(key, val){
 let storeDevices    = load(LS_STORE, DEFAULT_STORE);
 let customerDevices = load(LS_CUSTOMER, DEFAULT_CUSTOMER);
 let reviews         = load(LS_REVIEWS, DEFAULT_REVIEWS);
-let totalViews      = parseInt(localStorage.getItem(LS_VIEWS) || "0", 10);
+let totalViews      = parseInt(localStorage.getItem(LS_VIEWS) || "300000", 10);
 let currentBuyDevice = "";
 let pendingCustomerDevice = null;
 let uploadedImageData = "";
@@ -197,8 +205,9 @@ function bumpViews(){
   localStorage.setItem(LS_VIEWS, totalViews);
   const tv = document.getElementById("totalViews");
   const fv = document.getElementById("footerViews");
-  if(tv) tv.textContent = totalViews;
-  if(fv) fv.textContent = totalViews;
+  const formatted = totalViews.toLocaleString("en-US");
+  if(tv) tv.textContent = formatted;
+  if(fv) fv.textContent = formatted;
 }
 
 function pulseThis(el){
@@ -437,7 +446,7 @@ function closeAdminModal(){
 }
 function checkAdminLogin(){
   const pass = document.getElementById("adminPass").value;
-  if(pass === ADMIN_PASS){
+  if(pass === getAdminPass()){
     document.getElementById("adminLoginBox").style.display = "none";
     document.getElementById("adminPanelBox").style.display = "block";
     renderAdminList();
@@ -496,7 +505,51 @@ function renderAdminList(){
       </div>
     `).join("")}
     <button class="btn" style="background:#00b4d8;color:#fff;width:100%;margin-top:14px" onclick="openAddDeviceForm()">➕ إضافة جهاز جديد للمعرض</button>
+    <button class="btn" style="background:#eab308;color:#0f172a;width:100%;margin-top:10px;font-weight:900" onclick="openChangePassForm()">🔑 تغيير كلمة المرور</button>
   `;
+}
+
+function openChangePassForm(){
+  document.getElementById("adminDevicesList").innerHTML = `
+    <div class="edit-form-box">
+      <h4 style="color:#eab308;margin-bottom:10px">🔑 تغيير كلمة المرور</h4>
+      <div class="input-group"><label>كلمة المرور الحالية</label><input type="password" id="oldPass" placeholder="أدخل الكلمة الحالية"></div>
+      <div class="input-group"><label>كلمة المرور الجديدة</label><input type="password" id="newPass" placeholder="أدخل الكلمة الجديدة"></div>
+      <div class="input-group"><label>تأكيد الكلمة الجديدة</label><input type="password" id="confirmPass" placeholder="أعد كتابة الكلمة الجديدة"></div>
+      <div class="error-msg" id="errPassChange" style="display:none"></div>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button class="btn" style="background:#334155;color:#fff;flex:1" onclick="renderAdminList()">إلغاء</button>
+        <button class="btn" style="background:#eab308;color:#0f172a;flex:1;font-weight:900" onclick="saveNewPass()">حفظ</button>
+      </div>
+    </div>
+  `;
+}
+
+function saveNewPass(){
+  const oldP = document.getElementById("oldPass").value;
+  const newP = document.getElementById("newPass").value;
+  const confP = document.getElementById("confirmPass").value;
+  const err = document.getElementById("errPassChange");
+
+  if(oldP !== getAdminPass()){
+    err.textContent = "كلمة المرور الحالية غير صحيحة";
+    err.style.display = "block";
+    return;
+  }
+  if(!newP || newP.length < 3){
+    err.textContent = "كلمة المرور الجديدة قصيرة جداً (3 أحرف على الأقل)";
+    err.style.display = "block";
+    return;
+  }
+  if(newP !== confP){
+    err.textContent = "كلمتا المرور غير متطابقتين";
+    err.style.display = "block";
+    return;
+  }
+  setAdminPass(newP);
+  err.style.display = "none";
+  alert("✅ تم تغيير كلمة المرور بنجاح\n\nالكلمة الجديدة: " + newP);
+  renderAdminList();
 }
 
 function openAddDeviceForm(){
