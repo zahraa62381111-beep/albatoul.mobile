@@ -38,36 +38,12 @@ header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:25px;max-width:1200px;margin:0 auto}
 .card{background:#1e293b;border-radius:22px;padding:22px;text-align:center;border:1px solid rgba(255,255,255,.06);position:relative}
 .card img{width:100%;height:230px;object-fit:contain;background:#0f172a;border-radius:14px;margin-bottom:12px;cursor:pointer}
-.price{color:#00b4d8;font-weight:800;font-size:1.3rem}.price-old{text-decoration:line-through;color:#94a3b8}
-.badge{display:inline-block;margin-top:10px;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem;line-height:1.6}
-.badge-sold{background:rgba(234,179,8,.15);color:#eab308;border:1px solid rgba(234,179,8,.35)}
-.view-count{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:20px;font-size:.8rem;color:#fff;display:flex;gap:5px;align-items:center}
-#customerGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:850px;margin:0 auto}
-#customerGrid .card{border:1px solid rgba(0,180,216,.25)}
-.customer-label{display:inline-block;background:#00b4d8;color:#fff;padding:6px 18px;border-radius:20px;font-size:.9rem;font-weight:800;margin-bottom:12px}
-.reviews-section{padding:70px 8%;background:#131c31;border-top:1px solid rgba(255,255,255,.05)}
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1100px;margin:0 auto 40px}
-.review-card{background:#1e293b;border-radius:18px;padding:20px;border:1px solid rgba(0,180,216,.15)}
-.review-card .stars{color:#eab308;margin-bottom:8px}.review-card p{color:#cbd5e1;font-size:.95rem;line-height:1.6;margin-bottom:12px}.review-card .author{font-weight:800;color:#00b4d8}
-.add-review-box{max-width:600px;margin:0 auto;background:#1e293b;padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.08)}
-.sell-section{padding:80px 8%}.sell-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
-.sell-form-box{background:#1e293b;padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,.07)}
-.input-group{margin-bottom:12px;text-align:right}.input-group label{font-weight:700;color:#cbd5e1;display:block;margin-bottom:5px}.input-group label span{color:#ef4444}
-.input-group input,.input-group select,.input-group textarea{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f172a;color:#fff;outline:none}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.upload-area{border:2px dashed #00b4d8;padding:16px;border-radius:14px;text-align:center;cursor:pointer;background:rgba(0,180,216,.06)}
-#previewBox{display:none;margin-top:10px}#previewBox img{width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px}
-.radio-group{display:flex;gap:8px;flex-wrap:wrap}.radio-group label{background:#0f172a;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;display:flex;gap:5px;align-items:center}
-.error-msg{color:#f87171;font-size:.8rem;display:none;margin-top:4px}
+.price{color:#00b4d8;font-weight:800;font-size:1.3rem}
 .btn{padding:12px 22px;border-radius:30px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-.btn-whatsapp{background:#25D366;color:#fff;width:100%}.btn-invite{background:#00b4d8;color:#fff}.btn-buy{background:#00b4d8;color:#fff;width:100%;margin-top:10px}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
 .modal-box{background:#1e293b;padding:24px;border-radius:20px;max-width:480px;width:100%;border:1px solid rgba(255,255,255,.1);text-align:center}
 footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
-.check-list{text-align:right;list-style:none;margin-top:10px}
-.check-list li{padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.9rem}
-.check-list li span:last-child{color:#22c55e;font-weight:800}
-@media(max-width:768px){.sell-container{grid-template-columns:1fr}header{flex-direction:column;gap:8px}#customerGrid{grid-template-columns:1fr}}
+@media(max-width:768px){header{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
@@ -101,33 +77,18 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     </div>
 </section>
 
-<section class="products">
-    <h2 class="section-title">جوالات <span>متوفرة</span></h2>
-    <p class="section-sub">اضغط على "تقرير الفحص" لتشوف حالة الجهاز الحقيقية</p>
-    <div class="cards-grid" id="storeGrid"></div>
-</section>
-
-<section class="products" id="customerSection" style="background:#131c31">
-    <div style="text-align:center;max-width:800px;margin:0 auto 30px">
-        <span class="customer-label"><i class="fa-solid fa-users"></i> قسم خاص بالزبائن</span>
-        <h2 class="section-title" style="margin-bottom:10px">أجهزة <span>الزبائن</span></h2>
-        <p style="color:#cbd5e1;line-height:1.8">هاد القسم غير قسم المعرض تماماً<br>هون بتنعرض أجهزة الزبائن والبيع بيتم عبر صاحب المعرض 0930688067</p>
-    </div>
-    <div id="customerGrid"></div>
-</section>
-
 <footer>البتول للجوالات - حمص المخرم الفوقاني أم التين - 0930688067 © 2026</footer>
 
-<!-- نافذة لوحة التحكم مع نظام جلب المواصفات الذكي والمحلي -->
+<!-- نافذة لوحة التحكم مع نظام جلب المواصفات الموسع -->
 <div class="modal-overlay" id="adminModal">
     <div class="modal-box" style="max-width:560px; text-align:right; max-height:90vh; overflow-y:auto">
         <h3 style="color:#eab308; margin-bottom:15px; text-align:center;"><i class="fa-solid fa-lock"></i> لوحة تحكم المعرض</h3>
         
-        <!-- قسم جلب المواصفات الذكية والمحلية -->
+        <!-- قسم البحث الذكي الموسع -->
         <div style="background:#0f172a; padding:14px; border-radius:12px; margin-bottom:15px; border:1px solid rgba(0,180,216,0.3)">
             <label style="font-size:0.9rem; color:#00b4d8; font-weight:bold; display:block; margin-bottom:5px">جلب مواصفات الهاتف الذكي:</label>
             <div style="display:flex; gap:8px;">
-                <input type="text" id="apiPhoneInput" placeholder="اكتب اسم الجهاز (مثال: s23 أو iphone 13)" style="flex:1; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:#fff; font-size:0.85rem">
+                <input type="text" id="apiPhoneInput" placeholder="اكتب اسم الجهاز (مثال: a54, note 13, iphone 14)" style="flex:1; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:#fff; font-size:0.85rem">
                 <button class="btn" onclick="fetchSmartPhoneSpecs()" style="background:#00b4d8; font-size:0.85rem; padding:8px 14px;">جلب البيانات</button>
             </div>
         </div>
@@ -140,39 +101,78 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 </div>
 
 <script>
-    // قاعدة بيانات محلية ذكية وسريعة
+    // قاعدة بيانات محلية موسعة تضم أشهر الأجهزة المتداولة
     const localPhoneDatabase = {
+        // Samsung
+        "s24 ultra": { name: "Samsung Galaxy S24 Ultra", ram: "12GB", storage: "512GB", price: "950" },
         "s23 ultra": { name: "Samsung Galaxy S23 Ultra", ram: "12GB", storage: "256GB", price: "750" },
         "s23": { name: "Samsung Galaxy S23", ram: "8GB", storage: "128GB", price: "450" },
-        "iphone 13": { name: "Apple iPhone 13", ram: "4GB", storage: "128GB", price: "500" },
-        "iphone 13 pro max": { name: "Apple iPhone 13 Pro Max", ram: "6GB", storage: "256GB", price: "700" },
-        "redmi note 12": { name: "Xiaomi Redmi Note 12", ram: "8GB", storage: "128GB", price: "180" },
-        "a54": { name: "Samsung Galaxy A54", ram: "8GB", storage: "128GB", price: "230" }
+        "s22": { name: "Samsung Galaxy S22", ram: "8GB", storage: "128GB", price: "350" },
+        "a55": { name: "Samsung Galaxy A55", ram: "8GB", storage: "128GB", price: "320" },
+        "a54": { name: "Samsung Galaxy A54", ram: "8GB", storage: "128GB", price: "240" },
+        "a35": { name: "Samsung Galaxy A35", ram: "8GB", storage: "128GB", price: "270" },
+        "a34": { name: "Samsung Galaxy A34", ram: "8GB", storage: "128GB", price: "210" },
+        "a25": { name: "Samsung Galaxy A25", ram: "6GB", storage: "128GB", price: "180" },
+        "a15": { name: "Samsung Galaxy A15", ram: "4GB", storage: "128GB", price: "140" },
+        "a14": { name: "Samsung Galaxy A14", ram: "4GB", storage: "64GB", price: "120" },
+
+        // Apple iPhone
+        "15 pro max": { name: "Apple iPhone 15 Pro Max", ram: "8GB", storage: "256GB", price: "1100" },
+        "15 pro": { name: "Apple iPhone 15 Pro", ram: "8GB", storage: "128GB", price: "950" },
+        "15": { name: "Apple iPhone 15", ram: "6GB", storage: "128GB", price: "750" },
+        "14 pro max": { name: "Apple iPhone 14 Pro Max", ram: "6GB", storage: "256GB", price: "850" },
+        "14 pro": { name: "Apple iPhone 14 Pro", ram: "6GB", storage: "128GB", price: "750" },
+        "14": { name: "Apple iPhone 14", ram: "6GB", storage: "128GB", price: "600" },
+        "13 pro max": { name: "Apple iPhone 13 Pro Max", ram: "6GB", storage: "256GB", price: "700" },
+        "13 pro": { name: "Apple iPhone 13 Pro", ram: "6GB", storage: "128GB", price: "600" },
+        "13": { name: "Apple iPhone 13", ram: "4GB", storage: "128GB", price: "500" },
+        "12": { name: "Apple iPhone 12", ram: "4GB", storage: "128GB", price: "400" },
+        "11": { name: "Apple iPhone 11", ram: "4GB", storage: "64GB", price: "300" },
+
+        // Xiaomi / Redmi / Poco
+        "note 13 pro": { name: "Xiaomi Redmi Note 13 Pro", ram: "8GB", storage: "256GB", price: "250" },
+        "note 13": { name: "Xiaomi Redmi Note 13", ram: "8GB", storage: "128GB", price: "190" },
+        "note 12 pro": { name: "Xiaomi Redmi Note 12 Pro", ram: "8GB", storage: "256GB", price: "220" },
+        "note 12": { name: "Xiaomi Redmi Note 12", ram: "8GB", storage: "128GB", price: "170" },
+        "note 11": { name: "Xiaomi Redmi Note 11", ram: "4GB", storage: "128GB", price: "140" },
+        "poco x6": { name: "Xiaomi Poco X6 Pro", ram: "12GB", storage: "512GB", price: "340" },
+        "poco x5": { name: "Xiaomi Poco X5 Pro", ram: "8GB", storage: "256GB", price: "270" },
+
+        // Oppo & Realme
+        "reno 10": { name: "Oppo Reno 10", ram: "8GB", storage: "256GB", price: "310" },
+        "reno 8": { name: "Oppo Reno 8", ram: "8GB", storage: "256GB", price: "260" },
+        "c55": { name: "Realme C55", ram: "6GB", storage: "128GB", price: "150" },
+        "realme 11": { name: "Realme 11", ram: "8GB", storage: "256GB", price: "220" },
+
+        // Infinix & Tecno
+        "note 30": { name: "Infinix Note 30", ram: "8GB", storage: "256GB", price: "180" },
+        "hot 30": { name: "Infinix Hot 30", ram: "8GB", storage: "128GB", price: "130" },
+        "camon 20": { name: "Tecno Camon 20", ram: "8GB", storage: "256GB", price: "190" }
     };
 
-    // دالة جلب المواصفات الذكية والمحلية الفورية
+    // دالة البحث الذكي الموسعة
     function fetchSmartPhoneSpecs() {
         let inputVal = document.getElementById('apiPhoneInput').value.trim().toLowerCase();
         
         if (!inputVal) {
-            alert("يرجى كتابة اسم الجهاز أولاً للتفتيش عنه");
+            alert("يرجى كتابة اسم الجهاز أولاً");
             return;
         }
 
-        // مطابقة البحث الذكي (سواء كتب المستخدم جزءاً من الاسم أو الاسم كاملاً)
-        let foundKey = Object.keys(localPhoneDatabase).find(key => key.includes(inputVal) || inputVal.includes(key));
+        // البحث عن أي جهاز يتطابق مع ما كتبه المستخدم جزئياً أو كلياً
+        let foundKey = Object.keys(localPhoneDatabase).find(key => inputVal.includes(key) || key.includes(inputVal));
 
         if (foundKey) {
             let phoneData = localPhoneDatabase[foundKey];
             mapSpecsToAdminPanel(phoneData);
         } else {
-            alert("عذراً، لم يتم العثور على الجهاز. جرب كتابة اسم أقصر مثل: s23 أو iphone 13");
+            alert("عذراً، لم يتم العثور على الجهاز. جرب كتابة اسم أسهل مثل: a54 أو 13 أو note 13");
         }
     }
 
-    // دالة توزيع البيانات تلقائياً على لوحة التحكم
+    // دالة عرض البيانات عند نجاح البحث
     function mapSpecsToAdminPanel(data) {
-        alert("✅ تم جلب بيانات (" + data.name + ") بنجاح:\n- الرام: " + data.ram + "\n- الذاكرة: " + data.storage + "\n- السعر المقترح: $" + data.price);
+        alert("✅ تم جلب بيانات الجهاز بنجاح:\n\n📱 الجهاز: " + data.name + "\n💾 الرام: " + data.ram + "\n💽 الذاكرة: " + data.storage + "\n💰 السعر التقريبي: $" + data.price);
     }
 
     function openAdminModal() {
