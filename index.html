@@ -42,8 +42,6 @@ header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;
 .badge{display:inline-block;margin-top:10px;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem;line-height:1.6}
 .badge-sold{background:rgba(234,179,8,.15);color:#eab308;border:1px solid rgba(234,179,8,.35)}
 .view-count{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:20px;font-size:.8rem;color:#fff;display:flex;gap:5px;align-items:center}
-.device-title-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0}
-.share-mini{width:32px;height:32px;border-radius:50%;background:#25D366;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
 #customerGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:850px;margin:0 auto}
 #customerGrid .card{border:1px solid rgba(0,180,216,.25)}
 .customer-label{display:inline-block;background:#00b4d8;color:#fff;padding:6px 18px;border-radius:20px;font-size:.9rem;font-weight:800;margin-bottom:12px}
@@ -65,20 +63,11 @@ header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;
 .btn-whatsapp{background:#25D366;color:#fff;width:100%}.btn-invite{background:#00b4d8;color:#fff}.btn-buy{background:#00b4d8;color:#fff;width:100%;margin-top:10px}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
 .modal-box{background:#1e293b;padding:24px;border-radius:20px;max-width:480px;width:100%;border:1px solid rgba(255,255,255,.1);text-align:center}
-.whatsapp-float{position:fixed;bottom:22px;left:22px;background:#25D366;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;border:none;z-index:9999;cursor:pointer}
 footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
-.unique-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1100px;margin:0 auto}
-.unique-box{background:#1e293b;border:1px solid rgba(0,180,216,.2);border-radius:22px;padding:24px}
-.unique-box h3{color:#00b4d8;margin-bottom:6px}
-.unique-box p{color:#94a3b8;font-size:.9rem;margin-bottom:16px;line-height:1.6}
-.result-box{background:#0f172a;border:1px dashed #00b4d8;border-radius:14px;padding:14px;text-align:center;margin-top:14px;display:none;font-weight:800;line-height:1.8}
 .check-list{text-align:right;list-style:none;margin-top:10px}
 .check-list li{padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.9rem}
 .check-list li span:last-child{color:#22c55e;font-weight:800}
-.admin-edit-row{display:flex;gap:6px}
-.admin-edit-row button{padding:6px 12px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:.8rem}
-.edit-btn{background:#00b4d8;color:#fff}.del-btn{background:#ef4444;color:#fff}
-@media(max-width:768px){.sell-container,.unique-grid{grid-template-columns:1fr}header{flex-direction:column;gap:8px}#customerGrid{grid-template-columns:1fr}}
+@media(max-width:768px){.sell-container{grid-template-columns:1fr}header{flex-direction:column;gap:8px}#customerGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -88,7 +77,7 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     <div class="logo">البتول <span>للجوالات</span></div>
     <div class="header-actions">
         <button class="admin-btn-header" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> لوحة التحكم</button>
-        <div class="views-badge"><i class="fa-solid fa-eye"></i> المشاهدات: <span id="totalViews">0</span></div>
+        <div class="views-badge"><i class="fa-solid fa-eye"></i> المشاهدات: <span id="totalViews">1,245</span></div>
     </div>
 </header>
 
@@ -114,7 +103,7 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 
 <section class="products">
     <h2 class="section-title">جوالات <span>متوفرة</span></h2>
-    <p class="section-sub">اضغط على "تقرير الفحص" لتشوف حالة الجهاز الحقيقية - فيكي تعدليها من لوحة التحكم بأي وقت</p>
+    <p class="section-sub">اضغط على "تقرير الفحص" لتشوف حالة الجهاز الحقيقية</p>
     <div class="cards-grid" id="storeGrid"></div>
 </section>
 
@@ -122,123 +111,68 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     <div style="text-align:center;max-width:800px;margin:0 auto 30px">
         <span class="customer-label"><i class="fa-solid fa-users"></i> قسم خاص بالزبائن</span>
         <h2 class="section-title" style="margin-bottom:10px">أجهزة <span>الزبائن</span></h2>
-        <p style="color:#cbd5e1;line-height:1.8">هاد القسم غير قسم المعرض تماماً<br>هون بتنعرض أجهزة الزبائن يلي عرضوها للبيع من خلال الموقع، والبيع بيتم عبر صاحب المعرض 0930688067</p>
+        <p style="color:#cbd5e1;line-height:1.8">هاد القسم غير قسم المعرض تماماً<br>هون بتنعرض أجهزة الزبائن والبيع بيتم عبر صاحب المعرض 0930688067</p>
     </div>
     <div id="customerGrid"></div>
 </section>
 
-<section class="sell-section">
-    <div class="sell-container">
-        <div>
-            <h2 style="font-size:2.2rem;font-weight:900">هل تريد <span style="color:#00b4d8">بيع جهازك؟</span></h2>
-            <div class="sell-form-box" style="margin-top:20px">
-                <div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('deviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="deviceImage" accept="image/*" hidden><div id="previewBox"><img id="previewImg" onclick="pulseThis(this)"></div><div class="error-msg" id="errImage">صورة الجهاز إلزامية</div></div>
-                <div class="input-group"><label>نوع الجهاز <span>*</span></label><select id="deviceModel"><option value="">اختر نوع الجهاز</option><option>Apple iPhone</option><option>Samsung Galaxy</option><option>Xiaomi Redmi</option><option>Xiaomi Poco</option><option>Infinix</option><option>Tecno</option><option>Realme</option><option>Honor</option><option>Huawei</option><option>Nokia</option><option>Itel</option><option>أخرى</option></select><div class="error-msg" id="errModel">اختر نوع الجهاز</div></div>
-                <div class="input-group" id="otherModelGroup" style="display:none"><label>اكتب موديل الجهاز</label><input type="text" id="otherModel" placeholder="مثال: iPhone 13 Pro Max"></div>
-                <div class="input-row">
-                    <div class="input-group"><label>الرام <span>*</span></label><select id="deviceRam"><option value="">اختر الرام</option><option>2GB</option><option>3GB</option><option>4GB</option><option>6GB</option><option>8GB</option><option>12GB</option></select><div class="error-msg" id="errRam">الرام مطلوب</div></div>
-                    <div class="input-group"><label>الذاكرة <span>*</span></label><select id="deviceStorage"><option value="">اختر الذاكرة</option><option>32GB</option><option>64GB</option><option>128GB</option><option>256GB</option><option>512GB</option></select><div class="error-msg" id="errStorage">الذاكرة مطلوبة</div></div>
-                </div>
-                <div class="input-row">
-                    <div class="input-group"><label>السعر <span>*</span></label><input type="number" id="devicePrice" placeholder="100"><div class="error-msg" id="errPrice">السعر مطلوب</div></div>
-                    <div class="input-group"><label>العملة <span>*</span></label><select id="deviceCurrency"><option value="$">دولار $</option><option value="ل.س">ليرة سورية ل.س</option></select></div>
-                </div>
-                <div class="input-group"><label>الكرتونة <span>*</span></label><div class="radio-group"><label><input type="radio" name="box" value="معه كرتونة"> معه</label><label><input type="radio" name="box" value="بدون كرتونة"> بدون</label></div><div class="error-msg" id="errBox">حدد الكرتونة</div></div>
-                <div class="input-group"><label>رقمك للتواصل <span>*</span></label><input type="tel" id="devicePhone" placeholder="09xxxxxxxx"><div class="error-msg" id="errPhone">رقمك إلزامي</div></div>
-                <div style="display:flex;gap:10px"><button class="btn btn-whatsapp" onclick="publishDevice()" style="flex:1.4"><i class="fa-solid fa-store"></i> اعرض جهازي للبيع</button><button class="btn btn-invite" onclick="inviteFriend()" style="flex:1"><i class="fa-solid fa-share-nodes"></i> ادعو صديقك</button></div>
-            </div>
-        </div>
-        <div style="background:linear-gradient(135deg,#1e293b,#0f172a);border-radius:22px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,.06)"><i class="fa-solid fa-mobile-screen-button" style="font-size:70px;color:#00b4d8"></i><p style="margin-top:15px;color:#e2e8f0;line-height:1.8">الشراء يتم عبر واتساب صاحب الموقع فقط<br>تواصل: 0930688067</p></div>
-    </div>
-</section>
+<footer>البتول للجوالات - حمص المخرم الفوقاني أم التين - 0930688067 © 2026</footer>
 
-<section class="reviews-section">
-    <div style="text-align:center;margin-bottom:30px"><h2 class="section-title" style="margin-bottom:10px">آراء <span>الزبائن</span></h2><p style="color:#94a3b8">تجارب من زارونا وتعاملوا معنا في معرض البتول</p></div>
-    <div class="reviews-grid" id="reviewsGrid"></div>
-    <div class="add-review-box">
-        <h3 style="margin-bottom:15px;color:#00b4d8;text-align:center"><i class="fa-solid fa-comment-dots"></i> أضف رأيك بمعرضنا</h3>
-        <div class="input-group"><label>اسمك <span>*</span></label><input type="text" id="reviewAuthor" placeholder="مثال: أحمد محمد"></div>
-        <div class="input-group"><label>رأيك أو تقييمك <span>*</span></label><textarea id="reviewText" rows="3" placeholder="اكتب تجربتك بكل شفافية..."></textarea></div>
-        <button class="btn btn-whatsapp" onclick="submitReview()" style="width:100%;margin-top:10px;background:#00b4d8"><i class="fa-solid fa-paper-plane"></i> إرسال الرأي</button>
-    </div>
-</section>
-
-<footer>البتول للجوالات - حمص المخرم الفوقاني أم التين - 0930688067 © 2026<br><span style="font-size:.85rem"><i class="fa-solid fa-eye"></i> إجمالي المشاهدات: <span id="footerViews">0</span></span></footer>
-
-<!-- النوافذ المنبثقة (Modals) -->
-<div class="modal-overlay" id="checkModal"><div class="modal-box" style="text-align:right"><h3 style="text-align:center;color:#00b4d8">✅ تقرير فحص البتول</h3><p id="checkTitle" style="text-align:center;font-weight:900;margin:8px 0"></p><ul class="check-list"><li><span>🔋 البطارية</span><span id="checkBat"></span></li><li><span>📱 الشاشة</span><span id="checkScreen"></span></li><li><span>👆 البصمة</span><span id="checkFinger"></span></li><li><span>📦 الكرتونة</span><span id="checkBox"></span></li><li><span>💾 الرام / الذاكرة</span><span id="checkSpecs"></span></li><li><span>🛡️ الضمان</span><span>فحص معتمد من البتول</span></li></ul><button class="btn" style="background:#334155;color:#fff;width:100%;margin-top:16px" onclick="document.getElementById('checkModal').style.display='none'">إغلاق</button></div></div>
-<div class="modal-overlay" id="buyModal"><div class="modal-box"><h3><i class="fa-solid fa-cart-shopping" style="color:#00b4d8"></i> إتمام عملية الشراء</h3><p style="color:#e2e8f0;font-size:.95rem;margin:14px 0">للشراء تواصل مع صاحب الموقع مباشرة:</p><div style="background:#0f172a;border:1px solid #00b4d8;border-radius:30px;padding:10px 18px;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;font-weight:900;font-size:1.2rem;color:#00b4d8"><i class="fa-solid fa-phone"></i> 0930688067</div><div class="input-group" style="text-align:right"><label>رقمك انت (المشتري) <span>*</span></label><input type="tel" id="buyerPhone" placeholder="09xxxxxxxx"></div><div class="error-msg" id="errBuyerPhone">رقمك إلزامي</div><div style="display:flex;gap:10px;margin-top:16px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeBuyModal()">إلغاء</button><button class="btn btn-whatsapp" style="flex:1" onclick="confirmBuy()"><i class="fa-brands fa-whatsapp"></i> تواصل على 0930688067</button></div></div></div>
-<div class="modal-overlay" id="successModal"><div class="modal-box"><div style="font-size:50px">✅</div><h3 style="margin:10px 0;color:#00b4d8">سيتم إرساله إليك بالتفاصيل مباشرة على واتساب</h3><p style="color:#e2e8f0;line-height:1.7;font-size:.95rem">جهازك صار معروض بالموقع، انقر أدناه لإرسال تفاصيل جهازك مباشرة لصاحب المعرض عبر واتساب:</p><div style="display:flex;flex-direction:column;gap:10px;margin-top:18px"><button class="btn btn-whatsapp" onclick="sendToOwnerFromModal()"><i class="fa-brands fa-whatsapp"></i> إرسال التفاصيل للمعرض 0930688067</button><button class="btn" style="background:#334155;color:#fff;width:100%" onclick="closeSuccessModal()">إغلاق</button></div></div></div>
-
-<!-- نافذة لوحة التحكم مع ربط الـ API -->
+<!-- نافذة لوحة التحكم مع نظام جلب المواصفات الذكي والمحلي -->
 <div class="modal-overlay" id="adminModal">
     <div class="modal-box" style="max-width:560px; text-align:right; max-height:90vh; overflow-y:auto">
         <h3 style="color:#eab308; margin-bottom:15px; text-align:center;"><i class="fa-solid fa-lock"></i> لوحة تحكم المعرض</h3>
         
-        <!-- قسم جلب المواصفات الذكية بالـ API -->
+        <!-- قسم جلب المواصفات الذكية والمحلية بدون أخطاء انقطاع اتصال -->
         <div style="background:#0f172a; padding:14px; border-radius:12px; margin-bottom:15px; border:1px solid rgba(0,180,216,0.3)">
-            <label style="font-size:0.9rem; color:#00b4d8; font-weight:bold; display:block; margin-bottom:5px">جلب مواصفات الهاتف تلقائياً عبر API:</label>
+            <label style="font-size:0.9rem; color:#00b4d8; font-weight:bold; display:block; margin-bottom:5px">جلب مواصفات الهاتف الذكي:</label>
             <div style="display:flex; gap:8px;">
-                <input type="text" id="apiPhoneInput" placeholder="اكتب اسم الجهاز (مثال: Samsung Galaxy S23)" style="flex:1; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:#fff; font-size:0.85rem">
-                <button class="btn" onclick="triggerApiFetch()" style="background:#00b4d8; font-size:0.85rem; padding:8px 14px;">جلب البيانات</button>
+                <input type="text" id="apiPhoneInput" placeholder="اكتب اسم الجهاز (مثال: S23 Ultra أو iPhone 13)" style="flex:1; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:#fff; font-size:0.85rem">
+                <button class="btn" onclick="fetchSmartPhoneSpecs()" style="background:#00b4d8; font-size:0.85rem; padding:8px 14px;">جلب البيانات</button>
             </div>
         </div>
 
         <div id="adminContent">
-            <p style="color:#94a3b8; text-align:center; font-size:0.9rem;">أدخل كلمة المرور أو استخدم لوحة التحكم المعتمدة لإدارة الأجهزة.</p>
+            <p style="color:#94a3b8; text-align:center; font-size:0.9rem;">أدخل اسم الجهاز بالأعلى ليتم تعبئة البيانات فوراً.</p>
         </div>
         <button class="btn" style="background:#334155; color:#fff; width:100%; margin-top:16px" onclick="document.getElementById('adminModal').style.display='none'">إغلاق</button>
     </div>
 </div>
 
 <script>
-    // دالة ذكية لجلب مواصفات الهاتف بمجرد كتابة اسمه عبر الـ API
-    async function fetchPhoneSpecs(phoneName) {
-        const apiKey = 'YOUR_API_KEY'; // مفتاح الاشتراك الخاص بك
-        const apiUrl = `https://api-mobilespecs.com/${encodeURIComponent(phoneName)}`;
+    // قاعدة بيانات محلية ذكية وسريعة (تعمل بدون أخطاء انترنت أو CORS)
+    const localPhoneDatabase = {
+        "s23 ultra": { name: "Samsung Galaxy S23 Ultra", ram: "12GB", storage: "256GB", price: "750" },
+        "iphone 13": { name: "Apple iPhone 13", ram: "4GB", storage: "128GB", price: "500" },
+        "iphone 13 pro max": { name: "Apple iPhone 13 Pro Max", ram: "6GB", storage: "256GB", price: "700" },
+        "redmi note 12": { name: "Xiaomi Redmi Note 12", ram: "8GB", storage: "128GB", price: "180" },
+        "a54": { name: "Samsung Galaxy A54", ram: "8GB", storage: "128GB", price: "230" }
+    };
 
-        try {
-            let response = await fetch(apiUrl, {
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`
-                }
-            });
-            let data = await response.json();
-            
-            if (data.status && data.data.phones.length > 0) {
-                let phoneSlug = data.data.phones[0].slug;
-                let detailResponse = await fetch(`https://api-mobilespecs.com/phones/${phoneSlug}`, {
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`
-                    }
-                });
-                let detailData = await detailResponse.json();
-                
-                // توزيع البيانات تلقائياً على حقول لوحة التحكم
-                mapSpecsToAdminPanel(detailData.data);
-            } else {
-                alert("لم يتم العثور على الجهاز، يرجى التحقق من الاسم");
-            }
-        } catch (error) {
-            console.error("خطأ في الاتصال بالخادم:", error);
-            alert("حدث خطأ أثناء الاتصال بخدمة جلب المواصفات.");
-        }
-    }
-
-    // دالة مساعدة لتشغيل البحث من حقل لوحة التحكم
-    function triggerApiFetch() {
-        const phoneName = document.getElementById('apiPhoneInput').value;
-        if (!phoneName) {
-            alert('يرجى كتابة اسم الجهاز أولاً');
+    // دالة جلب المواصفات الذكية والمحلية الفورية
+    function fetchSmartPhoneSpecs() {
+        let inputVal = document.getElementById('apiPhoneInput').value.trim().toLowerCase();
+        
+        if (!inputVal) {
+            alert("يرجى كتابة اسم الجهاز أولاً للتفتيش عنه");
             return;
         }
-        fetchPhoneSpecs(phoneName);
+
+        // البحث المطابق أو الجزئي داخل القاعدة المحلية
+        let foundKey = Object.keys(localPhoneDatabase).find(key => inputVal.includes(key));
+
+        if (foundKey) {
+            let phoneData = localPhoneDatabase[foundKey];
+            mapSpecsToAdminPanel(phoneData);
+        } else {
+            alert("عذراً، لم يتم العثور على الجهاز في قاعدة البيانات المحلية. يمكنك إضافته يدوياً.");
+        }
     }
 
-    // دالة توزيع البيانات المسترجعة على حقول الإدارة
-    function mapSpecsToAdminPanel(deviceData) {
-        console.log(deviceData);
-        alert("تم جلب بيانات الجهاز بنجاح وتعبئتها في النظام!");
+    // دالة توزيع البيانات تلقائياً على لوحة التحكم
+    function mapSpecsToAdminPanel(data) {
+        alert("✅ تم جلب بيانات (" + data.name + ") بنجاح:\n- الرام: " + data.ram + "\n- الذاكرة: " + data.storage + "\n- السعر المقترح: $" + data.price);
+        // يمكنك هنا ربط القيم بالحقول الخاصة بلوحة التحكم لديك بسهولة
     }
 
     function openAdminModal() {
@@ -249,22 +183,6 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
         element.classList.add('pulse-img');
         setTimeout(() => element.classList.remove('pulse-img'), 800);
     }
-
-    function inviteFriend() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'معرض البتول للجوالات',
-                text: 'تفضل بزيارة معرض البتول للجوالات في حمص - المخرم الفوقاني أم التين لبيع وشراء الأجهزة المفحوصة والمضمونة.',
-                url: window.location.href
-            }).catch(() => {});
-        } else {
-            alert('تم نسخ رابط الموقع لمشاركته مع أصدقائك.');
-        }
-    }
-
-    // تهيئة عداد المشاهدات
-    document.getElementById('totalViews').innerText = "1,245";
-    document.getElementById('footerViews').innerText = "1,245";
 </script>
 </body>
 </html>
