@@ -123,26 +123,27 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     <div class="modal-box" style="max-width:560px; text-align:right; max-height:90vh; overflow-y:auto">
         <h3 style="color:#eab308; margin-bottom:15px; text-align:center;"><i class="fa-solid fa-lock"></i> لوحة تحكم المعرض</h3>
         
-        <!-- قسم جلب المواصفات الذكية والمحلية بدون أخطاء انقطاع اتصال -->
+        <!-- قسم جلب المواصفات الذكية والمحلية -->
         <div style="background:#0f172a; padding:14px; border-radius:12px; margin-bottom:15px; border:1px solid rgba(0,180,216,0.3)">
             <label style="font-size:0.9rem; color:#00b4d8; font-weight:bold; display:block; margin-bottom:5px">جلب مواصفات الهاتف الذكي:</label>
             <div style="display:flex; gap:8px;">
-                <input type="text" id="apiPhoneInput" placeholder="اكتب اسم الجهاز (مثال: S23 Ultra أو iPhone 13)" style="flex:1; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:#fff; font-size:0.85rem">
+                <input type="text" id="apiPhoneInput" placeholder="اكتب اسم الجهاز (مثال: s23 أو iphone 13)" style="flex:1; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:#fff; font-size:0.85rem">
                 <button class="btn" onclick="fetchSmartPhoneSpecs()" style="background:#00b4d8; font-size:0.85rem; padding:8px 14px;">جلب البيانات</button>
             </div>
         </div>
 
         <div id="adminContent">
-            <p style="color:#94a3b8; text-align:center; font-size:0.9rem;">أدخل اسم الجهاز بالأعلى ليتم تعبئة البيانات فوراً.</p>
+            <p style="color:#94a3b8; text-align:center; font-size:0.9rem;">أدخل اسم الجهاز بالأعلى ليتم جلب البيانات فوراً.</p>
         </div>
         <button class="btn" style="background:#334155; color:#fff; width:100%; margin-top:16px" onclick="document.getElementById('adminModal').style.display='none'">إغلاق</button>
     </div>
 </div>
 
 <script>
-    // قاعدة بيانات محلية ذكية وسريعة (تعمل بدون أخطاء انترنت أو CORS)
+    // قاعدة بيانات محلية ذكية وسريعة
     const localPhoneDatabase = {
         "s23 ultra": { name: "Samsung Galaxy S23 Ultra", ram: "12GB", storage: "256GB", price: "750" },
+        "s23": { name: "Samsung Galaxy S23", ram: "8GB", storage: "128GB", price: "450" },
         "iphone 13": { name: "Apple iPhone 13", ram: "4GB", storage: "128GB", price: "500" },
         "iphone 13 pro max": { name: "Apple iPhone 13 Pro Max", ram: "6GB", storage: "256GB", price: "700" },
         "redmi note 12": { name: "Xiaomi Redmi Note 12", ram: "8GB", storage: "128GB", price: "180" },
@@ -158,21 +159,20 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
             return;
         }
 
-        // البحث المطابق أو الجزئي داخل القاعدة المحلية
-        let foundKey = Object.keys(localPhoneDatabase).find(key => inputVal.includes(key));
+        // مطابقة البحث الذكي (سواء كتب المستخدم جزءاً من الاسم أو الاسم كاملاً)
+        let foundKey = Object.keys(localPhoneDatabase).find(key => key.includes(inputVal) || inputVal.includes(key));
 
         if (foundKey) {
             let phoneData = localPhoneDatabase[foundKey];
             mapSpecsToAdminPanel(phoneData);
         } else {
-            alert("عذراً، لم يتم العثور على الجهاز في قاعدة البيانات المحلية. يمكنك إضافته يدوياً.");
+            alert("عذراً، لم يتم العثور على الجهاز. جرب كتابة اسم أقصر مثل: s23 أو iphone 13");
         }
     }
 
     // دالة توزيع البيانات تلقائياً على لوحة التحكم
     function mapSpecsToAdminPanel(data) {
         alert("✅ تم جلب بيانات (" + data.name + ") بنجاح:\n- الرام: " + data.ram + "\n- الذاكرة: " + data.storage + "\n- السعر المقترح: $" + data.price);
-        // يمكنك هنا ربط القيم بالحقول الخاصة بلوحة التحكم لديك بسهولة
     }
 
     function openAdminModal() {
