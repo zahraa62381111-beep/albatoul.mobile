@@ -82,6 +82,14 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     </div>
 </section>
 
+<section class="products">
+    <h2 class="section-title">جوالات <span>متوفرة</span></h2>
+    <p class="section-sub">أجهزة معرض البتول الأصلية</p>
+    <div class="cards-grid" id="storeGrid">
+        <p style="color:#94a3b8;text-align:center;grid-column:1/-1;">جاري تحميل الأجهزة...</p>
+    </div>
+</section>
+
 <section class="products" id="customerSection" style="background:#131c31">
     <div style="text-align:center;max-width:800px;margin:0 auto 30px">
         <span class="customer-label"><i class="fa-solid fa-users"></i> قسم خاص بالزبائن</span>
@@ -144,15 +152,13 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
                 <h3 style="color:#eab308">لوحة تحكم المعرض</h3>
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <!-- زر استعادة الأجهزة القديمة -->
-                    <button class="btn" style="background:#ef4444;color:#fff;padding:6px 12px;font-size:.8rem" onclick="recoverOldDevices()"><i class="fa-solid fa-wrench"></i> استعادة الأجهزة</button>
-                    <!-- زر تغيير كلمة المرور -->
+                    <button class="btn" style="background:#22c55e;color:#fff;padding:6px 12px;font-size:.8rem" onclick="openAddStoreDeviceModal()"><i class="fa-solid fa-plus"></i> إضافة جهاز للمعرض</button>
+                    <button class="btn" style="background:#ef4444;color:#fff;padding:6px 12px;font-size:.8rem" onclick="recoverOldDevices()"><i class="fa-solid fa-wrench"></i> استعادة</button>
                     <button class="btn" style="background:#00b4d8;color:#fff;padding:6px 12px;font-size:.8rem" onclick="showChangePassSection()"><i class="fa-solid fa-key"></i> كلمة المرور</button>
                     <button class="btn" style="background:#334155;color:#fff;padding:6px 12px;font-size:.8rem" onclick="closeAdminModal()">خروج</button>
                 </div>
             </div>
 
-            <!-- قسم تغيير كلمة المرور -->
             <div id="changePassSection" style="background:#0f172a;padding:14px;border-radius:12px;margin-bottom:16px;display:none;border:1px solid rgba(234,179,8,.3)">
                 <h4 style="color:#eab308;font-size:.95rem;margin-bottom:10px">تعديل كلمة مرور لوحة التحكم</h4>
                 <div class="input-group"><label>كلمة المرور الحالية</label><input type="password" id="oldPassInput"></div>
@@ -163,38 +169,59 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
                 </div>
             </div>
 
-            <h4 style="color:#eab308;margin:10px 0 12px"><i class="fa-solid fa-clock"></i> طلبات بانتظار الموافقة (<span id="pendingCount">0</span>)</h4>
+            <h4 style="color:#00b4d8;margin:15px 0 10px"><i class="fa-solid fa-store"></i> أجهزة المعرض (جوالات متوفرة)</h4>
+            <div id="adminStoreList"></div>
+
+            <h4 style="color:#eab308;margin:15px 0 10px"><i class="fa-solid fa-clock"></i> طلبات زبائن بانتظار الموافقة (<span id="pendingCount">0</span>)</h4>
             <div id="pendingList"></div>
+            
             <hr style="border-color:rgba(255,255,255,.1);margin:20px 0">
-            <h4 style="color:#22c55e;margin:10px 0 12px"><i class="fa-solid fa-check-circle"></i> الأجهزة المنشورة (<span id="approvedCount">0</span>)</h4>
+            
+            <h4 style="color:#22c55e;margin:10px 0 10px"><i class="fa-solid fa-check-circle"></i> أجهزة الزبائن المنشورة (<span id="approvedCount">0</span>)</h4>
             <div id="approvedList"></div>
         </div>
     </div>
 </div>
 
-<!-- نافذة تعديل بيانات الجهاز -->
+<!-- نافذة إضافة جهاز للمعرض -->
+<div class="modal-overlay" id="addStoreDeviceModal">
+    <div class="modal-box" style="text-align:right;">
+        <h3 style="color:#00b4d8;margin-bottom:15px;text-align:center"><i class="fa-solid fa-plus"></i> إضافة جهاز للمعرض</h3>
+        <div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('storeDeviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="storeDeviceImage" accept="image/*" hidden onchange="previewStoreDeviceImage(event)"><div id="storePreviewBox" style="display:none;margin-top:10px"><img id="storePreviewImg" style="width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px;"></div></div>
+        
+        <div class="input-group"><label>الموديل <span>*</span></label><input type="text" id="storeModel" placeholder="مثال: iPhone 13 Pro Max"></div>
+        <div class="input-row">
+            <div class="input-group"><label>الرام <span>*</span></label><input type="text" id="storeRam" placeholder="مثال: 6GB"></div>
+            <div class="input-group"><label>الذاكرة <span>*</span></label><input type="text" id="storeStorage" placeholder="مثال: 128GB"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-group"><label>السعر <span>*</span></label><input type="number" id="storePrice"></div>
+            <div class="input-group"><label>العملة</label><select id="storeCurrency"><option value="$">دولار $</option><option value="ل.س">ليرة سورية</option></select></div>
+        </div>
+        <div class="input-group"><label>حالة الكرتونة</label><input type="text" id="storeBox" placeholder="مثال: معه كرتونة"></div>
+
+        <div style="display:flex;gap:10px;margin-top:20px">
+            <button class="btn" style="background:#22c55e;color:#fff;flex:1" onclick="saveStoreDevice()">إضافة الجهاز ونشره</button>
+            <button class="btn" style="background:#334155;color:#fff" onclick="document.getElementById('addStoreDeviceModal').style.display='none'">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- نافذة تعديل بيانات الجهاز (للمعرض والزبائن) -->
 <div class="modal-overlay" id="editDeviceModal">
     <div class="modal-box">
         <h3 style="color:#00b4d8;margin-bottom:15px"><i class="fa-solid fa-pen-to-square"></i> تعديل بيانات الجهاز</h3>
         <input type="hidden" id="editDeviceId">
         
         <div class="input-group"><label>الموديل</label><input type="text" id="editModel"></div>
-        
         <div class="edit-row">
             <div class="input-group"><label>الرام</label><input type="text" id="editRam"></div>
             <div class="input-group"><label>الذاكرة</label><input type="text" id="editStorage"></div>
         </div>
-        
         <div class="edit-row">
             <div class="input-group"><label>السعر</label><input type="number" id="editPrice"></div>
-            <div class="input-group"><label>العملة</label>
-                <select id="editCurrency">
-                    <option value="$">دولار $</option>
-                    <option value="ل.س">ليرة سورية ل.س</option>
-                </select>
-            </div>
+            <div class="input-group"><label>العملة</label><select id="editCurrency"><option value="$">دولار</option><option value="ل.س">ليرة</option></select></div>
         </div>
-        
         <div class="input-group">
             <label>حالة الجهاز</label>
             <select id="editStatus" style="font-weight:bold">
@@ -203,7 +230,6 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
                 <option value="pending">إلغاء النشر (مخفي)</option>
             </select>
         </div>
-
         <div style="display:flex;gap:10px;margin-top:20px">
             <button class="btn" style="background:#22c55e;color:#fff;flex:1" onclick="saveEditedDevice()">حفظ التعديلات</button>
             <button class="btn" style="background:#334155;color:#fff" onclick="document.getElementById('editDeviceModal').style.display='none'">إلغاء</button>
@@ -241,6 +267,7 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     
     if (typeof window.renderCustomerSection === 'function') window.renderCustomerSection();
     if (typeof window.renderAdminLists === 'function') window.renderAdminLists();
+    if (typeof window.renderStoreSection === 'function') window.renderStoreSection();
   });
 </script>
 
@@ -249,6 +276,7 @@ const DEFAULT_PASSWORD = "1234";
 let CURRENT_ADMIN_PASS = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
 const OWNER_WHATSAPP = "963930688067"; 
 let customerImageData = null;
+let storeImageData = null;
 let allDevicesCache = [];
 let lastSubmittedDevice = null;
 
@@ -262,25 +290,39 @@ function updateViews() {
     document.getElementById('totalViews').textContent = views;
 }
 
-function previewDeviceImage(e){
-  const file = e.target.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      let scale = 600 / img.width; if (scale > 1) scale = 1; 
-      canvas.width = img.width * scale; canvas.height = img.height * scale;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      customerImageData = canvas.toDataURL('image/jpeg', 0.7);
-      document.getElementById('previewImg').src = customerImageData;
-      document.getElementById('previewBox').style.display = 'block';
-      document.getElementById('errImage').style.display = 'none';
+function compressImage(file, callback) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let scale = 600 / img.width; if (scale > 1) scale = 1; 
+            canvas.width = img.width * scale; canvas.height = img.height * scale;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            callback(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.src = ev.target.result;
     };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
+}
+
+function previewDeviceImage(e) {
+    if(!e.target.files[0]) return;
+    compressImage(e.target.files[0], data => {
+        customerImageData = data;
+        document.getElementById('previewImg').src = data;
+        document.getElementById('previewBox').style.display = 'block';
+        document.getElementById('errImage').style.display = 'none';
+    });
+}
+function previewStoreDeviceImage(e) {
+    if(!e.target.files[0]) return;
+    compressImage(e.target.files[0], data => {
+        storeImageData = data;
+        document.getElementById('storePreviewImg').src = data;
+        document.getElementById('storePreviewBox').style.display = 'block';
+    });
 }
 
 async function publishDevice() {
@@ -306,43 +348,62 @@ async function publishDevice() {
     try {
         const docRef = await window.addDoc(window.collection(window.db, "devices"), {
             image: customerImageData, model, otherModel: modelText, ram, storage,
-            price, currency, box, phone, status: 'pending', createdAt: new Date()
+            price, currency, box, phone, status: 'pending', type: 'customer', createdAt: new Date()
         });
         lastSubmittedDevice = { id: docRef.id, model, otherModel: modelText, ram, storage, price, currency, box, phone };
         document.getElementById('successModal').style.display = 'flex';
-        
         document.getElementById('deviceModel').value = ''; document.getElementById('otherModel').value = '';
         document.getElementById('deviceRam').value = ''; document.getElementById('deviceStorage').value = '';
         document.getElementById('devicePrice').value = ''; document.getElementById('devicePhone').value = '';
         document.querySelectorAll('input[name="box"]').forEach(el => el.checked = false);
         document.getElementById('previewBox').style.display = 'none'; customerImageData = null;
     } catch (error) {
-        alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+        alert('حدث خطأ أثناء الإرسال.');
     } finally {
         btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-store"></i> اعرض جهازي للبيع';
     }
 }
 
+async function saveStoreDevice() {
+    const model = document.getElementById('storeModel').value.trim();
+    const ram = document.getElementById('storeRam').value.trim();
+    const storage = document.getElementById('storeStorage').value.trim();
+    const price = document.getElementById('storePrice').value;
+    const box = document.getElementById('storeBox').value.trim();
+    const currency = document.getElementById('storeCurrency').value;
+
+    if(!storeImageData || !model || !ram || !storage || !price) {
+        alert('يرجى تعبئة جميع الحقول وإضافة صورة');
+        return;
+    }
+
+    try {
+        await window.addDoc(window.collection(window.db, "devices"), {
+            image: storeImageData, model, otherModel: '', ram, storage,
+            price, currency, box: box || 'غير محدد', phone: OWNER_WHATSAPP, 
+            status: 'approved', type: 'store', createdAt: new Date()
+        });
+        alert('✅ تم إضافة الجهاز للمعرض ونشره بنجاح!');
+        document.getElementById('addStoreDeviceModal').style.display = 'none';
+        document.getElementById('storeModel').value = ''; document.getElementById('storeRam').value = '';
+        document.getElementById('storeStorage').value = ''; document.getElementById('storePrice').value = '';
+        document.getElementById('storeBox').value = ''; document.getElementById('storePreviewBox').style.display = 'none';
+        storeImageData = null;
+    } catch(e) { alert('حدث خطأ'); }
+}
+function openAddStoreDeviceModal() { document.getElementById('addStoreDeviceModal').style.display = 'flex'; }
+
 function sendToOwnerFromModal() {
     if(!lastSubmittedDevice) return;
     const d = lastSubmittedDevice;
-    const msg = `مرحباً، قمت بعرض جهازي للبيع على الموقع:\nالجهاز: ${d.model} ${d.otherModel || ''}\nالسعر: ${d.price} ${d.currency}\nرقمي: ${d.phone}`;
+    const msg = `مرحباً، قمت بعرض جهازي للبيع:\n${d.model} ${d.otherModel || ''}\nالسعر: ${d.price} ${d.currency}\nرقمي: ${d.phone}`;
     window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
     closeSuccessModal();
 }
 function closeSuccessModal() { document.getElementById('successModal').style.display = 'none'; }
 
-/* ===== عرض الأجهزة للزوار ===== */
-function renderCustomerSection() {
-    const grid = document.getElementById('customerGrid');
-    const devices = allDevicesCache.filter(d => d.status === 'approved' || d.status === 'sold' || !d.status);
-
-    if(devices.length === 0){
-        grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة زبائن معروضة حالياً</p>';
-        return;
-    }
-
-    grid.innerHTML = devices.map(d => `
+function generateDeviceCard(d) {
+    return `
         <div class="card">
             ${d.status === 'sold' ? '<div class="sold-stamp">مباع</div>' : ''}
             <img src="${d.image}" alt="${d.model}" onclick="pulseThis(this)">
@@ -355,14 +416,35 @@ function renderCustomerSection() {
             <div style="margin-top:15px">
                 ${d.status === 'sold' 
                   ? `<button class="btn" style="background:#334155;color:#94a3b8;width:100%;cursor:not-allowed" disabled><i class="fa-solid fa-ban"></i> تم البيع</button>`
-                  : `<a href="https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent('مرحباً، أرغب بشراء جهاز: ' + d.model + ' ' + (d.otherModel || ''))}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل لشراء الجهاز</a>`
+                  : `<a href="https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent('مرحباً، أرغب بشراء: ' + d.model + ' ' + (d.otherModel || ''))}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل لشراء الجهاز</a>`
                 }
             </div>
         </div>
-    `).join('');
+    `;
 }
 
-/* ===== لوحة التحكم ===== */
+function renderStoreSection() {
+    const grid = document.getElementById('storeGrid');
+    const devices = allDevicesCache.filter(d => d.type === 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
+    
+    if(devices.length === 0){
+        grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة معرض مضافة حالياً</p>';
+        return;
+    }
+    grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
+}
+
+function renderCustomerSection() {
+    const grid = document.getElementById('customerGrid');
+    const devices = allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
+
+    if(devices.length === 0){
+        grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة زبائن معروضة حالياً</p>';
+        return;
+    }
+    grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
+}
+
 function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
 function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
 
@@ -389,16 +471,37 @@ function saveNewPassword() {
     alert('✅ تم تغيير كلمة المرور بنجاح!'); hideChangePassSection();
 }
 
+function generateAdminItem(d) {
+    return `
+        <div class="admin-device-item">
+            <div class="admin-device-header">
+                <div style="display:flex;gap:10px;align-items:center">
+                    <img src="${d.image}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;${d.status === 'sold' ? 'opacity:0.5;' : ''}">
+                    <div>
+                        <strong style="display:block;font-size:.9rem">${d.model} ${d.otherModel || ''} ${d.status === 'sold' ? '<span style="color:#ef4444;font-size:.7rem">(مباع)</span>' : ''}</strong>
+                        <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-edit-row">
+                <button class="edit-btn" onclick="openEditModal('${d.id}')">تعديل</button>
+                <button class="sold-btn" onclick="markAsSold('${d.id}')">${d.status === 'sold' ? 'إرجاع' : 'تم البيع'}</button>
+                <button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button>
+            </div>
+        </div>
+    `;
+}
+
 function renderAdminLists() {
-    const pending = allDevicesCache.filter(d => d.status === 'pending' || !d.status);
-    const approved = allDevicesCache.filter(d => d.status === 'approved' || d.status === 'sold');
+    const storeDevices = allDevicesCache.filter(d => d.type === 'store' && d.status !== 'pending');
+    const adminStoreList = document.getElementById('adminStoreList');
+    adminStoreList.innerHTML = storeDevices.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا يوجد أجهزة معرض</p>' : storeDevices.map(d => generateAdminItem(d)).join('');
 
+    const pending = allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'pending' || !d.status));
     document.getElementById('pendingCount').textContent = pending.length;
-    document.getElementById('approvedCount').textContent = approved.length;
-
     const pendingList = document.getElementById('pendingList');
     if(pending.length === 0){
-        pendingList.innerHTML = '<p style="color:#94a3b8;text-align:center;">لا توجد طلبات معلقة</p>';
+        pendingList.innerHTML = '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد طلبات معلقة</p>';
     } else {
         pendingList.innerHTML = pending.map(d => `
             <div class="admin-device-item">
@@ -407,7 +510,7 @@ function renderAdminLists() {
                         <img src="${d.image}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;">
                         <div>
                             <strong style="display:block;font-size:.9rem">${d.model} ${d.otherModel || ''}</strong>
-                            <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency}</span>
+                            <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency} • ${d.phone}</span>
                         </div>
                     </div>
                 </div>
@@ -419,40 +522,43 @@ function renderAdminLists() {
         `).join('');
     }
 
+    const approved = allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold'));
+    document.getElementById('approvedCount').textContent = approved.length;
     const approvedList = document.getElementById('approvedList');
-    if(approved.length === 0){
-        approvedList.innerHTML = '<p style="color:#94a3b8;text-align:center;">لا توجد أجهزة منشورة</p>';
-    } else {
-        approvedList.innerHTML = approved.map(d => `
-            <div class="admin-device-item">
-                <div class="admin-device-header">
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <img src="${d.image}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;${d.status === 'sold' ? 'opacity:0.5;' : ''}">
-                        <div>
-                            <strong style="display:block;font-size:.9rem">${d.model} ${d.otherModel || ''} ${d.status === 'sold' ? '<span style="color:#ef4444;font-size:.7rem">(مباع)</span>' : ''}</strong>
-                            <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="admin-edit-row">
-                    <button class="edit-btn" onclick="openEditModal('${d.id}')">تعديل</button>
-                    <button class="sold-btn" onclick="markAsSold('${d.id}')">${d.status === 'sold' ? 'إرجاع' : 'تم البيع'}</button>
-                    <button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button>
-                </div>
-            </div>
-        `).join('');
-    }
+    approvedList.innerHTML = approved.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد أجهزة زبائن منشورة</p>' : approved.map(d => generateAdminItem(d)).join('');
 }
 
+// ⚠️ هذه هي دالة الاستعادة التي تم إصلاحها ⚠️
 async function recoverOldDevices() {
-    if(!confirm('هل تريد استعادة الأجهزة القديمة التي لا تحتوي على حالة؟ (سيتم اعتبارها منشورة)')) return;
+    if(!confirm('هل تريد استعادة الأجهزة القديمة؟ (سيتم إصلاح حالتها لتظهر على الموقع)')) return;
+    
     let count = 0;
+    // نبحث عن أي جهاز لا يملك حالة أو نوع
     for (let d of allDevicesCache) {
-        if (!d.status) {
-            try { await window.updateDoc(window.doc(window.db, "devices", d.id), { status: "approved" }); count++; } catch(e) {}
+        if (!d.status || !d.type) {
+            try { 
+                // إذا كان يملك رقم هاتف، نعتبره جهاز زبون، وإلا فهو جهاز معرض
+                let type = d.type;
+                if (!type) {
+                    type = (d.phone && d.phone !== "963930688067" && d.phone !== "0930688067") ? "customer" : "store";
+                }
+                
+                await window.updateDoc(window.doc(window.db, "devices", d.id), { 
+                    status: d.status || "approved",
+                    type: type
+                }); 
+                count++; 
+            } catch(e) {
+                console.error("فشل استعادة جهاز:", d.id, e);
+            }
         }
     }
-    alert(`تم استعادة ${count} جهاز بنجاح!`);
+    
+    if (count > 0) {
+        alert(`✅ تم استعادة ${count} جهاز بنجاح! يرجى إغلاق اللوحة وستجدهم في الموقع.`);
+    } else {
+        alert(`لم يتم العثور على أجهزة قديمة بحاجة للاستعادة. (ربما تم حذفها من Firebase نهائياً).`);
+    }
 }
 
 async function approveDevice(id) { try { await window.updateDoc(window.doc(window.db, "devices", id), { status: "approved" }); } catch(e) { alert('خطأ'); } }
