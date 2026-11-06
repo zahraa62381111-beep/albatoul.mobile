@@ -3,522 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>البتول - حمص المخرم</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>خدمات جامعية للطلاب</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{background:#0f172a;color:#fff}
-.edge-light{position:fixed;z-index:9998;pointer-events:none;box-shadow:0 0 12px #00b4d8, 0 0 25px rgba(0,180,216,.6)}
-.edge-light.top,.edge-light.bottom{left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00b4d8,#00e5ff,#fff,#00b4d8,transparent);background-size:200% 100%;animation:moveLight 2.5s linear infinite}
-.edge-light.left,.edge-light.right{top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,#00b4d8,#00e5ff,#fff,#00b4d8,transparent);background-size:100% 200%;animation:moveLightV 2.5s linear infinite}
-.edge-light.top{top:0}.edge-light.bottom{bottom:0}.edge-light.left{left:0}.edge-light.right{right:0}
-@keyframes moveLight{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes moveLightV{0%{background-position:0 -200%}100%{background-position:0 200%}}
-.pulse-img{animation:pulseBorder 0.8s ease}
-@keyframes pulseBorder{0%{box-shadow:0 0 0 0 rgba(0,180,216,0.8)}50%{box-shadow:0 0 0 18px rgba(0,180,216,0);transform:scale(1.02)}100%{box-shadow:0 0 0 0 rgba(0,180,216,0)}}
-header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;color:#00b4d8;font-size:26px}.logo span{color:#fff}
-.header-actions{display:flex;gap:12px;align-items:center}
-.views-badge{background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.3);padding:6px 14px;border-radius:20px;font-size:.85rem;color:#00b4d8;font-weight:800}
-.admin-btn-header{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#eab308;padding:6px 14px;border-radius:20px;font-size:.85rem;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px}
-.hero{min-height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 8% 40px;background:radial-gradient(800px 400px at 50% 0%,#1e293b,#0f172a)}
-.hero-content{background:rgba(30,41,59,.6);padding:35px;border-radius:28px;max-width:650px;border:1px solid rgba(255,255,255,.08)}
-.hero-img{width:100%;max-height:220px;object-fit:cover;border-radius:16px;margin-bottom:15px;cursor:pointer}
-.contact-badge{background:#00b4d8;padding:10px 28px;border-radius:30px;font-weight:800;display:inline-block;margin-top:10px}
-.trust-section{padding:50px 8%;background:linear-gradient(135deg,#131c31,#0f172a);text-align:center;border-top:1px solid rgba(0,180,216,.15);border-bottom:1px solid rgba(0,180,216,.15)}
-.trust-title{font-size:2rem;font-weight:900;margin-bottom:8px}.trust-title span{color:#00b4d8}
-.trust-sub{color:#94a3b8;margin-bottom:30px}
-.trust-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.trust-card{background:#1e293b;border:1px solid rgba(0,180,216,.15);border-radius:18px;padding:22px}
-.trust-card i{font-size:32px;color:#00b4d8;margin-bottom:10px;display:block}
-.trust-card h4{font-weight:800;margin-bottom:6px}.trust-card p{color:#cbd5e1;font-size:.9rem;line-height:1.6}
-.products{padding:80px 8%}.section-title{text-align:center;font-size:2.4rem;margin-bottom:20px}.section-title span{color:#00b4d8}
-.section-sub{text-align:center;color:#94a3b8;margin-bottom:40px}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:25px;max-width:1200px;margin:0 auto}
-.card{background:#1e293b;border-radius:22px;padding:22px;text-align:center;border:1px solid rgba(255,255,255,.06);position:relative}
-.card img{width:100%;height:230px;object-fit:contain;background:#0f172a;border-radius:14px;margin-bottom:12px;cursor:pointer}
-.price{color:#00b4d8;font-weight:800;font-size:1.3rem}.price-old{text-decoration:line-through;color:#94a3b8}
-.badge{display:inline-block;margin-top:10px;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem;line-height:1.6}
-.badge-sold{background:rgba(234,179,8,.15);color:#eab308;border:1px solid rgba(234,179,8,.35)}
-.view-count{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:20px;font-size:.8rem;color:#fff;display:flex;gap:5px;align-items:center}
-.device-title-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0}
-.share-mini{width:32px;height:32px;border-radius:50%;background:#25D366;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
-#customerGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:850px;margin:0 auto}
-#customerGrid .card{border:1px solid rgba(0,180,216,.25)}
-.customer-label{display:inline-block;background:#00b4d8;color:#fff;padding:6px 18px;border-radius:20px;font-size:.9rem;font-weight:800;margin-bottom:12px}
-.reviews-section{padding:70px 8%;background:#131c31;border-top:1px solid rgba(255,255,255,.05)}
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1100px;margin:0 auto 40px}
-.review-card{background:#1e293b;border-radius:18px;padding:20px;border:1px solid rgba(0,180,216,.15)}
-.review-card .stars{color:#eab308;margin-bottom:8px}.review-card p{color:#cbd5e1;font-size:.95rem;line-height:1.6;margin-bottom:12px}.review-card .author{font-weight:800;color:#00b4d8}
-.add-review-box{max-width:600px;margin:0 auto;background:#1e293b;padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.08)}
-.sell-section{padding:80px 8%}.sell-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
-.sell-form-box{background:#1e293b;padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,.07)}
-.input-group{margin-bottom:12px;text-align:right}.input-group label{font-weight:700;color:#cbd5e1;display:block;margin-bottom:5px}.input-group label span{color:#ef4444}
-.input-group input,.input-group select,.input-group textarea{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f172a;color:#fff;outline:none}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.upload-area{border:2px dashed #00b4d8;padding:16px;border-radius:14px;text-align:center;cursor:pointer;background:rgba(0,180,216,.06)}
-#previewBox{display:none;margin-top:10px}#previewBox img{width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px}
-.radio-group{display:flex;gap:8px;flex-wrap:wrap}.radio-group label{background:#0f172a;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;display:flex;gap:5px;align-items:center}
-.error-msg{color:#f87171;font-size:.8rem;display:none;margin-top:4px}
-.btn{padding:12px 22px;border-radius:30px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-.btn-whatsapp{background:#25D366;color:#fff;width:100%}.btn-invite{background:#00b4d8;color:#fff}.btn-buy{background:#00b4d8;color:#fff;width:100%;margin-top:10px}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
-.modal-box{background:#1e293b;padding:24px;border-radius:20px;max-width:480px;width:100%;border:1px solid rgba(255,255,255,.1);text-align:center}
-.whatsapp-float{position:fixed;bottom:22px;left:22px;background:#25D366;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;border:none;z-index:9999;cursor:pointer}
-footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
-.check-list{text-align:right;list-style:none;margin-top:10px}
-.check-list li{padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.9rem}
-.check-list li span:last-child{color:#22c55e;font-weight:800}
-.admin-edit-row{display:flex;gap:6px}
-.admin-edit-row button{padding:6px 12px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:.8rem}
-.edit-btn{background:#00b4d8;color:#fff}.del-btn{background:#ef4444;color:#fff}
-.specs-search{position:relative}
-.specs-list{position:absolute;top:100%;left:0;right:0;background:#0f172a;border:1px solid #00b4d8;border-radius:12px;max-height:280px;overflow-y:auto;z-index:100;display:none}
-.specs-item{display:flex;align-items:center;gap:10px;padding:9px 10px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.07);text-align:right}
-.specs-item:hover{background:#1e293b}
-.specs-item b{font-size:.9rem}
-.specs-item span{font-size:.8rem;color:#94a3b8;display:block}
-.specs-preview{background:#0f172a;border:1px solid rgba(0,180,216,.4);border-radius:12px;padding:12px;margin:8px 0;display:none;text-align:right}
-.specs-preview p{font-size:.85rem;color:#cbd5e1;line-height:1.7}
-@media(max-width:768px){.sell-container{grid-template-columns:1fr}header{flex-direction:column;gap:8px}#customerGrid{grid-template-columns:1fr}}
+:root{--navy:#0F2340;--navy2:#162E52;--gold:#D4AF37}
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;margin:0;background:#0F2340;color:#fff;overflow-x:hidden}
+.topbar{background:#0F2340;color:#fff;text-align:center;padding:14px 12px;line-height:1.7;border-bottom:2px solid #D4AF37;width:100%}
+.topbar .line1{display:block;font-size:14px;font-weight:bold;white-space:normal;word-break:break-word}
+.topbar .line2{display:block;font-size:12px;opacity:.9}
+header{display:flex;flex-direction:column;gap:12px;align-items:center;padding:15px 10px;background:#0F2340;box-shadow:0 2px 5px rgba(0,0,0,.3);position:sticky;top:0;z-index:10;width:100%;text-align:center}
+.logo{font-weight:bold;color:#fff;font-size:19px;line-height:1.4}
+.logo span{display:block;font-size:11px;color:#D4AF37;letter-spacing:1px}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;width:100%}
+.nav a{text-decoration:none;color:#fff;font-size:14px;font-weight:500;white-space:nowrap;padding:4px 2px}
+.btn{display:inline-block;padding:11px 22px;border-radius:5px;text-decoration:none;font-size:14px;font-weight:bold;border:none;cursor:pointer;white-space:nowrap}
+.btn-gold{background:#D4AF37;color:#0F2340}
+.btn-navy{background:#D4AF37;color:#0F2340;text-align:center}
+.btn-wa{background:#25D366;color:#fff;width:100%;font-size:16px;padding:12px;margin-top:10px}
+.hero{display:flex;flex-wrap:wrap;padding:30px 5%;background:#0F2340;align-items:center;gap:30px}
+.hero-text{flex:1;min-width:280px;text-align:center}
+.tag{background:rgba(255,255,255,.15);color:#D4AF37;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:bold;display:inline-block;line-height:1.6}
+.hero h1{font-size:28px;color:#fff;margin:15px 0;line-height:1.5}
+.hero p{color:#E0E0E0;font-size:14px;line-height:1.7}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-top:25px}
+.stat{text-align:center;min-width:80px}
+.stat b{display:block;font-size:19px;color:#fff}
+.stat small{color:#B0BEC5;font-size:12px;display:block;margin-top:4px;line-height:1.5}
+.hero-img{flex:1;min-width:280px;display:flex;justify-content:center}
+.hero-card{background:linear-gradient(135deg,#FFF8E7 0%,#FFECB3 100%);padding:25px;border-radius:12px;box-shadow:0 8px 25px rgba(212,175,55,.25);width:100%;max-width:360px;color:#0F2340;border:2px solid #D4AF37}
+.hero-card h3{color:#0F2340}
+.hero-card select,.hero-card input{width:100%;padding:10px;margin:8px 0;border:1px solid #D4AF37;border-radius:8px;font-family:inherit;background:#fff}
+.container{padding:35px 5%;background:#0F2340}
+.section-title{text-align:center;margin-bottom:20px}
+.section-title h2{color:#fff}
+.section-title p{color:#B0BEC5;line-height:1.7}
+.search-box{max-width:500px;margin:0 auto 25px auto;position:relative}
+.search-box input{width:100%;padding:13px 45px 13px 15px;border:2px solid #D4AF37;border-radius:25px;background:#162E52;color:#fff;font-family:inherit;font-size:14px;outline:none}
+.search-box input::placeholder{color:#B0BEC5}
+.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:#162E52;padding:20px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.3);border-top:3px solid #D4AF37;display:flex;flex-direction:column;justify-content:space-between}
+.card h3{color:#fff}
+.card p{font-size:13px;color:#D0D7E3;line-height:1.6}
+.price{font-weight:bold;color:#D4AF37;margin-bottom:15px}
+.track-box{background:#162E52;border:2px solid #D4AF37;border-radius:12px;padding:25px;max-width:520px;margin:0 auto;text-align:center}
+.track-box input,.track-box select{width:100%;padding:12px;margin:8px 0;border:1px solid #D4AF37;border-radius:8px;font-family:inherit;background:#0F2340;color:#fff;text-align:center;font-size:15px}
+.track-box input::placeholder{color:#B0BEC5}
+.order-result{background:#0F2340;border:1px solid #D4AF37;border-radius:10px;padding:15px;margin-top:15px;text-align:right;color:#fff;line-height:1.8}
+.order-result b{color:#D4AF37}
 </style>
 </head>
 <body>
-<div class="edge-light top"></div><div class="edge-light bottom"></div><div class="edge-light left"></div><div class="edge-light right"></div>
-<header><div class="logo">البتول <span>للجوالات</span></div><div class="header-actions"><button class="admin-btn-header" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> لوحة التحكم</button><div class="views-badge"><i class="fa-solid fa-eye"></i> المشاهدات: <span id="totalViews">0</span></div></div></header>
-<section class="hero"><div class="hero-content"><img src="https://i.ibb.co/Z1TFXQVF/dd46cd6b14f82e05cced6710d0664a45.jpg" class="hero-img" onclick="pulseThis(this)"><h1>معرض <span>البتول</span></h1><p>حمص - المخرم الفوقاني - أم التين</p><div class="contact-badge"><i class="fa-solid fa-phone"></i> 0930688067</div><p style="margin-top:14px;color:#a5f3fc;font-size:.9rem">بيع • بدل • فحص مضمون</p></div></section>
-<section class="trust-section">
-<h2 class="trust-title">وجهتكم الأولى <span>مصداقية وشفافية</span></h2>
-<p class="trust-sub">في معرض البتول نضمن لكم تجربة بيع وشراء آمنة وواضحة</p>
-<div class="trust-grid">
-<div class="trust-card"><i class="fa-solid fa-shield-halved"></i><h4>فحص البتول المضمون ✅</h4><p>كل جهاز مفحوص: بطارية، شاشة، بصمة، كرتونة - تقرير كامل قبل الشراء</p></div>
-<div class="trust-card"><i class="fa-solid fa-eye"></i><h4>شفافية مطلقة</h4><p>السعر والمواصفات والكرتونة واضحة قبل أي تواصل</p></div>
-<div class="trust-card"><i class="fa-solid fa-handshake"></i><h4>وساطة مضمونة</h4><p>البيع والشراء يتم عبر صاحب الموقع 0930688067 لضمان حق الطرفين</p></div>
+
+<div class="topbar">
+<span class="line1">التسجيل على مفاضلة الجامعة الافتراضية السورية متاح الآن</span>
+<span class="line2">نرد عليكم خلال دقائق عبر واتساب</span>
 </div>
-</section>
-<section class="products"><h2 class="section-title">جوالات <span>متوفرة</span></h2>
-<p class="section-sub">اضغط على "تقرير الفحص" لتشوف حالة الجهاز الحقيقية - فيكي تعدليها من لوحة التحكم بأي وقت</p>
-<div class="cards-grid" id="storeGrid"></div></section>
-<section class="products" id="customerSection" style="background:#131c31">
-<div style="text-align:center;max-width:800px;margin:0 auto 30px"><span class="customer-label"><i class="fa-solid fa-users"></i> قسم خاص بالزبائن</span><h2 class="section-title" style="margin-bottom:10px">أجهزة <span>الزبائن</span></h2><p style="color:#cbd5e1;line-height:1.8">هاد القسم غير قسم المعرض تماماً<br>هون بتنعرض أجهزة الزبائن يلي عرضوها للبيع من خلال الموقع، والبيع بيتم عبر صاحب المعرض 0930688067</p></div>
-<div id="customerGrid"></div>
-</section>
-<section class="sell-section">
-<div class="sell-container">
-<div>
-<h2 style="font-size:2.2rem;font-weight:900">هل تريد <span style="color:#00b4d8">بيع جهازك؟</span></h2>
-<div class="sell-form-box" style="margin-top:20px">
-<div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('deviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="deviceImage" accept="image/*" hidden><div id="previewBox"><img id="previewImg" onclick="pulseThis(this)"></div><div class="error-msg" id="errImage">صورة الجهاز إلزامية</div></div>
-<div class="input-group"><label>نوع الجهاز <span>*</span></label><select id="deviceModel"><option value="">اختر نوع الجهاز</option><option>Apple iPhone</option><option>Samsung Galaxy</option><option>Xiaomi Redmi</option><option>Xiaomi Poco</option><option>Infinix</option><option>Tecno</option><option>Realme</option><option>Honor</option><option>Huawei</option><option>Nokia</option><option>Itel</option><option>أخرى</option></select><div class="error-msg" id="errModel">اختر نوع الجهاز</div></div>
-<div class="input-group" id="otherModelGroup" style="display:none"><label>اكتب موديل الجهاز</label><input type="text" id="otherModel" placeholder="مثال: iPhone 13 Pro Max"></div>
-<div class="input-row"><div class="input-group"><label>الرام <span>*</span></label><select id="deviceRam"><option value="">اختر الرام</option><option>2GB</option><option>3GB</option><option>4GB</option><option>6GB</option><option>8GB</option><option>12GB</option></select><div class="error-msg" id="errRam">الرام مطلوب</div></div><div class="input-group"><label>الذاكرة <span>*</span></label><select id="deviceStorage"><option value="">اختر الذاكرة</option><option>32GB</option><option>64GB</option><option>128GB</option><option>256GB</option><option>512GB</option></select><div class="error-msg" id="errStorage">الذاكرة مطلوبة</div></div></div>
-<div class="input-row"><div class="input-group"><label>السعر <span>*</span></label><input type="number" id="devicePrice" placeholder="100"><div class="error-msg" id="errPrice">السعر مطلوب</div></div><div class="input-group"><label>العملة <span>*</span></label><select id="deviceCurrency"><option value="$">دولار $</option><option value="ل.س">ليرة سورية ل.س</option></select></div></div>
-<div class="input-group"><label>الكرتونة <span>*</span></label><div class="radio-group"><label><input type="radio" name="box" value="معه كرتونة"> معه</label><label><input type="radio" name="box" value="بدون كرتونة"> بدون</label></div><div class="error-msg" id="errBox">حدد الكرتونة</div></div>
-<div class="input-group"><label>رقمك للتواصل <span>*</span></label><input type="tel" id="devicePhone" placeholder="09xxxxxxxx"><div class="error-msg" id="errPhone">رقمك إلزامي</div></div>
-<div style="display:flex;gap:10px"><button class="btn btn-whatsapp" onclick="publishDevice()" style="flex:1.4"><i class="fa-solid fa-store"></i> اعرض جهازي للبيع</button><button class="btn btn-invite" onclick="inviteFriend()" style="flex:1"><i class="fa-solid fa-share-nodes"></i> ادعو صديقك</button></div>
+
+<header>
+<div class="logo">خدمات جامعية للطلاب<span>UNIVERSITY SERVICES</span></div>
+<div class="nav"><a href="#services">خدماتنا</a><a href="#track">تتبع طلبك</a><a href="#how">طريقة الطلب</a><a href="#pay">الدفع</a><a href="#faq">الأسئلة الشائعة</a></div>
+<a class="btn btn-gold" href="https://wa.me/963930688067" target="_blank">اطلب عبر واتساب ↗</a>
+</header>
+
+<div class="hero">
+<div class="hero-text">
+<span class="tag">خدمات جامعية موثوقة • سوريا حمص المخرم الفوقاني</span>
+<h1>مستقبلك الجامعي يبدأ من منزلك</h1>
+<p>نقدّم لكم خدمات التسجيل في المفاضلات، ودفع الأقساط والرسوم، وحل الوظائف الجامعية، وترجمة الأوراق الرسمية.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+<a class="btn btn-gold" href="https://wa.me/963930688067" target="_blank">سجّل على المفاضلة الآن →</a>
+<a class="btn" style="background:#fff;color:#0F2340;border:1px solid #fff" href="#track">تتبع طلبك 🔍</a>
+</div>
+<div class="hero-stats">
+<div class="stat"><b>+850</b><small>طالب تمت خدمته</small></div>
+<div class="stat"><b>15 دقيقة</b><small>متوسط مدة التسجيل</small></div>
+<div class="stat"><b>4.9 / 5</b><small>تقييم الطلاب لنا</small></div>
 </div>
 </div>
-<div style="background:linear-gradient(135deg,#1e293b,#0f172a);border-radius:22px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,.06)"><i class="fa-solid fa-mobile-screen-button" style="font-size:70px;color:#00b4d8"></i><p style="margin-top:15px;color:#e2e8f0;line-height:1.8">الشراء يتم عبر واتساب صاحب الموقع فقط<br>تواصل: 0930688067</p></div>
+<div class="hero-img">
+<div class="hero-card">
+<h3>اطلب خدمتك خلال ثوانٍ</h3>
+<select id="srv"><option>الجامعة الافتراضية السورية - تسجيل ودفع</option><option>المفاضلة العامة أو الموازي</option><option>حل وظيفة أو حلقة بحث</option><option>ترجمة ورقة أو مصدقة</option><option>دفع رسم أو قسط جامعي</option></select>
+<input id="name" type="text" placeholder="الاسم الثلاثي">
+<input id="phone" type="tel" placeholder="رقم الهاتف - مثال: 0930...">
+<button class="btn btn-wa" onclick="goWA()">اطلب عبر واتساب 💬</button>
+<div id="orderNumShow" style="font-size:13px;color:#0F2340;text-align:center;font-weight:bold;margin-top:10px;display:none;background:rgba(0,0,0,0.05);padding:8px;border-radius:6px"></div>
+<p style="font-size:12px;color:#666;text-align:center">الاستفسار مجاني • نرد عليكم خلال دقائق</p>
 </div>
-</section>
-<footer>البتول للجوالات - حمص المخرم الفوقاني أم التين - 0930688067 © 2026<br><span style="font-size:.85rem"><i class="fa-solid fa-eye"></i> إجمالي المشاهدات: <span id="footerViews">0</span></span></footer>
-<section class="reviews-section">
-<div style="text-align:center;margin-bottom:30px"><h2 class="section-title" style="margin-bottom:10px">آراء <span>الزبائن</span></h2><p style="color:#94a3b8">تجارب من زارونا وتعاملوا معنا في معرض البتول</p></div>
-<div class="reviews-grid" id="reviewsGrid"></div>
-<div class="add-review-box">
-<h3 style="margin-bottom:15px;color:#00b4d8;text-align:center"><i class="fa-solid fa-comment-dots"></i> أضف رأيك بمعرضنا</h3>
-<div class="input-group"><label>اسمك <span>*</span></label><input type="text" id="reviewAuthor" placeholder="مثال: أحمد محمد"></div>
-<div class="input-group"><label>رأيك أو تقييمك <span>*</span></label><textarea id="reviewText" rows="3" placeholder="اكتب تجربتك بكل شفافية..."></textarea></div>
-<button class="btn btn-whatsapp" onclick="submitReview()" style="width:100%;margin-top:10px;background:#00b4d8"><i class="fa-solid fa-paper-plane"></i> إرسال الرأي</button>
 </div>
-</section>
-<div class="modal-overlay" id="checkModal"><div class="modal-box" style="text-align:right"><h3 style="text-align:center;color:#00b4d8">✅ تقرير فحص البتول</h3><p id="checkTitle" style="text-align:center;font-weight:900;margin:8px 0"></p><ul class="check-list"><li><span>🔋 البطارية</span><span id="checkBat"></span></li><li><span>📱 الشاشة</span><span id="checkScreen"></span></li><li><span>👆 البصمة</span><span id="checkFinger"></span></li><li><span>📦 الكرتونة</span><span id="checkBox"></span></li><li><span>💾 الرام / الذاكرة</span><span id="checkSpecs"></span></li><li><span>🛡️ الضمان</span><span>فحص معتمد من البتول</span></li></ul><button class="btn" style="background:#334155;color:#fff;width:100%;margin-top:16px" onclick="document.getElementById('checkModal').style.display='none'">إغلاق</button></div></div>
-<div class="modal-overlay" id="buyModal"><div class="modal-box"><h3><i class="fa-solid fa-cart-shopping" style="color:#00b4d8"></i> إتمام عملية الشراء</h3><p style="color:#e2e8f0;font-size:.95rem;margin:14px 0">للشراء تواصل مع صاحب الموقع مباشرة:</p><div style="background:#0f172a;border:1px solid #00b4d8;border-radius:30px;padding:10px 18px;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;font-weight:900;font-size:1.2rem;color:#00b4d8"><i class="fa-solid fa-phone"></i> 0930688067</div><div class="input-group" style="text-align:right"><label>رقمك انت (المشتري) <span>*</span></label><input type="tel" id="buyerPhone" placeholder="09xxxxxxxx"></div><div class="error-msg" id="errBuyerPhone">رقمك إلزامي</div><div style="display:flex;gap:10px;margin-top:16px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeBuyModal()">إلغاء</button><button class="btn btn-whatsapp" style="flex:1" onclick="confirmBuy()"><i class="fa-brands fa-whatsapp"></i> تواصل على 0930688067</button></div></div></div>
-<div class="modal-overlay" id="successModal"><div class="modal-box"><div style="font-size:50px">✅</div><h3 style="margin:10px 0;color:#00b4d8">سيتم إرساله إليك بالتفاصيل مباشرة على واتساب</h3><p style="color:#e2e8f0;line-height:1.7;font-size:.95rem">جهازك صار معروض بالموقع، انقر أدناه لإرسال تفاصيل جهازك مباشرة لصاحب المعرض عبر واتساب:</p><div style="display:flex;flex-direction:column;gap:10px;margin-top:18px"><button class="btn btn-whatsapp" onclick="sendToOwnerFromModal()"><i class="fa-brands fa-whatsapp"></i> إرسال التفاصيل للمعرض 0930688067</button><button class="btn" style="background:#334155;color:#fff;width:100%" onclick="closeSuccessModal()">إغلاق</button></div></div></div>
-<div class="modal-overlay" id="adminModal"><div class="modal-box" style="max-width:560px; text-align:right;max-height:90vh;overflow-y:auto">
-<div id="adminLoginBox"><h3 style="text-align:center;color:#eab308;margin-bottom:15px"><i class="fa-solid fa-lock"></i> دخول لوحة التحكم</h3><div class="input-group"><label>كلمة المرور</label><input type="password" id="adminPass" placeholder="أدخل كلمة المرور"></div><div class="error-msg" id="errAdminPass" style="display:none">كلمة المرور غير صحيحة</div><div style="display:flex;gap:10px;margin-top:15px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeAdminModal()">إلغاء</button><button class="btn" style="background:#eab308;color:#0f172a;flex:1;font-weight:900" onclick="checkAdminLogin()">دخول</button></div></div>
-<div id="adminPanelBox" style="display:none">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="color:#eab308">لوحة تحكم المعرض</h3><button class="btn" style="background:#ef4444;color:#fff;padding:6px 12px;font-size:.8rem" onclick="closeAdminModal()">إغلاق</button></div>
-<div style="background:#0f172a;padding:12px;border-radius:12px;margin-bottom:14px;border:1px solid rgba(0,180,216,.3)"><label style="font-size:.9rem;color:#00b4d8;font-weight:800;display:block;margin-bottom:6px">🔍 جلب مواصفات أي هاتف - اكتب الاسم هون (أكثر من 170 جهاز جاهز):</label><div style="display:flex;gap:8px"><input type="text" id="apiPhoneInput" placeholder="مثال: a54 - note 13 - iphone 14 - honor 90 - spark 20" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:#1e293b;color:#fff" oninput="onQuickSearch(this.value)"><button class="btn" onclick="fetchSmartPhoneSpecs()" style="background:#00b4d8;padding:10px 14px">جلب البيانات</button></div><div id="apiQuickList" style="margin-top:8px;display:none"></div><div id="apiQuickResult" style="margin-top:8px;font-size:.85rem;color:#22c55e;display:none"></div></div>
-<h4 style="color:#00b4d8;margin:12px 0 8px">📱 أجهزة المعرض (الأساسية)</h4>
-<div id="adminStoreList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"></div>
-<h4 style="color:#00b4d8;margin:12px 0 8px">👥 أجهزة الزبائن</h4>
-<div id="adminDevicesList" style="display:flex;flex-direction:column;gap:8px"></div>
 </div>
-</div></div>
-<div class="modal-overlay" id="editModal"><div class="modal-box" style="text-align:right;max-height:90vh;overflow-y:auto">
-<h3 style="text-align:center;color:#00b4d8;margin-bottom:14px">✏️ تعديل الجهاز</h3>
-<div class="input-group specs-search"><label>اسم الجهاز - اكتب وسيظهر الجهاز فوراً</label><input type="text" id="editModel" placeholder="مثال: iPhone 11 - Samsung A55 - Redmi Note 13" oninput="onPhoneTyping(this.value)" autocomplete="off"><div id="specsList" class="specs-list"></div></div>
-<div id="specsPreview" class="specs-preview"></div>
-<div class="input-row"><div class="input-group"><label>السعر</label><input type="number" id="editPrice"></div><div class="input-group"><label>الحالة</label><select id="editStatus"><option value="available">متوفر</option><option value="sold">مباع</option></select></div></div>
-<div class="input-row"><div class="input-group"><label>الرام</label><input type="text" id="editRam" placeholder="مثال: 8GB"></div><div class="input-group"><label>الذاكرة</label><input type="text" id="editStorage" placeholder="مثال: 128GB"></div></div>
-<div class="input-group"><label>الكرتونة</label><select id="editBox"><option>معه كرتونة</option><option>بدون كرتونة</option><option>معه كرتونة + عقد</option></select></div>
-<div style="background:#0f172a;padding:12px;border-radius:12px;margin:10px 0"><p style="color:#00b4d8;font-weight:800;margin-bottom:8px">✅ حالة الفحص</p>
-<div class="input-row"><div class="input-group"><label>البطارية</label><input type="text" id="editBat" placeholder="مثال: 92%"></div><div class="input-group"><label>الشاشة</label><input type="text" id="editScreen" placeholder="أصلية / مبدلة"></div></div>
-<div class="input-group"><label>البصمة</label><input type="text" id="editFinger" placeholder="شغالة / عطلانة"></div>
+
+<div class="container" id="track">
+<div class="section-title"><h2>🔍 تتبع طلبك</h2><p>أدخل رقم طلبك أو رقم موبايلك لمشاهدة حالة الطلب الحالية</p></div>
+<div class="track-box">
+<input id="trackInput" type="text" placeholder="رقم الطلب مثال: SVU-4821 أو رقم الموبايل">
+<button class="btn btn-gold" style="width:100%" onclick="trackOrder()">عرض حالة الطلب</button>
+<div id="trackResult"></div>
+<div style="margin-top:20px;border-top:1px solid #333;padding-top:15px">
+<p style="font-size:13px;color:#B0BEC5;cursor:pointer" onclick="toggleAdmin()">⚙️ خيارات الإدارة (اضغط هنا)</p>
+<div id="adminSection" style="display:none">
+<input id="adminCode" type="text" placeholder="رقم الطلب لتحديثه" style="text-align:right">
+<select id="newStatus"><option value="0">تم الاستلام</option><option value="1">قيد المعالجة</option><option value="2">تم الإنجاز - جاهز</option></select>
+<input id="adminPass" type="password" placeholder="أدخل رمز التحقق الإداري">
+<button class="btn" style="background:#fff;color:#0F2340;width:100%" onclick="updateStatus()">تحديث حالة الطلب ✅</button>
 </div>
-<div style="display:flex;gap:10px"><button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeEditModal()">إلغاء</button><button class="btn" style="background:#00b4d8;color:#fff;flex:1" onclick="saveEdit()">💾 حفظ التعديل</button></div>
-</div></div>
-<button class="whatsapp-float" onclick="openWA()"><i class="fa-brands fa-whatsapp"></i></button>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script>
-const firebaseConfig = {apiKey: "AIzaSyCCbgvpXKpKYukvCljJp8I1b2cJo1HxIZI",authDomain: "albatoul-d85b7.firebaseapp.com",projectId: "albatoul-d85b7",storageBucket: "albatoul-d85b7.firebasestorage.app",messagingSenderId: "297915951560",appId: "1:297915951560:web:19a6000f906d2bc5fab8fd",measurementId: "G-SSMG8WH4LE"};
-firebase.initializeApp(firebaseConfig);const db = firebase.firestore();
-</script>
-<script>
-let selectedImage=null;let currentBuyDevice=null;let currentDevices=[];let lastPublished=null;let editingType=null;let editingId=null;let editingIndex=null;
-const ADMIN_PASSWORD="Batoul0937855802";
-// قاعدة محلية مضمونة 100% - بدون أي API خارجي - أكثر من 170 جهاز
-const localPhoneDatabase = {
-"s24 ultra":{name:"Samsung Galaxy S24 Ultra",ram:"12GB",storage:"512GB",bat:"5000mAh",screen:"أصلية",price:"950"},
-"s24":{name:"Samsung Galaxy S24",ram:"8GB",storage:"256GB",bat:"4000mAh",screen:"أصلية",price:"650"},
-"s24 plus":{name:"Samsung Galaxy S24 Plus",ram:"12GB",storage:"256GB",bat:"4900mAh",screen:"أصلية",price:"750"},
-"s23 ultra":{name:"Samsung Galaxy S23 Ultra",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"750"},
-"s23 fe":{name:"Samsung Galaxy S23 FE",ram:"8GB",storage:"128GB",bat:"4500mAh",screen:"أصلية",price:"380"},
-"s23":{name:"Samsung Galaxy S23",ram:"8GB",storage:"128GB",bat:"3900mAh",screen:"أصلية",price:"450"},
-"s22 ultra":{name:"Samsung Galaxy S22 Ultra",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"550"},
-"s22":{name:"Samsung Galaxy S22",ram:"8GB",storage:"128GB",bat:"3700mAh",screen:"أصلية",price:"350"},
-"s21 fe":{name:"Samsung Galaxy S21 FE",ram:"8GB",storage:"128GB",bat:"4500mAh",screen:"أصلية",price:"300"},
-"s20 fe":{name:"Samsung Galaxy S20 FE",ram:"8GB",storage:"128GB",bat:"4500mAh",screen:"أصلية",price:"220"},
-"s10":{name:"Samsung Galaxy S10",ram:"8GB",storage:"128GB",bat:"3400mAh",screen:"أصلية",price:"70"},
-"s10 plus":{name:"Samsung Galaxy S10 Plus",ram:"8GB",storage:"128GB",bat:"4100mAh",screen:"أصلية",price:"90"},
-"a56":{name:"Samsung Galaxy A56",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"340"},
-"a55":{name:"Samsung Galaxy A55",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"320"},
-"a54":{name:"Samsung Galaxy A54",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"240"},
-"a53":{name:"Samsung Galaxy A53",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"200"},
-"a35":{name:"Samsung Galaxy A35",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"270"},
-"a34":{name:"Samsung Galaxy A34",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"210"},
-"a33":{name:"Samsung Galaxy A33",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"180"},
-"a25":{name:"Samsung Galaxy A25",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"180"},
-"a24":{name:"Samsung Galaxy A24",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"170"},
-"a23":{name:"Samsung Galaxy A23",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"150"},
-"a16":{name:"Samsung Galaxy A16",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"a15":{name:"Samsung Galaxy A15",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"140"},
-"a14":{name:"Samsung Galaxy A14",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"120"},
-"a13":{name:"Samsung Galaxy A13",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"a12":{name:"Samsung Galaxy A12",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"85"},
-"a07":{name:"Samsung Galaxy A07",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"150"},
-"a06":{name:"Samsung Galaxy A06",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"100"},
-"a05s":{name:"Samsung Galaxy A05s",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"a05":{name:"Samsung Galaxy A05",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"95"},
-"a04s":{name:"Samsung Galaxy A04s",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"85"},
-"a04":{name:"Samsung Galaxy A04",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"75"},
-"a03s":{name:"Samsung Galaxy A03s",ram:"3GB",storage:"32GB",bat:"5000mAh",screen:"أصلية",price:"60"},
-"a03":{name:"Samsung Galaxy A03",ram:"3GB",storage:"32GB",bat:"5000mAh",screen:"أصلية",price:"55"},
-"m34":{name:"Samsung Galaxy M34",ram:"6GB",storage:"128GB",bat:"6000mAh",screen:"أصلية",price:"190"},
-"m33":{name:"Samsung Galaxy M33",ram:"6GB",storage:"128GB",bat:"6000mAh",screen:"أصلية",price:"170"},
-"m14":{name:"Samsung Galaxy M14",ram:"4GB",storage:"64GB",bat:"6000mAh",screen:"أصلية",price:"130"},
-"f14":{name:"Samsung Galaxy F14",ram:"4GB",storage:"128GB",bat:"6000mAh",screen:"أصلية",price:"140"},
-"16 pro max":{name:"Apple iPhone 16 Pro Max",ram:"8GB",storage:"256GB",bat:"4685mAh",screen:"أصلية",price:"1250"},
-"16 pro":{name:"Apple iPhone 16 Pro",ram:"8GB",storage:"128GB",bat:"3582mAh",screen:"أصلية",price:"1050"},
-"16":{name:"Apple iPhone 16",ram:"8GB",storage:"128GB",bat:"3561mAh",screen:"أصلية",price:"850"},
-"16 plus":{name:"Apple iPhone 16 Plus",ram:"8GB",storage:"128GB",bat:"4674mAh",screen:"أصلية",price:"950"},
-"15 pro max":{name:"Apple iPhone 15 Pro Max",ram:"8GB",storage:"256GB",bat:"4422mAh",screen:"أصلية",price:"1100"},
-"15 pro":{name:"Apple iPhone 15 Pro",ram:"8GB",storage:"128GB",bat:"3274mAh",screen:"أصلية",price:"950"},
-"15 plus":{name:"Apple iPhone 15 Plus",ram:"6GB",storage:"128GB",bat:"4383mAh",screen:"أصلية",price:"820"},
-"15":{name:"Apple iPhone 15",ram:"6GB",storage:"128GB",bat:"3349mAh",screen:"أصلية",price:"750"},
-"14 pro max":{name:"Apple iPhone 14 Pro Max",ram:"6GB",storage:"256GB",bat:"4323mAh",screen:"أصلية",price:"850"},
-"14 pro":{name:"Apple iPhone 14 Pro",ram:"6GB",storage:"128GB",bat:"3200mAh",screen:"أصلية",price:"750"},
-"14 plus":{name:"Apple iPhone 14 Plus",ram:"6GB",storage:"128GB",bat:"4325mAh",screen:"أصلية",price:"650"},
-"14":{name:"Apple iPhone 14",ram:"6GB",storage:"128GB",bat:"3279mAh",screen:"أصلية",price:"600"},
-"13 pro max":{name:"Apple iPhone 13 Pro Max",ram:"6GB",storage:"256GB",bat:"4352mAh",screen:"أصلية",price:"700"},
-"13 pro":{name:"Apple iPhone 13 Pro",ram:"6GB",storage:"128GB",bat:"3095mAh",screen:"أصلية",price:"600"},
-"13 mini":{name:"Apple iPhone 13 mini",ram:"4GB",storage:"128GB",bat:"2438mAh",screen:"أصلية",price:"420"},
-"13":{name:"Apple iPhone 13",ram:"4GB",storage:"128GB",bat:"3227mAh",screen:"أصلية",price:"500"},
-"12 pro max":{name:"Apple iPhone 12 Pro Max",ram:"6GB",storage:"128GB",bat:"3687mAh",screen:"أصلية",price:"550"},
-"12 pro":{name:"Apple iPhone 12 Pro",ram:"6GB",storage:"128GB",bat:"2815mAh",screen:"أصلية",price:"480"},
-"12 mini":{name:"Apple iPhone 12 mini",ram:"4GB",storage:"64GB",bat:"2227mAh",screen:"أصلية",price:"320"},
-"12":{name:"Apple iPhone 12",ram:"4GB",storage:"128GB",bat:"2815mAh",screen:"أصلية",price:"400"},
-"11 pro max":{name:"Apple iPhone 11 Pro Max",ram:"4GB",storage:"256GB",bat:"3969mAh",screen:"أصلية",price:"420"},
-"11 pro":{name:"Apple iPhone 11 Pro",ram:"4GB",storage:"256GB",bat:"3046mAh",screen:"أصلية",price:"380"},
-"11":{name:"Apple iPhone 11",ram:"4GB",storage:"128GB",bat:"3110mAh",screen:"أصلية",price:"300"},
-"iphone 11":{name:"Apple iPhone 11",ram:"4GB",storage:"128GB",bat:"3110mAh",screen:"أصلية",price:"120"},
-"x":{name:"Apple iPhone X",ram:"3GB",storage:"64GB",bat:"2716mAh",screen:"أصلية",price:"220"},
-"xs max":{name:"Apple iPhone XS Max",ram:"4GB",storage:"256GB",bat:"3174mAh",screen:"أصلية",price:"280"},
-"xs":{name:"Apple iPhone XS",ram:"4GB",storage:"256GB",bat:"2658mAh",screen:"أصلية",price:"240"},
-"xr":{name:"Apple iPhone XR",ram:"3GB",storage:"128GB",bat:"2942mAh",screen:"أصلية",price:"230"},
-"8 plus":{name:"Apple iPhone 8 Plus",ram:"3GB",storage:"64GB",bat:"2675mAh",screen:"أصلية",price:"150"},
-"8":{name:"Apple iPhone 8",ram:"2GB",storage:"64GB",bat:"1821mAh",screen:"أصلية",price:"120"},
-"se 2022":{name:"Apple iPhone SE 2022",ram:"4GB",storage:"64GB",bat:"2018mAh",screen:"أصلية",price:"280"},
-"se 2020":{name:"Apple iPhone SE 2020",ram:"3GB",storage:"64GB",bat:"1821mAh",screen:"أصلية",price:"200"},
-"note 13 pro plus":{name:"Xiaomi Redmi Note 13 Pro Plus",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"320"},
-"note 13 pro":{name:"Xiaomi Redmi Note 13 Pro",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"250"},
-"note 13":{name:"Xiaomi Redmi Note 13",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"190"},
-"note 12 pro plus":{name:"Xiaomi Redmi Note 12 Pro Plus",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"260"},
-"note 12 pro":{name:"Xiaomi Redmi Note 12 Pro",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"220"},
-"note 12":{name:"Xiaomi Redmi Note 12",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"170"},
-"note 12s":{name:"Xiaomi Redmi Note 12S",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"180"},
-"note 11 pro":{name:"Xiaomi Redmi Note 11 Pro",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"180"},
-"note 11":{name:"Xiaomi Redmi Note 11",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"140"},
-"note 10 pro":{name:"Xiaomi Redmi Note 10 Pro",ram:"6GB",storage:"128GB",bat:"5020mAh",screen:"أصلية",price:"160"},
-"note 10":{name:"Xiaomi Redmi Note 10",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"note 9":{name:"Xiaomi Redmi Note 9",ram:"4GB",storage:"128GB",bat:"5020mAh",screen:"أصلية",price:"110"},
-"note 8":{name:"Xiaomi Redmi Note 8",ram:"4GB",storage:"64GB",bat:"4000mAh",screen:"أصلية",price:"85"},
-"redmi 14c":{name:"Xiaomi Redmi 14C",ram:"4GB",storage:"128GB",bat:"5160mAh",screen:"أصلية",price:"110"},
-"redmi 13c":{name:"Xiaomi Redmi 13C",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"105"},
-"redmi 12":{name:"Xiaomi Redmi 12",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"redmi 10":{name:"Redmi 10 2022",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"50"},
-"redmi 9":{name:"Xiaomi Redmi 9",ram:"4GB",storage:"64GB",bat:"5020mAh",screen:"أصلية",price:"75"},
-"redmi a3":{name:"Xiaomi Redmi A3",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"85"},
-"redmi a2":{name:"Xiaomi Redmi A2",ram:"2GB",storage:"32GB",bat:"5000mAh",screen:"أصلية",price:"60"},
-"poco x7 pro":{name:"Xiaomi Poco X7 Pro",ram:"12GB",storage:"256GB",bat:"6000mAh",screen:"أصلية",price:"360"},
-"poco x6 pro":{name:"Xiaomi Poco X6 Pro",ram:"12GB",storage:"512GB",bat:"5000mAh",screen:"أصلية",price:"340"},
-"poco x6":{name:"Xiaomi Poco X6",ram:"8GB",storage:"256GB",bat:"5100mAh",screen:"أصلية",price:"280"},
-"poco x5 pro":{name:"Xiaomi Poco X5 Pro",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"270"},
-"poco x5":{name:"Xiaomi Poco X5",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"210"},
-"poco x4 pro":{name:"Xiaomi Poco X4 Pro",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"220"},
-"poco x3 pro":{name:"Xiaomi Poco X3 Pro",ram:"8GB",storage:"256GB",bat:"5160mAh",screen:"أصلية",price:"180"},
-"poco x3":{name:"Poco X3",ram:"6GB",storage:"128GB",bat:"5160mAh",screen:"أصلية",price:"90"},
-"poco f5":{name:"Xiaomi Poco F5",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"330"},
-"poco f4":{name:"Xiaomi Poco F4",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"300"},
-"poco c65":{name:"Xiaomi Poco C65",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"120"},
-"poco c55":{name:"Xiaomi Poco C55",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"90"},
-"mi 13":{name:"Xiaomi Mi 13",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"450"},
-"mi 12":{name:"Xiaomi Mi 12",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"350"},
-"mi 11":{name:"Xiaomi Mi 11",ram:"8GB",storage:"256GB",bat:"4600mAh",screen:"أصلية",price:"300"},
-"realme 13":{name:"Realme 13",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"220"},
-"realme 12":{name:"Realme 12",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"200"},
-"realme 11":{name:"Realme 11",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"220"},
-"realme 10":{name:"Realme 10",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"180"},
-"realme 9":{name:"Realme 9",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"150"},
-"realme 8":{name:"Realme 8",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"c67":{name:"Realme C67",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"160"},
-"c65":{name:"Realme C65",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"140"},
-"c55":{name:"Realme C55",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"150"},
-"c53":{name:"Realme C53",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"120"},
-"c51":{name:"Realme C51",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"100"},
-"c35":{name:"Realme C35",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"95"},
-"c33":{name:"Realme C33",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"85"},
-"c30":{name:"Realme C30",ram:"2GB",storage:"32GB",bat:"5000mAh",screen:"أصلية",price:"60"},
-"narzo 50":{name:"Realme Narzo 50",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"reno 12":{name:"Oppo Reno 12",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"360"},
-"reno 11":{name:"Oppo Reno 11",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"320"},
-"reno 10":{name:"Oppo Reno 10",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"310"},
-"reno 8":{name:"Oppo Reno 8",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"260"},
-"reno 7":{name:"Oppo Reno 7",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"230"},
-"reno 6":{name:"Oppo Reno 6",ram:"8GB",storage:"128GB",bat:"4300mAh",screen:"أصلية",price:"200"},
-"a98":{name:"Oppo A98",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"240"},
-"a78":{name:"Oppo A78",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"190"},
-"a77":{name:"Oppo A77",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"160"},
-"a58":{name:"Oppo A58",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"140"},
-"a57":{name:"Oppo A57",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"a38":{name:"Oppo A38",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"a18":{name:"Oppo A18",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"100"},
-"a17":{name:"Oppo A17",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"90"},
-"a16":{name:"Oppo A16",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"80"},
-"a15":{name:"Oppo A15",ram:"3GB",storage:"32GB",bat:"4230mAh",screen:"أصلية",price:"65"},
-"honor 200":{name:"Honor 200",ram:"12GB",storage:"512GB",bat:"5200mAh",screen:"أصلية",price:"420"},
-"honor 90":{name:"Honor 90",ram:"12GB",storage:"512GB",bat:"5000mAh",screen:"أصلية",price:"380"},
-"honor 70":{name:"Honor 70",ram:"8GB",storage:"256GB",bat:"4800mAh",screen:"أصلية",price:"300"},
-"honor 50":{name:"Honor 50",ram:"8GB",storage:"256GB",bat:"4300mAh",screen:"أصلية",price:"250"},
-"honor x9b":{name:"Honor X9b",ram:"12GB",storage:"256GB",bat:"5800mAh",screen:"أصلية",price:"280"},
-"honor x9a":{name:"Honor X9a",ram:"8GB",storage:"256GB",bat:"5100mAh",screen:"أصلية",price:"240"},
-"honor x8b":{name:"Honor X8b",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"190"},
-"honor x8":{name:"Honor X8",ram:"6GB",storage:"128GB",bat:"4000mAh",screen:"أصلية",price:"150"},
-"honor x7b":{name:"Honor X7b",ram:"8GB",storage:"256GB",bat:"6000mAh",screen:"أصلية",price:"170"},
-"honor x7a":{name:"Honor X7a",ram:"4GB",storage:"128GB",bat:"6000mAh",screen:"أصلية",price:"140"},
-"honor x6":{name:"Honor X6",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"honor 8a":{name:"Honor 8A",ram:"2GB",storage:"32GB",bat:"3020mAh",screen:"أصلية",price:"50"},
-"honor 10 lite":{name:"Honor 10 Lite",ram:"3GB",storage:"32GB",bat:"3400mAh",screen:"أصلية",price:"60"},
-"infinix note 40":{name:"Infinix Note 40",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"190"},
-"note 30":{name:"Infinix Note 30",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"180"},
-"note 12":{name:"Infinix Note 12",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"note 11":{name:"Infinix Note 11",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"hot 40":{name:"Infinix Hot 40",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"140"},
-"hot 30":{name:"Infinix Hot 30",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"hot 20":{name:"Infinix Hot 20",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"100"},
-"hot 12":{name:"Infinix Hot 12",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"95"},
-"hot 11":{name:"Infinix Hot 11",ram:"4GB",storage:"64GB",bat:"5200mAh",screen:"أصلية",price:"85"},
-"hot 10":{name:"Infinix Hot 10",ram:"4GB",storage:"64GB",bat:"5200mAh",screen:"أصلية",price:"75"},
-"smart 8":{name:"Infinix Smart 8",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"75"},
-"smart 7":{name:"Infinix Smart 7",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"65"},
-"zero 30":{name:"Infinix Zero 30",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"260"},
-"camon 30":{name:"Tecno Camon 30",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"210"},
-"camon 20":{name:"Tecno Camon 20",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"190"},
-"camon 19":{name:"Tecno Camon 19",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"150"},
-"spark 20":{name:"Tecno Spark 20",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"120"},
-"spark 20 pro":{name:"Tecno Spark 20 Pro",ram:"12GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"150"},
-"spark 10":{name:"Tecno Spark 10",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"spark 10 pro":{name:"Tecno Spark 10 Pro",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"spark 9":{name:"Tecno Spark 9",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"95"},
-"spark 8":{name:"Tecno Spark 8",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"75"},
-"spark go 2024":{name:"Tecno Spark Go 2024",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"70"},
-"pova 6":{name:"Tecno Pova 6",ram:"8GB",storage:"256GB",bat:"6000mAh",screen:"أصلية",price:"170"},
-"pova 5":{name:"Tecno Pova 5",ram:"8GB",storage:"128GB",bat:"6000mAh",screen:"أصلية",price:"150"},
-"phantom x2":{name:"Tecno Phantom X2",ram:"8GB",storage:"256GB",bat:"5160mAh",screen:"أصلية",price:"350"},
-"nova 12":{name:"Huawei Nova 12",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"280"},
-"nova 11":{name:"Huawei Nova 11",ram:"8GB",storage:"256GB",bat:"4500mAh",screen:"أصلية",price:"260"},
-"nova 10":{name:"Huawei Nova 10",ram:"8GB",storage:"256GB",bat:"4000mAh",screen:"أصلية",price:"230"},
-"nova 9":{name:"Huawei Nova 9",ram:"8GB",storage:"128GB",bat:"4300mAh",screen:"أصلية",price:"200"},
-"nova 8":{name:"Huawei Nova 8",ram:"8GB",storage:"128GB",bat:"3800mAh",screen:"أصلية",price:"170"},
-"y9a":{name:"Huawei Y9a",ram:"8GB",storage:"128GB",bat:"4300mAh",screen:"أصلية",price:"140"},
-"y9 prime":{name:"Huawei Y9 Prime",ram:"4GB",storage:"128GB",bat:"4000mAh",screen:"أصلية",price:"110"},
-"y8p":{name:"Huawei Y8p",ram:"4GB",storage:"128GB",bat:"4000mAh",screen:"أصلية",price:"95"},
-"y7a":{name:"Huawei Y7a",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"90"},
-"y6p":{name:"Huawei Y6p",ram:"3GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"70"},
-"p40 pro":{name:"Huawei P40 Pro",ram:"8GB",storage:"256GB",bat:"4200mAh",screen:"أصلية",price:"320"},
-"p30 pro":{name:"Huawei P30 Pro",ram:"8GB",storage:"256GB",bat:"4200mAh",screen:"أصلية",price:"250"},
-"mate 20":{name:"Huawei Mate 20",ram:"6GB",storage:"128GB",bat:"4000mAh",screen:"أصلية",price:"160"},
-"y90":{name:"Vivo Y90",ram:"3GB",storage:"32GB",bat:"4030mAh",screen:"أصلية",price:"60"},
-"y36":{name:"Vivo Y36",ram:"8GB",storage:"256GB",bat:"5000mAh",screen:"أصلية",price:"160"},
-"y28":{name:"Vivo Y28",ram:"8GB",storage:"256GB",bat:"6000mAh",screen:"أصلية",price:"150"},
-"y27":{name:"Vivo Y27",ram:"6GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"130"},
-"y22":{name:"Vivo Y22",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"110"},
-"y21":{name:"Vivo Y21",ram:"4GB",storage:"64GB",bat:"5000mAh",screen:"أصلية",price:"95"},
-"v29":{name:"Vivo V29",ram:"12GB",storage:"256GB",bat:"4600mAh",screen:"أصلية",price:"320"},
-"v27":{name:"Vivo V27",ram:"8GB",storage:"256GB",bat:"4600mAh",screen:"أصلية",price:"280"},
-"itel p40":{name:"Itel P40",ram:"4GB",storage:"64GB",bat:"6000mAh",screen:"أصلية",price:"70"},
-"itel a70":{name:"Itel A70",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"75"},
-"itel s23":{name:"Itel S23",ram:"8GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"95"},
-"nokia g22":{name:"Nokia G22",ram:"4GB",storage:"128GB",bat:"5050mAh",screen:"أصلية",price:"110"},
-"nokia g21":{name:"Nokia G21",ram:"4GB",storage:"128GB",bat:"5050mAh",screen:"أصلية",price:"100"},
-"nokia c32":{name:"Nokia C32",ram:"4GB",storage:"128GB",bat:"5000mAh",screen:"أصلية",price:"85"},
-"nokia c21":{name:"Nokia C21",ram:"3GB",storage:"64GB",bat:"3000mAh",screen:"أصلية",price:"60"}
+</div>
+</div>
+</div>
+
+<div class="container" id="services">
+<div class="section-title"><h2>خدماتنا للطلاب</h2><p>جميع الخدمات التي يحتاجها الطالب في سوريا، في مكان واحد</p></div>
+<div class="search-box">
+<span class="search-icon">🔍</span>
+<input type="text" id="searchInput" placeholder="ابحث عن خدمتك... مثال: افتراضية، مفاضلة، وظيفة" onkeyup="searchService()">
+</div>
+<div class="grid" id="servicesGrid">
+<div class="card service-card"><div><h3>🎓 الجامعة الافتراضية السورية</h3><p>التسجيل على المفاضلة، اختيار المواد، دفع الأقساط، استرجاع الحساب.</p></div><div><div class="price">ابتداءً من 10,000 ل.س</div><a class="btn btn-navy" style="width:100%;display:block;box-sizing:border-box" href="https://wa.me/963930688067" target="_blank">اطلب الخدمة</a></div></div>
+<div class="card service-card"><div><h3>📝 المفاضلة العامة والموازي</h3><p>نسجّلكم على المفاضلة العامة والموازي والتعليم المفتوح.</p></div><div><div class="price">ابتداءً من 15,000 ل.س</div><a class="btn btn-navy" style="width:100%;display:block;box-sizing:border-box" href="https://wa.me/963930688067" target="_blank">اطلب الخدمة</a></div></div>
+<div class="card service-card"><div><h3>💻 حل الوظائف والبحوث</h3><p>إعداد الوظائف، حلقات البحث، تلخيص المحاضرات.</p></div><div><div class="price">حسب نوع الوظيفة</div><a class="btn btn-navy" style="width:100%;display:block;box-sizing:border-box" href="https://wa.me/963930688067" target="_blank">اطلب الخدمة</a></div></div>
+</div>
+<p id="noResult" style="display:none;text-align:center;color:#D4AF37;margin-top:20px">ما لقينا خدمة بهاد الاسم، راسلنا واتساب ونحنا منساعدك 💬</p>
+</div>
+
+<div class="container" id="how"><div class="section-title"><h2>طريقة طلب الخدمة</h2><p>1- أرسل الطلب عبر واتساب &nbsp; 2- تأكيد البيانات والدفع &nbsp; 3- ننجز خدمتك ونرسل لك الإثبات</p></div></div>
+<div class="container" id="pay"><div class="section-title"><h2>الدفع</h2><p>الدفع عبر شام كاش أو تحويل، بعد تأكيد المبلغ معك.</p></div></div>
+<div class="container" id="faq"><div class="section-title"><h2>الأسئلة الشائعة</h2><p>كم يستغرق التسجيل؟ عادة 15 دقيقة بعد تأكيد بياناتك.</p></div></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBhYogsa89xWDoisvi-BAEb0UABD13jI",
+    authDomain: "uni-service-9f33a.firebaseapp.com",
+    projectId: "uni-service-9f33a",
+    storageBucket: "uni-service-9f33a.firebasestorage.app",
+    messagingSenderId: "106754889339",
+    appId: "1:106754889339:web:e102f4cb7a22bee404e6de"
 };
-function findPhones(query){
-  const q=query.trim().toLowerCase(); if(q.length<2) return [];
-  const results=[];
-  for(const key in localPhoneDatabase){
-    const d=localPhoneDatabase[key];
-    if(key.includes(q)||q.includes(key)||d.name.toLowerCase().includes(q)) results.push({key,...d});
-  }
-  return results.slice(0,10);
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.goWA = async function() {
+    const srv = document.getElementById('srv').value;
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    
+    if(!name || !phone) {
+        alert('الرجاء إدخال الاسم ورقم الهاتف.');
+        return;
+    }
+    
+    const orderNum = 'SVU-' + Math.floor(1000 + Math.random() * 9000);
+    
+    try {
+        await setDoc(doc(db, "orders", orderNum), {
+            orderId: orderNum,
+            name: name,
+            phone: phone,
+            service: srv,
+            status: "تم الاستلام",
+            statusCode: "0",
+            date: new Date().toLocaleDateString('ar-SY')
+        });
+        
+        const showDiv = document.getElementById('orderNumShow');
+        showDiv.style.display = 'block';
+        showDiv.innerHTML = `رقم طلبك الخاص هو: <b>${orderNum}</b>`;
+        
+        const message = `مرحباً، أرغب بطلب خدمة جامعية:%0A- الخدمة: ${srv}%0A- الاسم: ${name}%0A- رقم الهاتف: ${phone}%0A- رقم الطلب: ${orderNum}`;
+        window.open(`https://wa.me/963930688067?text=${message}`, '_blank');
+    } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("حدث خطأ أثناء حفظ الطلب، يرجى المحاولة مرة أخرى.");
+    }
 }
-function mapSpecsToAdminPanel(data){
-  if(!data) return;
-  if(document.getElementById('editModel')){
-    if(data.name) document.getElementById('editModel').value=data.name;
-    if(data.ram) document.getElementById('editRam').value=data.ram;
-    if(data.storage) document.getElementById('editStorage').value=data.storage;
-    if(data.bat) document.getElementById('editBat').value=data.bat;
-    if(data.screen) document.getElementById('editScreen').value=data.screen;
-    if(data.price) document.getElementById('editPrice').value=data.price;
-  }
-  const pv=document.getElementById('specsPreview');
-  if(pv){
-    pv.style.display='block';
-    pv.innerHTML=`<p><b style="color:#fff;font-size:1rem">${data.name||''}</b><br>💾 ${data.ram||''} / ${data.storage||''} - 🔋 ${data.bat||''}<br>📱 ${data.screen||''} ${data.price?' - 💰 $'+data.price:''}<br><span style="color:#22c55e">✅ تم جلب المواصفات - عدّل السعر وحالة الفحص فقط</span></p>`;
-  }
-  const qr=document.getElementById('apiQuickResult');
-  if(qr){ qr.style.display='block'; qr.textContent=`✅ تم جلب: ${data.name} - رام ${data.ram} - ${data.storage} - بطارية ${data.bat}`; }
+
+window.searchService = function() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let cards = document.getElementsByClassName('service-card');
+    let hasResult = false;
+    for (let i = 0; i < cards.length; i++) {
+        let text = cards[i].innerText.toLowerCase();
+        if (text.includes(input)) {
+            cards[i].style.display = "flex";
+            hasResult = true;
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+    document.getElementById('noResult').style.display = hasResult ? "none" : "block";
 }
-function fetchSmartPhoneSpecs(){
-  const input=document.getElementById('apiPhoneInput');
-  let val=(input?.value||'').trim().toLowerCase();
-  if(!val){ alert("اكتب اسم الجهاز أولاً"); return; }
-  const res=findPhones(val);
-  if(res.length>0){ mapSpecsToAdminPanel(res[0]); return; }
-  alert("مو موجود بالقاعدة، جرب اسم أسهل مثل: a54 أو 13 أو note 13 أو spark 20");
+
+window.trackOrder = async function() {
+    let queryVal = document.getElementById('trackInput').value.trim();
+    let resultDiv = document.getElementById('trackResult');
+    
+    if(!queryVal) {
+        resultDiv.innerHTML = `<p style="color:#ff6b6b; margin-top:10px;">الرجاء إدخال رقم الطلب أو رقم الهاتف.</p>`;
+        return;
+    }
+    
+    resultDiv.innerHTML = `<p style="color:#D4AF37; margin-top:10px;">جاري البحث عن الطلب...</p>`;
+    
+    try {
+        let docRef = doc(db, "orders", queryVal);
+        let docSnap = await getDoc(docRef);
+        
+        let orderData = null;
+        if (docSnap.exists()) {
+            orderData = docSnap.data();
+        } else {
+            const q = query(collection(db, "orders"), where("phone", "==", queryVal));
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+                orderData = querySnapshot.docs[0].data();
+            }
+        }
+        
+        if(orderData) {
+            let statusText = orderData.status;
+            if(orderData.statusCode === "0") statusText = "تم الاستلام";
+            if(orderData.statusCode === "1") statusText = "قيد المعالجة";
+            if(orderData.statusCode === "2") statusText = "تم الإنجاز - جاهز";
+
+            resultDiv.innerHTML = `
+                <div class="order-result">
+                    <p>رقم الطلب: <b>${orderData.orderId}</b></p>
+                    <p>اسم الطالب: <b>${orderData.name}</b></p>
+                    <p>الخدمة المطلوبة: <b>${orderData.service}</b></p>
+                    <p>حالة الطلب الحالية: <span style="color:#25D366; font-weight:bold;">${statusText}</span></p>
+                    <p style="font-size:12px; color:#B0BEC5;">تاريخ الطلب: ${orderData.date}</p>
+                </div>
+            `;
+        } else {
+            resultDiv.innerHTML = `<p style="color:#ff6b6b; margin-top:10px;">عذراً، لم نتمكن من العثور على طلب بهذا الرقم.</p>`;
+        }
+    } catch(e) {
+        console.error(e);
+        resultDiv.innerHTML = `<p style="color:#ff6b6b; margin-top:10px;">حدث خطأ في الاتصال بقاعدة البيانات.</p>`;
+    }
 }
-function onQuickSearch(val){
-  const listEl=document.getElementById('apiQuickList'); if(!listEl) return;
-  if(val.trim().length<2){ listEl.style.display='none'; return; }
-  const res=findPhones(val);
-  if(res.length===0){ listEl.style.display='block'; listEl.innerHTML='<div style="padding:8px;color:#f87171;font-size:.85rem">مو موجود، جرب اسم أسهل</div>'; return; }
-  listEl.style.display='block';
-  listEl.innerHTML=res.map(d=>`<div class="specs-item" style="background:#1e293b;border-radius:8px;margin-bottom:4px" onclick="mapSpecsToAdminPanel(localPhoneDatabase['${d.key}'])"><div><b>${d.name}</b><span>رام ${d.ram} - ${d.storage} - اضغط للتعبئة</span></div></div>`).join('');
+
+window.toggleAdmin = function() {
+    let adminSec = document.getElementById('adminSection');
+    adminSec.style.display = adminSec.style.display === 'none' ? 'block' : 'none';
 }
-function onPhoneTyping(val){
-  const pv=document.getElementById('specsPreview'); if(pv) pv.style.display='none';
-  const listEl=document.getElementById('specsList'); if(!listEl) return;
-  if(val.trim().length<2){ listEl.style.display='none'; return; }
-  const res=findPhones(val);
-  if(res.length===0){ listEl.style.display='block'; listEl.innerHTML='<div style="padding:10px;text-align:center;color:#f87171;font-size:.85rem">مو موجود بالقاعدة - اكتب المواصفات يدوياً</div>'; return; }
-  listEl.style.display='block';
-  listEl.innerHTML=res.map(d=>`<div class="specs-item" onclick="mapSpecsToAdminPanel(localPhoneDatabase['${d.key}']);document.getElementById('specsList').style.display='none'"><div><b>${d.name}</b><span>رام ${d.ram} - ${d.storage} - بطارية ${d.bat} - اضغط للتعبئة</span></div></div>`).join('');
+
+window.updateStatus = async function() {
+    let orderId = document.getElementById('adminCode').value.trim();
+    let newStatusCode = document.getElementById('newStatus').value;
+    let password = document.getElementById('adminPass').value;
+    
+    if(password !== '1234') {
+        alert('رمز التحقق الإداري غير صحيح!');
+        return;
+    }
+    
+    if(!orderId) {
+        alert('الرجاء إدخال رقم الطلب.');
+        return;
+    }
+    
+    let statusTexts = { "0": "تم الاستلام", "1": "قيد المعالجة", "2": "تم الإنجاز - جاهز" };
+    
+    try {
+        const orderRef = doc(db, "orders", orderId);
+        await updateDoc(orderRef, {
+            statusCode: newStatusCode,
+            status: statusTexts[newStatusCode]
+        });
+        alert('تم تحديث حالة الطلب بنجاح ✅');
+        document.getElementById('adminCode').value = '';
+        document.getElementById('adminPass').value = '';
+    } catch(e) {
+        console.error(e);
+        alert('فشل التحديث، تأكد من صحة رقم الطلب.');
+    }
 }
-let storeDevices = JSON.parse(localStorage.getItem('batoul_store_devices')||'null') || [
-{id:'s1',model:'Samsung Galaxy A07',price:'150',status:'sold',img:'https://mobelat.com/wp-content/uploads/2025/08/samsung-galaxy-a07-4g-thumb-mobelat.jpg',ram:'4GB',storage:'128GB',box:'معه كرتونة',bat:'92%',screen:'أصلية',finger:'شغالة'},
-{id:'s2',model:'Redmi 10 2022',price:'50',status:'available',img:'https://i.ibb.co/svw2Ppx3/61-X6-CZex-COL-AC-UF894-1000-QL80-FMwebp.webp',ram:'4GB',storage:'64GB',box:'بدون كرتونة',bat:'88%',screen:'أصلية',finger:'شغالة'},
-{id:'s3',model:'Samsung S10',price:'70',status:'sold',img:'https://i.ibb.co/3KRzGdJ/5ac4fb46a4997e817bbc20560be2370d.jpg',ram:'8GB',storage:'128GB',box:'معه كرتونة',bat:'85%',screen:'أصلية',finger:'شغالة'}
-];
-function saveStore(){localStorage.setItem('batoul_store_devices',JSON.stringify(storeDevices));}
-function renderStore(){
-const grid=document.getElementById('storeGrid');grid.innerHTML='';
-storeDevices.forEach(d=>{
-const div=document.createElement('div');div.className='card';
-const isSold=d.status==='sold';
-div.innerHTML=`<div class="view-count"><i class="fa-solid fa-eye"></i> <span class="static-view">0</span></div><img src="${d.img}" onclick="pulseThis(this)"><div class="device-title-row"><h3>${d.model}</h3><button class="share-mini" onclick="shareDevice('${d.model}','${d.price}$')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price ${isSold?'price-old':''}">${d.price}$</p><span class="badge ${isSold?'badge-sold':''}">${isSold?'مباع - الله يهني صاحب النصيب':'متوفر - رام '+d.ram+' - '+d.storage+'<br>'+d.box}</span><button class="btn" style="background:#0f172a;border:1px solid #00b4d8;color:#00b4d8;width:100%;margin-top:10px" onclick="openCheck('${d.model}','${d.bat}','${d.screen}','${d.finger}','${d.box}','${d.ram} / ${d.storage}')">📋 تقرير الفحص</button>`;
-grid.appendChild(div);
-});
-updateTotalViewsText();
-}
-function updateTotalViewsText(){let v=document.getElementById('totalViews').textContent;document.querySelectorAll('.static-view').forEach(el=>el.textContent=v);}
-function pulseThis(img){img.classList.remove('pulse-img');void img.offsetWidth;img.classList.add('pulse-img');setTimeout(()=>img.classList.remove('pulse-img'),800);}
-function shareDevice(name,price){const link=window.location.href;const text=`شوف هالجهاز على معرض البتول 📱\n${name} - ${price}\n${link}`;window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");}
-document.getElementById('deviceImage').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;selectedImage=f;const r=new FileReader();r.onload=ev=>{document.getElementById('previewImg').src=ev.target.result;document.getElementById('previewBox').style.display='block';};r.readAsDataURL(f);});
-document.getElementById('deviceModel').addEventListener('change',function(){const other=document.getElementById('otherModelGroup');if(this.value==='أخرى'){other.style.display='block';}else{other.style.display='none';}});
-function openWA(){window.open("https://wa.me/963930688067?text="+encodeURIComponent("السلام عليكم معرض البتول"),"_blank");}
-function openCheck(name,bat,screen,finger,box,specs){document.getElementById('checkTitle').textContent=name;document.getElementById('checkBat').textContent=bat;document.getElementById('checkScreen').textContent=screen;document.getElementById('checkFinger').textContent=finger;document.getElementById('checkBox').textContent=box;document.getElementById('checkSpecs').textContent=specs||'-';document.getElementById('checkModal').style.display='flex';}
-async function updateTotalViews(){try{const ref=db.collection('stats').doc('total');await db.runTransaction(async t=>{const doc=await t.get(ref);const v=(doc.exists?doc.data().views:0)+1;t.set(ref,{views:v});document.getElementById('totalViews').textContent=v;document.getElementById('footerViews').textContent=v;document.querySelectorAll('.static-view').forEach(el=>el.textContent=v);});}catch(e){let total=parseInt(localStorage.getItem('batoul_total_views')||'0');total++;localStorage.setItem('batoul_total_views',total);document.getElementById('totalViews').textContent=total;document.getElementById('footerViews').textContent=total;document.querySelectorAll('.static-view').forEach(el=>el.textContent=total);}}
-function renderDevices(list){currentDevices=list;const grid=document.getElementById('customerGrid');grid.innerHTML='';if(list.length===0){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#94a3b8;padding:20px">لا توجد أجهزة زبائن معروضة حالياً</p>';return;}list.forEach((d,i)=>{const div=document.createElement('div');div.className='card';div.innerHTML=`<div class="view-count"><i class="fa-solid fa-eye"></i> ${d.views||0}</div><img src="${d.img}" onclick="pulseThis(this)"><div class="device-title-row"><h3>${d.model}</h3><button class="share-mini" onclick="shareDevice('${d.model}','${d.price} ${d.currency}')"><i class="fa-brands fa-whatsapp"></i></button></div><p class="price">${d.price} ${d.currency}</p><span class="badge">رام ${d.ram} - ${d.storage}<br>${d.box}<br><i class="fa-solid fa-phone"></i> ${d.phone}</span><button class="btn btn-buy" onclick="openBuyModal(${i})"><i class="fa-brands fa-whatsapp"></i> شراء عبر 0930688067</button>`;grid.appendChild(div);});}
-function loadDevices(){db.collection('devices').orderBy('createdAt','desc').onSnapshot(snap=>{const list=[];snap.forEach(doc=>{list.push({id:doc.id,...doc.data()})});renderDevices(list);localStorage.setItem('batoul_customer_devices',JSON.stringify(list));},()=>{const list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');renderDevices(list);});}
-function renderReviews(list){const grid=document.getElementById('reviewsGrid');grid.innerHTML='';if(list.length===0){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:#94a3b8">كن أول من يضيف رأيه بمعرضنا!</p>';return;}list.forEach(r=>{const div=document.createElement('div');div.className='review-card';div.innerHTML=`<div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>"${r.text}"</p><div class="author"><i class="fa-solid fa-user-circle"></i> ${r.author}</div>`;grid.appendChild(div);});}
-function loadReviews(){db.collection('reviews').orderBy('createdAt','desc').onSnapshot(snap=>{const list=[];snap.forEach(doc=>{list.push({id:doc.id,...doc.data()})});renderReviews(list);localStorage.setItem('batoul_reviews',JSON.stringify(list));},()=>{const list=JSON.parse(localStorage.getItem('batoul_reviews')||'[]');renderReviews(list);});}
-async function submitReview(){const author=document.getElementById('reviewAuthor').value.trim();const text=document.getElementById('reviewText').value.trim();if(!author || !text){alert('الرجاء كتابة اسمك والرأي بشكل كامل');return;}const data={author,text,createdAt:firebase.firestore.FieldValue.serverTimestamp()};try{await db.collection('reviews').add(data);}catch(e){const list=JSON.parse(localStorage.getItem('batoul_reviews')||'[]');list.unshift(data);localStorage.setItem('batoul_reviews',JSON.stringify(list));renderReviews(list);}document.getElementById('reviewAuthor').value='';document.getElementById('reviewText').value='';alert('شكراً لك! تم إضافة رأيك بنجاح 🌟');}
-function publishDevice(){let ok=true;document.querySelectorAll('.error-msg').forEach(el=>{if(el.id!='errBuyerPhone' && el.id!='errAdminPass')el.style.display='none'});const modelSelect=document.getElementById('deviceModel').value;const otherModel=document.getElementById('otherModel').value.trim();const finalModel=modelSelect==='أخرى' && otherModel ? otherModel : modelSelect;const ram=document.getElementById('deviceRam').value;const storage=document.getElementById('deviceStorage').value;const price=document.getElementById('devicePrice').value;const currency=document.getElementById('deviceCurrency').value;const phone=document.getElementById('devicePhone').value.trim();const box=document.querySelector('input[name="box"]:checked')?.value||'';if(!selectedImage){document.getElementById('errImage').style.display='block';ok=false}if(!modelSelect){document.getElementById('errModel').style.display='block';ok=false}if(!ram){document.getElementById('errRam').style.display='block';ok=false}if(!storage){document.getElementById('errStorage').style.display='block';ok=false}if(!price){document.getElementById('errPrice').style.display='block';ok=false}if(!box){document.getElementById('errBox').style.display='block';ok=false}if(!phone){document.getElementById('errPhone').style.display='block';ok=false}if(!ok)return;const reader=new FileReader();reader.onload=async ev=>{const data={img:ev.target.result,model:finalModel,ram,storage,price,currency,box,phone,views:0,bat:'-',screen:'-',finger:'-'};lastPublished=data;try{await db.collection('devices').add({...data,createdAt:firebase.firestore.FieldValue.serverTimestamp()});}catch(e){const list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');list.unshift(data);localStorage.setItem('batoul_customer_devices',JSON.stringify(list));renderDevices(list);}document.getElementById('successModal').style.display='flex';};reader.readAsDataURL(selectedImage);}
-function closeSuccessModal(){document.getElementById('successModal').style.display='none';}
-function sendToOwnerFromModal(){if(!lastPublished)return;const d=lastPublished;const msg=`السلام عليكم معرض البتول - أريد عرض جهازي للبيع:\n📱 الجهاز: ${d.model}\n💾 الرام: ${d.ram} - الذاكرة: ${d.storage}\n📦 الكرتونة: ${d.box}\n💲 السعر: ${d.price} ${d.currency}\n📞 رقمي: ${d.phone}`;window.open("https://wa.me/963930688067?text="+encodeURIComponent(msg),"_blank");closeSuccessModal();}
-async function openBuyModal(idx){const d=currentDevices[idx];currentBuyDevice=d;if(d && d.id){try{await db.collection('devices').doc(d.id).update({views:(d.views||0)+1})}catch(e){}}document.getElementById('buyModal').style.display='flex';}
-function closeBuyModal(){document.getElementById('buyModal').style.display='none';document.getElementById('errBuyerPhone').style.display='none'}
-function confirmBuy(){const buyer=document.getElementById('buyerPhone').value.trim();if(!buyer){document.getElementById('errBuyerPhone').style.display='block';return}const d=currentBuyDevice;const msg=`السلام عليكم معرض البتول - أريد شراء الجهاز التالي:\n📱 الجهاز: ${d.model}\n💾 الرام: ${d.ram} - الذاكرة: ${d.storage}\n📦 الكرتونة: ${d.box}\n💲 سعر البائع: ${d.price} ${d.currency}\n📞 رقم البائع: ${d.phone}\n📞 رقمي أنا المشتري: ${buyer}`;window.open("https://wa.me/963930688067?text="+encodeURIComponent(msg),"_blank");closeBuyModal();}
-function inviteFriend(){const siteLink=window.location.href;const text=`تعال بيع جوالك على معرض البتول 📱\nاعرض جهازك مجاناً وبعه بسرعة على موقع المعرض - حمص المخرم:\n${siteLink}`;if(navigator.share){navigator.share({title:'معرض البتول للجوالات', text:text, url:siteLink}).catch(()=>{});}else{window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");}}
-function openAdminModal(){document.getElementById('adminModal').style.display='flex';document.getElementById('adminLoginBox').style.display='block';document.getElementById('adminPanelBox').style.display='none';document.getElementById('adminPass').value='';document.getElementById('errAdminPass').style.display='none';}
-function closeAdminModal(){document.getElementById('adminModal').style.display='none';}
-function checkAdminLogin(){const pass=document.getElementById('adminPass').value;if(pass===ADMIN_PASSWORD){document.getElementById('adminLoginBox').style.display='none';document.getElementById('adminPanelBox').style.display='block';loadAdminDevices();}else{document.getElementById('errAdminPass').style.display='block';}}
-function loadAdminDevices(){
-const storeList=document.getElementById('adminStoreList');storeList.innerHTML='';
-storeDevices.forEach((d,idx)=>{
-const item=document.createElement('div');item.style.cssText="background:#0f172a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.08)";
-item.innerHTML=`<div><strong>${d.model}</strong> (${d.price}$) - ${d.status==='sold'?'مباع':'متوفر'}<br><span style="font-size:.8rem;color:#94a3b8">رام ${d.ram} - ${d.storage} - بطارية ${d.bat}</span></div><div class="admin-edit-row"><button class="edit-btn" onclick="openEdit('store',${idx})">✏️ تعديل</button></div>`;
-storeList.appendChild(item);
-});
-const listContainer=document.getElementById('adminDevicesList');listContainer.innerHTML='';
-if(currentDevices.length===0){listContainer.innerHTML='<p style="color:#94a3b8;text-align:center">لا توجد أجهزة زبائن حالياً</p>';return;}
-currentDevices.forEach((d,idx)=>{
-const item=document.createElement('div');item.style.cssText="background:#0f172a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,.08)";
-item.innerHTML=`<div><strong>${d.model}</strong> (${d.price} ${d.currency})<br><span style="font-size:.8rem;color:#94a3b8">رام ${d.ram} - ${d.storage} - ${d.box} - بطارية ${d.bat||'-'}</span></div><div class="admin-edit-row"><button class="edit-btn" onclick="openEdit('customer',${idx})">✏️ تعديل</button><button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button></div>`;
-listContainer.appendChild(item);
-});
-}
-function openEdit(type,idx){
-editingType=type;editingIndex=idx;
-let d = type==='store' ? storeDevices[idx] : currentDevices[idx];
-editingId = d.id;
-document.getElementById('editModel').value=d.model||'';
-document.getElementById('editPrice').value=d.price||'';
-document.getElementById('editStatus').value= type==='store' ? (d.status||'available') : 'available';
-document.getElementById('editRam').value=d.ram||'';
-document.getElementById('editStorage').value=d.storage||'';
-document.getElementById('editBox').value=d.box||'معه كرتونة';
-document.getElementById('editBat').value=d.bat||'';
-document.getElementById('editScreen').value=d.screen||'';
-document.getElementById('editFinger').value=d.finger||'';
-document.getElementById('specsList').style.display='none';
-document.getElementById('specsPreview').style.display='none';
-document.getElementById('adminModal').style.display='none';
-document.getElementById('editModal').style.display='flex';
-}
-function closeEditModal(){document.getElementById('editModal').style.display='none';document.getElementById('adminModal').style.display='flex';}
-async function saveEdit(){
-const data={model:document.getElementById('editModel').value,price:document.getElementById('editPrice').value,ram:document.getElementById('editRam').value,storage:document.getElementById('editStorage').value,box:document.getElementById('editBox').value,bat:document.getElementById('editBat').value,screen:document.getElementById('editScreen').value,finger:document.getElementById('editFinger').value};
-if(editingType==='store'){
-data.status=document.getElementById('editStatus').value;
-storeDevices[editingIndex]={...storeDevices[editingIndex],...data};
-saveStore();renderStore();
-}else{
-try{await db.collection('devices').doc(editingId).update(data);}catch(e){let list=JSON.parse(localStorage.getItem('batoul_customer_devices')||'[]');list[editingIndex]={...list[editingIndex],...data};localStorage.setItem('batoul_customer_devices',JSON.stringify(list));}
-currentDevices[editingIndex]={...currentDevices[editingIndex],...data};renderDevices(currentDevices);
-}
-document.getElementById('editModal').style.display='none';
-alert('تم حفظ التعديل بنجاح ✅ وظهر فوراً بالموقع');
-openAdminModal();checkAdminLoginManual();
-}
-function checkAdminLoginManual(){document.getElementById('adminLoginBox').style.display='none';document.getElementById('adminPanelBox').style.display='block';loadAdminDevices();}
-async function deleteDevice(id){if(confirm('هل أنت متأكد من حذف هذا الجهاز من الموقع؟')){try{await db.collection('devices').doc(id).delete();alert('تم حذف الجهاز بنجاح');openAdminModal();checkAdminLoginManual();}catch(e){alert('حدث خطأ أثناء الحذف');}}}
-renderStore();updateTotalViews();loadDevices();loadReviews();
 </script>
+
 </body>
 </html>
