@@ -35,7 +35,6 @@ header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;
 .price{color:#00b4d8;font-weight:800;font-size:1.3rem}
 .badge{display:inline-block;margin-top:10px;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem;line-height:1.6}
 .device-title-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0}
-.share-mini{width:32px;height:32px;border-radius:50%;background:#25D366;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
 #customerGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:850px;margin:0 auto}
 #customerGrid .card{border:1px solid rgba(0,180,216,.25)}
 .customer-label{display:inline-block;background:#00b4d8;color:#fff;padding:6px 18px;border-radius:20px;font-size:.9rem;font-weight:800;margin-bottom:12px}
@@ -528,37 +527,22 @@ function renderAdminLists() {
     approvedList.innerHTML = approved.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد أجهزة زبائن منشورة</p>' : approved.map(d => generateAdminItem(d)).join('');
 }
 
-// ⚠️ هذه هي دالة الاستعادة التي تم إصلاحها ⚠️
 async function recoverOldDevices() {
-    if(!confirm('هل تريد استعادة الأجهزة القديمة؟ (سيتم إصلاح حالتها لتظهر على الموقع)')) return;
-    
+    if(!confirm('هل تريد استعادة الأجهزة القديمة؟')) return;
     let count = 0;
-    // نبحث عن أي جهاز لا يملك حالة أو نوع
     for (let d of allDevicesCache) {
         if (!d.status || !d.type) {
             try { 
-                // إذا كان يملك رقم هاتف، نعتبره جهاز زبون، وإلا فهو جهاز معرض
-                let type = d.type;
-                if (!type) {
-                    type = (d.phone && d.phone !== "963930688067" && d.phone !== "0930688067") ? "customer" : "store";
-                }
-                
+                let type = d.type || ((d.phone && d.phone !== "963930688067" && d.phone !== "0930688067") ? "customer" : "store");
                 await window.updateDoc(window.doc(window.db, "devices", d.id), { 
                     status: d.status || "approved",
                     type: type
                 }); 
                 count++; 
-            } catch(e) {
-                console.error("فشل استعادة جهاز:", d.id, e);
-            }
+            } catch(e) {}
         }
     }
-    
-    if (count > 0) {
-        alert(`✅ تم استعادة ${count} جهاز بنجاح! يرجى إغلاق اللوحة وستجدهم في الموقع.`);
-    } else {
-        alert(`لم يتم العثور على أجهزة قديمة بحاجة للاستعادة. (ربما تم حذفها من Firebase نهائياً).`);
-    }
+    alert(count > 0 ? `✅ تم استعادة ${count} جهاز.` : `لم يتم العثور على أجهزة بحاجة للاستعادة.`);
 }
 
 async function approveDevice(id) { try { await window.updateDoc(window.doc(window.db, "devices", id), { status: "approved" }); } catch(e) { alert('خطأ'); } }
