@@ -121,7 +121,6 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 
 <footer>البتول للجوالات - 0930688067 © 2026</footer>
 
-<!-- نافذة نجاح الرفع -->
 <div class="modal-overlay" id="successModal">
     <div class="modal-box">
         <div style="font-size:45px">✅</div>
@@ -134,7 +133,6 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     </div>
 </div>
 
-<!-- لوحة التحكم -->
 <div class="modal-overlay" id="adminModal">
     <div class="modal-box" style="max-width:95%;text-align:right;max-height:85vh;overflow-y:auto">
         <div id="adminLoginBox">
@@ -182,7 +180,6 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     </div>
 </div>
 
-<!-- نافذة إضافة جهاز للمعرض -->
 <div class="modal-overlay" id="addStoreDeviceModal">
     <div class="modal-box" style="text-align:right;">
         <h3 style="color:#00b4d8;margin-bottom:15px;text-align:center"><i class="fa-solid fa-plus"></i> إضافة جهاز للمعرض</h3>
@@ -206,7 +203,6 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     </div>
 </div>
 
-<!-- نافذة تعديل بيانات الجهاز (للمعرض والزبائن) -->
 <div class="modal-overlay" id="editDeviceModal">
     <div class="modal-box">
         <h3 style="color:#00b4d8;margin-bottom:15px"><i class="fa-solid fa-pen-to-square"></i> تعديل بيانات الجهاز</h3>
@@ -295,11 +291,11 @@ function compressImage(file, callback) {
         const img = new Image();
         img.onload = () => {
             const canvas = document.createElement('canvas');
-            let scale = 600 / img.width; if (scale > 1) scale = 1; 
+            let scale = 500 / img.width; if (scale > 1) scale = 1; 
             canvas.width = img.width * scale; canvas.height = img.height * scale;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            callback(canvas.toDataURL('image/jpeg', 0.7));
+            callback(canvas.toDataURL('image/jpeg', 0.6)); // تصغير الجودة لضمان القبول
         };
         img.src = ev.target.result;
     };
@@ -357,7 +353,7 @@ async function publishDevice() {
         document.querySelectorAll('input[name="box"]').forEach(el => el.checked = false);
         document.getElementById('previewBox').style.display = 'none'; customerImageData = null;
     } catch (error) {
-        alert('حدث خطأ أثناء الإرسال.');
+        alert('حدث خطأ أثناء الإرسال.\nالسبب: ' + error.message + '\nتأكد من قواعد الأمان في Firebase.');
     } finally {
         btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-store"></i> اعرض جهازي للبيع';
     }
@@ -376,6 +372,10 @@ async function saveStoreDevice() {
         return;
     }
 
+    const btn = event.target;
+    btn.innerHTML = 'جاري الإضافة...';
+    btn.disabled = true;
+
     try {
         await window.addDoc(window.collection(window.db, "devices"), {
             image: storeImageData, model, otherModel: '', ram, storage,
@@ -388,7 +388,12 @@ async function saveStoreDevice() {
         document.getElementById('storeStorage').value = ''; document.getElementById('storePrice').value = '';
         document.getElementById('storeBox').value = ''; document.getElementById('storePreviewBox').style.display = 'none';
         storeImageData = null;
-    } catch(e) { alert('حدث خطأ'); }
+    } catch(e) { 
+        alert('حدث خطأ أثناء الإضافة.\nالسبب: ' + e.message); 
+    } finally {
+        btn.innerHTML = 'إضافة الجهاز ونشره';
+        btn.disabled = false;
+    }
 }
 function openAddStoreDeviceModal() { document.getElementById('addStoreDeviceModal').style.display = 'flex'; }
 
