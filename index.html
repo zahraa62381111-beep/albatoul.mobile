@@ -279,7 +279,6 @@ function pulseThis(el) { el.classList.add('pulse-img'); setTimeout(() => el.clas
 function inviteFriend() { window.open(`https://wa.me/?text=${encodeURIComponent('شاهد معرض البتول للجوالات: ' + window.location.href)}`, '_blank'); }
 function toggleOtherModel() { document.getElementById('otherModelGroup').style.display = (document.getElementById('deviceModel').value === 'أخرى') ? 'block' : 'none'; }
 
-// ===== فتح واتساب مباشرة بنفس الصفحة بدون تاب وسيط =====
 function buyViaWhatsApp(model, otherModel) {
     const msg = 'مرحباً، أرغب بشراء: ' + model + ' ' + (otherModel || '');
     const url = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -472,30 +471,63 @@ window.renderCustomerSection = function() {
     grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
 };
 
-function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
-function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+// ===== إصلاح 1: openAdminModal — حماية + إعادة تعيين الحالة =====
+function openAdminModal() {
+    if (!window.__IS_OWNER__) {
+        return;
+    }
+    CURRENT_ADMIN_PASS = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
+    document.getElementById('adminLoginBox').style.display = 'block';
+    document.getElementById('adminPanelBox').style.display = 'none';
+    document.getElementById('adminPass').value = '';
+    document.getElementById('errAdminPass').style.display = 'none';
+    document.getElementById('changePassSection').style.display = 'none';
+    document.getElementById('adminModal').style.display = 'flex';
+}
 
+// ===== إصلاح 2: closeAdminModal — إعادة تعيين الحالة =====
+function closeAdminModal() {
+    document.getElementById('adminModal').style.display = 'none';
+    document.getElementById('adminLoginBox').style.display = 'block';
+    document.getElementById('adminPanelBox').style.display = 'none';
+    document.getElementById('adminPass').value = '';
+    document.getElementById('errAdminPass').style.display = 'none';
+    document.getElementById('changePassSection').style.display = 'none';
+}
+
+// ===== إصلاح 3: checkAdminLogin — قراءة أحدث باسورد =====
 function checkAdminLogin() {
-    if(document.getElementById('adminPass').value === CURRENT_ADMIN_PASS){
+    const storedPass = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
+    const inputPass = document.getElementById('adminPass').value;
+    if (inputPass === storedPass) {
+        CURRENT_ADMIN_PASS = storedPass;
         document.getElementById('adminLoginBox').style.display = 'none';
         document.getElementById('adminPanelBox').style.display = 'block';
         document.getElementById('errAdminPass').style.display = 'none';
         document.getElementById('adminPass').value = '';
     } else {
         document.getElementById('errAdminPass').style.display = 'block';
+        document.getElementById('adminPass').value = '';
     }
 }
 
 function showChangePassSection() { document.getElementById('changePassSection').style.display = 'block'; }
 function hideChangePassSection() { document.getElementById('changePassSection').style.display = 'none'; }
+
+// ===== إصلاح 4: saveNewPassword =====
 function saveNewPassword() {
     const oldP = document.getElementById('oldPassInput').value;
     const newP = document.getElementById('newPassInput').value;
-    if(oldP !== CURRENT_ADMIN_PASS) { alert('كلمة المرور الحالية خاطئة'); return; }
-    if(newP.length < 4) { alert('يجب أن تكون 4 أحرف على الأقل'); return; }
+    const storedPass = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
+    if (oldP !== storedPass) { alert('كلمة المرور الحالية خاطئة'); return; }
+    if (newP.length < 4) { alert('يجب أن تكون 4 أحرف على الأقل'); return; }
+    if (newP === storedPass) { alert('كلمة المرور الجديدة مطابقة للقديمة'); return; }
     localStorage.setItem('albatoulAdminPass', newP);
     CURRENT_ADMIN_PASS = newP;
-    alert('✅ تم تغيير كلمة المرور بنجاح!'); hideChangePassSection();
+    document.getElementById('oldPassInput').value = '';
+    document.getElementById('newPassInput').value = '';
+    alert('✅ تم تغيير كلمة المرور بنجاح!'); 
+    hideChangePassSection();
 }
 
 function generateAdminItem(d) {
@@ -633,7 +665,14 @@ async function saveEditedDevice() {
     } catch(e) { alert('خطأ: ' + e.message); }
 }
 
-window.onload = function() { updateViews(); };
+// ===== إصلاح 5: onload — إظهار الزر فقط لصاحب المنصة =====
+window.addEventListener('load', function() {
+    const adminBtn = document.querySelector('.admin-btn-header');
+    const isOwner = new URLSearchParams(window.location.search).get('admin') === '1';
+    if (adminBtn && !isOwner) adminBtn.style.display = 'none';
+    window.__IS_OWNER__ = isOwner;
+    updateViews();
+});
 </script>
 </body>
 </html>
