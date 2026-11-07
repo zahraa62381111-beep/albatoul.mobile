@@ -171,9 +171,9 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 
             <h4 style="color:#eab308;margin:15px 0 10px"><i class="fa-solid fa-clock"></i> طلبات زبائن بانتظار الموافقة (<span id="pendingCount">0</span>)</h4>
             <div id="pendingList"></div>
-            
+
             <hr style="border-color:rgba(255,255,255,.1);margin:20px 0">
-            
+
             <h4 style="color:#22c55e;margin:10px 0 10px"><i class="fa-solid fa-check-circle"></i> أجهزة الزبائن المنشورة (<span id="approvedCount">0</span>)</h4>
             <div id="approvedList"></div>
         </div>
@@ -184,7 +184,7 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     <div class="modal-box" style="text-align:right;">
         <h3 style="color:#00b4d8;margin-bottom:15px;text-align:center"><i class="fa-solid fa-plus"></i> إضافة جهاز للمعرض</h3>
         <div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('storeDeviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="storeDeviceImage" accept="image/*" hidden onchange="previewStoreDeviceImage(event)"><div id="storePreviewBox" style="display:none;margin-top:10px"><img id="storePreviewImg" style="width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px;"></div></div>
-        
+
         <div class="input-group"><label>الموديل <span>*</span></label><input type="text" id="storeModel" placeholder="مثال: iPhone 13 Pro Max"></div>
         <div class="input-row">
             <div class="input-group"><label>الرام <span>*</span></label><input type="text" id="storeRam" placeholder="مثال: 6GB"></div>
@@ -197,7 +197,7 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
         <div class="input-group"><label>حالة الكرتونة</label><input type="text" id="storeBox" placeholder="مثال: معه كرتونة"></div>
 
         <div style="display:flex;gap:10px;margin-top:20px">
-            <button class="btn" style="background:#22c55e;color:#fff;flex:1" onclick="saveStoreDevice()">إضافة الجهاز ونشره</button>
+            <button class="btn" style="background:#22c55e;color:#fff;flex:1" onclick="saveStoreDevice(event)">إضافة الجهاز ونشره</button>
             <button class="btn" style="background:#334155;color:#fff" onclick="document.getElementById('addStoreDeviceModal').style.display='none'">إلغاء</button>
         </div>
     </div>
@@ -207,7 +207,7 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
     <div class="modal-box">
         <h3 style="color:#00b4d8;margin-bottom:15px"><i class="fa-solid fa-pen-to-square"></i> تعديل بيانات الجهاز</h3>
         <input type="hidden" id="editDeviceId">
-        
+
         <div class="input-group"><label>الموديل</label><input type="text" id="editModel"></div>
         <div class="edit-row">
             <div class="input-group"><label>الرام</label><input type="text" id="editRam"></div>
@@ -259,10 +259,10 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
   window.onSnapshot(window.collection(window.db, "devices"), (snapshot) => {
     const devices = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
     window.allDevicesCache = devices;
-    
-    if (typeof window.renderCustomerSection === 'function') window.renderCustomerSection();
-    if (typeof window.renderAdminLists === 'function') window.renderAdminLists();
-    if (typeof window.renderStoreSection === 'function') window.renderStoreSection();
+
+    try { if (typeof window.renderCustomerSection === 'function') window.renderCustomerSection(); } catch(e) { console.error(e); }
+    try { if (typeof window.renderAdminLists === 'function') window.renderAdminLists(); } catch(e) { console.error(e); }
+    try { if (typeof window.renderStoreSection === 'function') window.renderStoreSection(); } catch(e) { console.error(e); }
   });
 </script>
 
@@ -272,16 +272,27 @@ let CURRENT_ADMIN_PASS = localStorage.getItem('albatoulAdminPass') || DEFAULT_PA
 const OWNER_WHATSAPP = "963930688067"; 
 let customerImageData = null;
 let storeImageData = null;
-let allDevicesCache = [];
+window.allDevicesCache = [];
 let lastSubmittedDevice = null;
 
 function pulseThis(el) { el.classList.add('pulse-img'); setTimeout(() => el.classList.remove('pulse-img'), 800); }
 function inviteFriend() { window.open(`https://wa.me/?text=${encodeURIComponent('شاهد معرض البتول للجوالات: ' + window.location.href)}`, '_blank'); }
 function toggleOtherModel() { document.getElementById('otherModelGroup').style.display = (document.getElementById('deviceModel').value === 'أخرى') ? 'block' : 'none'; }
 
+// ===== فتح واتساب مباشرة بنفس الصفحة بدون تاب وسيط =====
+function buyViaWhatsApp(model, otherModel) {
+    const msg = 'مرحباً، أرغب بشراء: ' + model + ' ' + (otherModel || '');
+    const url = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+    location.href = url;
+}
+
 function updateViews() {
-    let views = parseInt(localStorage.getItem('siteViews') || '0') + 1;
-    localStorage.setItem('siteViews', views);
+    let views = parseInt(localStorage.getItem('siteViews') || '0');
+    if (!sessionStorage.getItem('viewCounted')) {
+        views += 1;
+        localStorage.setItem('siteViews', views);
+        sessionStorage.setItem('viewCounted', '1');
+    }
     document.getElementById('totalViews').textContent = views;
 }
 
@@ -291,11 +302,19 @@ function compressImage(file, callback) {
         const img = new Image();
         img.onload = () => {
             const canvas = document.createElement('canvas');
-            let scale = 500 / img.width; if (scale > 1) scale = 1; 
-            canvas.width = img.width * scale; canvas.height = img.height * scale;
+            let maxW = 600;
+            let scale = maxW / img.width; if (scale > 1) scale = 1; 
+            canvas.width = img.width * scale; 
+            canvas.height = img.height * scale;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            callback(canvas.toDataURL('image/jpeg', 0.6)); // تصغير الجودة لضمان القبول
+            let quality = 0.7;
+            let data = canvas.toDataURL('image/jpeg', quality);
+            while (data.length > 700000 && quality > 0.3) {
+                quality -= 0.1;
+                data = canvas.toDataURL('image/jpeg', quality);
+            }
+            callback(data);
         };
         img.src = ev.target.result;
     };
@@ -320,6 +339,11 @@ function previewStoreDeviceImage(e) {
     });
 }
 
+function isValidPhone(phone) {
+    const cleaned = String(phone).replace(/[\s\-]/g, '');
+    return /^09\d{8}$/.test(cleaned) || /^\+?9639\d{8}$/.test(cleaned) || /^9\d{8}$/.test(cleaned);
+}
+
 async function publishDevice() {
     const btn = document.getElementById('submitBtn');
     const model = document.getElementById('deviceModel').value;
@@ -335,7 +359,8 @@ async function publishDevice() {
     const check = (id, cond) => { document.getElementById(id).style.display = cond ? 'none' : 'block'; if(!cond) ok = false; };
     check('errImage', !!customerImageData); check('errModel', !!model);
     check('errRam', !!ram); check('errStorage', !!storage);
-    check('errPrice', !!price); check('errBox', !!box); check('errPhone', !!phone);
+    check('errPrice', !!price); check('errBox', !!box); 
+    check('errPhone', !!phone && isValidPhone(phone));
     if(!ok) return;
 
     btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
@@ -359,7 +384,7 @@ async function publishDevice() {
     }
 }
 
-async function saveStoreDevice() {
+async function saveStoreDevice(ev) {
     const model = document.getElementById('storeModel').value.trim();
     const ram = document.getElementById('storeRam').value.trim();
     const storage = document.getElementById('storeStorage').value.trim();
@@ -372,9 +397,8 @@ async function saveStoreDevice() {
         return;
     }
 
-    const btn = event.target;
-    btn.innerHTML = 'جاري الإضافة...';
-    btn.disabled = true;
+    const btn = ev ? ev.target : document.querySelector('#addStoreDeviceModal .btn[onclick*="saveStoreDevice"]');
+    if (btn) { btn.innerHTML = 'جاري الإضافة...'; btn.disabled = true; }
 
     try {
         await window.addDoc(window.collection(window.db, "devices"), {
@@ -391,8 +415,7 @@ async function saveStoreDevice() {
     } catch(e) { 
         alert('حدث خطأ أثناء الإضافة.\nالسبب: ' + e.message); 
     } finally {
-        btn.innerHTML = 'إضافة الجهاز ونشره';
-        btn.disabled = false;
+        if (btn) { btn.innerHTML = 'إضافة الجهاز ونشره'; btn.disabled = false; }
     }
 }
 function openAddStoreDeviceModal() { document.getElementById('addStoreDeviceModal').style.display = 'flex'; }
@@ -420,34 +443,34 @@ function generateDeviceCard(d) {
             <div style="margin-top:15px">
                 ${d.status === 'sold' 
                   ? `<button class="btn" style="background:#334155;color:#94a3b8;width:100%;cursor:not-allowed" disabled><i class="fa-solid fa-ban"></i> تم البيع</button>`
-                  : `<a href="https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent('مرحباً، أرغب بشراء: ' + d.model + ' ' + (d.otherModel || ''))}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل لشراء الجهاز</a>`
+                  : `<button onclick="buyViaWhatsApp('${d.model}', '${(d.otherModel || '').replace(/'/g, "\\'")}')" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل لشراء الجهاز</button>`
                 }
             </div>
         </div>
     `;
 }
 
-function renderStoreSection() {
+window.renderStoreSection = function() {
     const grid = document.getElementById('storeGrid');
-    const devices = allDevicesCache.filter(d => d.type === 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
-    
+    const devices = window.allDevicesCache.filter(d => d.type === 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
+
     if(devices.length === 0){
         grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة معرض مضافة حالياً</p>';
         return;
     }
     grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
-}
+};
 
-function renderCustomerSection() {
+window.renderCustomerSection = function() {
     const grid = document.getElementById('customerGrid');
-    const devices = allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
+    const devices = window.allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
 
     if(devices.length === 0){
         grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة زبائن معروضة حالياً</p>';
         return;
     }
     grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
-}
+};
 
 function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
 function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
@@ -496,73 +519,95 @@ function generateAdminItem(d) {
     `;
 }
 
-function renderAdminLists() {
-    const storeDevices = allDevicesCache.filter(d => d.type === 'store' && d.status !== 'pending');
+window.renderAdminLists = function() {
+    const storeDevices = window.allDevicesCache.filter(d => d.type === 'store' && d.status !== 'pending');
     const adminStoreList = document.getElementById('adminStoreList');
-    adminStoreList.innerHTML = storeDevices.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا يوجد أجهزة معرض</p>' : storeDevices.map(d => generateAdminItem(d)).join('');
-
-    const pending = allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'pending' || !d.status));
-    document.getElementById('pendingCount').textContent = pending.length;
-    const pendingList = document.getElementById('pendingList');
-    if(pending.length === 0){
-        pendingList.innerHTML = '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد طلبات معلقة</p>';
-    } else {
-        pendingList.innerHTML = pending.map(d => `
-            <div class="admin-device-item">
-                <div class="admin-device-header">
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <img src="${d.image}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;">
-                        <div>
-                            <strong style="display:block;font-size:.9rem">${d.model} ${d.otherModel || ''}</strong>
-                            <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency} • ${d.phone}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="admin-edit-row">
-                    <button class="approve-btn" onclick="approveDevice('${d.id}')">موافقة ونشر</button>
-                    <button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button>
-                </div>
-            </div>
-        `).join('');
+    if (adminStoreList) {
+        adminStoreList.innerHTML = storeDevices.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا يوجد أجهزة معرض</p>' : storeDevices.map(d => generateAdminItem(d)).join('');
     }
 
-    const approved = allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold'));
-    document.getElementById('approvedCount').textContent = approved.length;
+    const pending = window.allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'pending' || !d.status));
+    const pendingCountEl = document.getElementById('pendingCount');
+    if (pendingCountEl) pendingCountEl.textContent = pending.length;
+    const pendingList = document.getElementById('pendingList');
+    if (pendingList) {
+        if(pending.length === 0){
+            pendingList.innerHTML = '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد طلبات معلقة</p>';
+        } else {
+            pendingList.innerHTML = pending.map(d => `
+                <div class="admin-device-item">
+                    <div class="admin-device-header">
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <img src="${d.image}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;">
+                            <div>
+                                <strong style="display:block;font-size:.9rem">${d.model} ${d.otherModel || ''}</strong>
+                                <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency} • ${d.phone}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-edit-row">
+                        <button class="approve-btn" onclick="approveDevice('${d.id}')">موافقة ونشر</button>
+                        <button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    const approved = window.allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold'));
+    const approvedCountEl = document.getElementById('approvedCount');
+    if (approvedCountEl) approvedCountEl.textContent = approved.length;
     const approvedList = document.getElementById('approvedList');
-    approvedList.innerHTML = approved.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد أجهزة زبائن منشورة</p>' : approved.map(d => generateAdminItem(d)).join('');
-}
+    if (approvedList) {
+        approvedList.innerHTML = approved.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد أجهزة زبائن منشورة</p>' : approved.map(d => generateAdminItem(d)).join('');
+    }
+};
 
 async function recoverOldDevices() {
     if(!confirm('هل تريد استعادة الأجهزة القديمة؟')) return;
+    if (!window.allDevicesCache || window.allDevicesCache.length === 0) {
+        alert('لا توجد أجهزة في الذاكرة. انتظر تحميل البيانات ثم حاول مجدداً.');
+        return;
+    }
     let count = 0;
-    for (let d of allDevicesCache) {
+    for (let d of window.allDevicesCache) {
         if (!d.status || !d.type) {
             try { 
-                let type = d.type || ((d.phone && d.phone !== "963930688067" && d.phone !== "0930688067") ? "customer" : "store");
+                const isOwner = d.phone && (String(d.phone).includes("930688067"));
+                const type = d.type || (isOwner ? "store" : "customer");
                 await window.updateDoc(window.doc(window.db, "devices", d.id), { 
                     status: d.status || "approved",
                     type: type
                 }); 
                 count++; 
-            } catch(e) {}
+            } catch(e) { console.error(e); }
         }
     }
     alert(count > 0 ? `✅ تم استعادة ${count} جهاز.` : `لم يتم العثور على أجهزة بحاجة للاستعادة.`);
 }
 
-async function approveDevice(id) { try { await window.updateDoc(window.doc(window.db, "devices", id), { status: "approved" }); } catch(e) { alert('خطأ'); } }
-async function markAsSold(id) {
-    const dev = allDevicesCache.find(d => d.id === id);
-    const newStatus = dev.status === 'sold' ? 'approved' : 'sold';
-    try { await window.updateDoc(window.doc(window.db, "devices", id), { status: newStatus }); } catch(e) { alert('خطأ'); }
+async function approveDevice(id) { 
+    try { 
+        await window.updateDoc(window.doc(window.db, "devices", id), { status: "approved" }); 
+    } catch(e) { alert('خطأ: ' + e.message); } 
 }
+
+async function markAsSold(id) {
+    const dev = window.allDevicesCache.find(d => d.id === id);
+    if (!dev) { alert('لم يتم العثور على الجهاز.'); return; }
+    const newStatus = dev.status === 'sold' ? 'approved' : 'sold';
+    try { 
+        await window.updateDoc(window.doc(window.db, "devices", id), { status: newStatus }); 
+    } catch(e) { alert('خطأ: ' + e.message); }
+}
+
 async function deleteDevice(id) {
     if(!confirm('هل أنت متأكد من الحذف نهائياً؟')) return;
-    try { await window.deleteDoc(window.doc(window.db, "devices", id)); } catch(e) { alert('خطأ'); }
+    try { await window.deleteDoc(window.doc(window.db, "devices", id)); } catch(e) { alert('خطأ: ' + e.message); }
 }
 
 function openEditModal(id) {
-    const d = allDevicesCache.find(dev => dev.id === id);
+    const d = window.allDevicesCache.find(dev => dev.id === id);
     if(!d) return;
     document.getElementById('editDeviceId').value = d.id;
     document.getElementById('editModel').value = d.model;
@@ -585,7 +630,7 @@ async function saveEditedDevice() {
             status: document.getElementById('editStatus').value
         });
         alert('تم الحفظ!'); document.getElementById('editDeviceModal').style.display = 'none';
-    } catch(e) { alert('خطأ'); }
+    } catch(e) { alert('خطأ: ' + e.message); }
 }
 
 window.onload = function() { updateViews(); };
