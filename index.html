@@ -11,8 +11,11 @@ body{background:#0f172a;color:#fff}
 header{padding:18px 8%;background:rgba(15,23,42,.95);position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,255,255,.05)}
 .logo{font-weight:900;color:#00b4d8;font-size:22px;cursor:pointer;user-select:none}
 .hero{min-height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:160px 8% 40px}
-.hero-content{background:rgba(30,41,59,.6);padding:35px;border-radius:28px;max-width:650px;border:1px solid rgba(255,255,255,.08)}
+.hero-content{background:rgba(30,41,59,.6);padding:35px;border-radius:28px;max-width:700px;border:1px solid rgba(255,255,255,.08)}
+.hero-desc{color:#cbd5e1;font-size:1.05rem;line-height:1.8;margin:15px 0 20px;padding:0 10px}
 .views-badge{background:rgba(0,180,216,.2);color:#00b4d8;padding:8px 20px;border-radius:20px;font-weight:700;display:inline-block;margin-top:10px;border:1px solid rgba(0,180,216,.4)}
+/* شريط الإعلانات الديناميكي */
+.announcement-banner{background:linear-gradient(135deg, #eab308, #ca8a04);color:#0f172a;padding:12px 20px;text-align:center;font-weight:900;font-size:1.1rem;display:none;margin-bottom:20px;border-radius:15px;box-shadow:0 4px 15px rgba(234,179,8,.3)}
 .products{padding:20px 8% 60px}
 .section-title{text-align:center;font-size:2.1rem;margin-bottom:15px}.section-title span{color:#00b4d8}
 .search-container{max-width:500px;margin:0 auto 25px}
@@ -36,8 +39,8 @@ header{padding:18px 8%;background:rgba(15,23,42,.95);position:fixed;top:0;left:0
 .cond-new{background:#22c55e;color:#fff}
 .cond-used{background:#f97316;color:#fff}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
-.modal-box{background:#1e293b;padding:22px;border-radius:20px;max-width:500px;width:100%;max-height:90vh;overflow:auto}
-.modal-box input,.modal-box select{width:100%;padding:11px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0f172a;color:#fff;margin-bottom:10px;outline:none}
+.modal-box{background:#1e293b;padding:22px;border-radius:20px;max-width:550px;width:100%;max-height:90vh;overflow:auto}
+.modal-box input,.modal-box select,.modal-box textarea{width:100%;padding:11px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0f172a;color:#fff;margin-bottom:10px;outline:none;font-family:'Cairo',sans-serif}
 .btn{padding:11px 18px;border-radius:30px;font-weight:800;border:none;cursor:pointer}
 .btn-blue{background:#00b4d8;color:#fff;width:100%}.btn-green{background:#22c55e;color:#fff}.btn-red{background:#ef4444;color:#fff}.btn-gray{background:#334155;color:#fff}
 .admin-item{background:#0f172a;padding:12px;border-radius:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
@@ -50,9 +53,12 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 </header>
 
 <section class="hero"><div class="hero-content">
+<!-- شريط الإعلان الذي تتحكم به من لوحة التحكم -->
+<div id="announcementDisplay" class="announcement-banner"></div>
+
 <h1>أسعار الأجهزة في <span style="color:#00b4d8">حمص</span></h1>
-<p>مواكبة يومية لأسعار الموبايل في حمص - المخرم الفوقاني</p>
-<p style="margin-top:14px;color:#a5f3fc;font-weight:700;" id="realDate">تاريخ التحديث</p>
+<p class="hero-desc">منصة تعرض لكم أسعار الجوالات بشكل يومي ومستمر وفقاً لأسعار السوق في حمص.</p>
+<p style="margin-top:10px;color:#a5f3fc;font-weight:700;" id="realDate">تاريخ التحديث</p>
 <div id="viewsContainer" style="display:none;">
 <div class="views-badge" id="viewsCounterText">👀 عدد المشاهدات: 0</div>
 </div>
@@ -72,43 +78,73 @@ footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
 
 <div class="filters" id="brandFilters">
 <button class="active" onclick="setBrand('الكل',this)">الكل</button>
+<button onclick="setBrand('SAMSUNG',this)">سامسونج</button>
+<button onclick="setBrand('APPLE',this)">أبل</button>
 <button onclick="setBrand('XIAOMI',this)">شاومي</button>
 <button onclick="setBrand('INFINIX',this)">انفينكس</button>
 <button onclick="setBrand('POCO',this)">بوكو</button>
+<button onclick="setBrand('ONEPLUS',this)">ون بلاس</button>
+<button onclick="setBrand('HONOR',this)">هونر</button>
+<button onclick="setBrand('TECNO',this)">تكنو</button>
 </div>
 <div class="subfilters" id="catFilters"></div>
 <div class="cards-grid" id="storeGrid"></div>
 </section>
 
+<!-- لوحة التحكم الكاملة -->
 <div class="modal" id="adminModal">
 <div class="modal-box">
-<h2 style="text-align:center;margin-bottom:15px">🔒 لوحة التحكم</h2>
+<h2 style="text-align:center;margin-bottom:15px">🔒 لوحة التحكم الشاملة</h2>
 <div id="loginBox">
 <input type="password" id="adminPass" placeholder="كلمة المرور">
 <button class="btn btn-blue" onclick="checkPass()">دخول</button>
 <button class="btn btn-gray" style="width:100%;margin-top:8px" onclick="closeAdmin()">إغلاق</button>
 </div>
 <div id="adminBox" style="display:none">
-<h3 style="margin-bottom:10px">⚙️ تغيير كلمة المرور</h3>
+
+<!-- قسم إنشاء وإدارة الإعلانات -->
+<h3 style="margin-bottom:10px">📢 نظام إدارة الإعلانات</h3>
 <div style="background:#0f172a;padding:12px;border-radius:12px;margin-bottom:20px;">
-<input type="password" id="newAdminPass" placeholder="كلمة المرور الجديدة">
-<button class="btn btn-green" style="width:100%" onclick="changePassword()">حفظ كلمة المرور الجديدة 🔑</button>
+<textarea id="adText" placeholder="اكتب نص الإعلان هنا (مثال: عروض خاصة بمناسبة رأس السنة...)"></textarea>
+<div style="display:flex;gap:10px;align-items:center;margin-top:5px;">
+<button class="btn btn-green" style="flex:1" onclick="saveAnnouncement()">نشر / تحديث الإعلان 📢</button>
+<button class="btn btn-red" style="flex:1" onclick="hideAnnouncement()">إيقاف وحذف الإعلان ❌</button>
+</div>
 </div>
 
-<h3 style="margin-bottom:10px">⚙️ إعدادات عداد المشاهدات</h3>
+<!-- قسم تغيير كلمة المرور -->
+<h3 style="margin-bottom:10px">🔑 تغيير كلمة المرور</h3>
+<div style="background:#0f172a;padding:12px;border-radius:12px;margin-bottom:20px;">
+<input type="password" id="newAdminPass" placeholder="كلمة المرور الجديدة">
+<button class="btn btn-green" style="width:100%" onclick="changePassword()">حفظ كلمة المرور 🔑</button>
+</div>
+
+<!-- قسم عداد المشاهدات -->
+<h3 style="margin-bottom:10px">👀 إعدادات عداد المشاهدات</h3>
 <div style="background:#0f172a;padding:12px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
 <span>حالة العدّاد: <b id="statusLabel" style="color:#22c55e">متوقف</b></span>
 <button class="btn btn-green" id="toggleViewsBtn" onclick="toggleViews()">تشغيل العدّاد</button>
 </div>
 
+<!-- قسم إضافة الأجهزة -->
 <h3>➕ إضافة جهاز جديد</h3>
 <select id="newCondition"><option value="جديد">جهاز جديد ✨</option><option value="مستعمل">جهاز مستعمل 🔄</option></select>
-<select id="newBrand"><option value="XIAOMI">XIAOMI</option><option value="INFINIX">INFINIX</option><option value="POCO">POCO</option></select>
-<input id="newCat" placeholder="الفئة: مثلا Redmi Note">
-<input id="newName" placeholder="اسم الجهاز: مثلا Note 15 8/256GB">
-<input id="newPrice" type="number" placeholder="السعر بالدولار: مثلا 237">
+<select id="newBrand">
+<option value="SAMSUNG">SAMSUNG</option>
+<option value="APPLE">APPLE</option>
+<option value="XIAOMI">XIAOMI</option>
+<option value="INFINIX">INFINIX</option>
+<option value="POCO">POCO</option>
+<option value="ONEPLUS">ONEPLUS</option>
+<option value="HONOR">HONOR</option>
+<option value="TECNO">TECNO</option>
+</select>
+<input id="newCat" placeholder="الفئة: مثلا سامسونج S أو أبل Pro">
+<input id="newName" placeholder="اسم الجهاز: مثلا Galaxy S24 Ultra">
+<input id="newPrice" type="number" placeholder="السعر بالدولار: مثلا 850">
 <button class="btn btn-blue" onclick="addDevice()">إضافة الجهاز ✅</button>
-<h3 style="margin:20px 0 10px">📋 كل الأجهزة - تعديل / حذف</h3>
+
+<h3 style="margin:20px 0 10px">📋 كل الأجهزة - تعديل / حذف كامل</h3>
 <div id="adminList"></div>
 <button class="btn btn-gray" style="width:100%;margin-top:10px" onclick="closeAdmin()">إغلاق</button>
 </div>
@@ -125,6 +161,34 @@ function updateRealDate() {
   document.getElementById('realDate').innerText = "تاريخ التحديث: " + today;
 }
 updateRealDate();
+
+// --- نظام الإعلانات ---
+let adData = JSON.parse(localStorage.getItem('batoul_announcement') || '{"active": false, "text": ""}');
+function checkAnnouncement() {
+  let banner = document.getElementById('announcementDisplay');
+  if(adData.active && adData.text.trim() !== "") {
+    banner.innerText = adData.text;
+    banner.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+function saveAnnouncement() {
+  let text = document.getElementById('adText').value.trim();
+  if(!text) { alert('الرجاء كتابة نص الإعلان'); return; }
+  adData = { active: true, text: text };
+  localStorage.setItem('batoul_announcement', JSON.stringify(adData));
+  checkAnnouncement();
+  alert('تم نشر الإعلان بنجاح في الواجهة 📢');
+}
+function hideAnnouncement() {
+  adData = { active: false, text: "" };
+  localStorage.setItem('batoul_announcement', JSON.stringify(adData));
+  document.getElementById('adText').value = "";
+  checkAnnouncement();
+  alert('تم إيقاف الإعلان وإخفاؤه ❌');
+}
+checkAnnouncement();
 
 // --- كلمة المرور المخزنة ---
 let currentPassword = localStorage.getItem('batoul_password') || '12345';
@@ -181,68 +245,15 @@ checkViewsStatus();
 // --- بيانات الأجهزة ---
 let defaultDevices=[
 {condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20E 4/64GB", price:125},
-{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20 4/64GB", price:129},
-{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 10 Plus 4/128GB", price:135},
-{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 10 Plus 8/128GB", price:140},
-{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20 4/128GB", price:149},
-{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20 8/256GB", price:169},
-{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60i 5G 4/128GB", price:150},
-{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60i 5G 8/256GB", price:196},
 {condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60 Pro 8/256GB", price:230},
-{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60 Pro+ 8/256GB", price:230},
-{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 70 Pro 8/256GB", price:330},
-{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note Edge 8/256GB", price:271},
-{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 8/256GB", price:364},
-{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 Pro 8/256GB", price:395},
-{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 Pro 12/256GB", price:460},
-{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 Ultra 12/256GB", price:660},
-{condition:"جديد", brand:"INFINIX", cat:"ألعاب - GT", name:"GT 50 Pro 12/256GB", price:482},
-{condition:"جديد", brand:"INFINIX", cat:"ألعاب - GT", name:"GT 50 Pro 12/512GB", price:532},
-{condition:"جديد", brand:"INFINIX", cat:"تابلت", name:"XPad 20 8/256GB", price:215},
-{condition:"جديد", brand:"INFINIX", cat:"تابلت", name:"XPad 30E 8/256GB", price:250},
-{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A5 3/64GB", price:109},
-{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A7 Pro 4/64GB", price:113},
-{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A5 4/128GB", price:119},
-{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A7 Pro 4/128GB", price:128},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15C 4/128GB", price:135},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15C 8/256GB", price:162},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15 8/256GB", price:164},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15 8/256GB - نسخة 204$", price:204},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 14 4/256GB", price:213},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 14S 8/256GB", price:230},
 {condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 8/256GB", price:237},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 14S 12/256GB", price:270},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro 8/256GB", price:335},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro 12/256GB", price:358},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro 12/512GB", price:382},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro+ 12/256GB", price:420},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro Max 12/256GB", price:425},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro Max 12/512GB", price:455},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro+ 12/512GB", price:495},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro 12/256GB", price:498},
-{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro 12/512GB", price:540},
-{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17T 12/256GB", price:560},
-{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17T Pro 12/512GB", price:710},
-{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17 12/256GB", price:765},
-{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17 12/512GB", price:815},
-{condition:"جديد", brand:"POCO", cat:"اقتصادية - Poco", name:"Poco C71 4/64GB", price:111},
-{condition:"جديد", brand:"POCO", cat:"اقتصادية - Poco", name:"Poco C71 4/128GB", price:125},
-{condition:"جديد", brand:"POCO", cat:"متوسطة - Poco", name:"Poco M7 4/128GB", price:152},
-{condition:"جديد", brand:"POCO", cat:"متوسطة - Poco", name:"Poco M7 8/256GB", price:180},
-{condition:"جديد", brand:"POCO", cat:"متوسطة - Poco", name:"Poco M7 Pro 5G 8/256GB", price:210},
 {condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco X8 Pro 12/256GB", price:438},
-{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco X8 Pro Max 12/512GB", price:538},
-{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco F8 Pro 12/256GB", price:570},
-{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco F8 Pro 12/512GB", price:660},
-{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco F9 Pro 12/512GB", price:740},
-{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 8/256GB", price:215},
-{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 4G 8/256GB", price:240},
-{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 Pro 8/256GB", price:295},
-{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 Pro 5G 8/256GB", price:330},
-{condition:"جديد", brand:"POCO", cat:"تابلت", name:"Poco Pad X1 8/256GB", price:350},
-{condition:"جديد", brand:"XIAOMI", cat:"ساعات", name:"Mi Band 10", price:56},
-{condition:"جديد", brand:"XIAOMI", cat:"ساعات", name:"Xiaomi Watch S4", price:95},
-{condition:"جديد", brand:"XIAOMI", cat:"ساعات", name:"Xiaomi Watch 5", price:110}
+{condition:"جديد", brand:"SAMSUNG", cat:"فلاجشيب", name:"Galaxy S24 Ultra 12/256GB", price:980},
+{condition:"جديد", brand:"SAMSUNG", cat:"متوسطة", name:"Galaxy A55 8/256GB", price:390},
+{condition:"جديد", brand:"APPLE", cat:"آيفون", name:"iPhone 15 Pro Max 256GB", price:1150},
+{condition:"جديد", brand:"HONOR", cat:"متوسطة", name:"Honor 90 8/256GB", price:310},
+{condition:"جديد", brand:"TECNO", cat:"اقتصادية", name:"Spark 20 Pro 8/256GB", price:175},
+{condition:"جديد", brand:"ONEPLUS", cat:"رائدة", name:"OnePlus 12 16/512GB", price:720}
 ];
 
 let allDevices = JSON.parse(localStorage.getItem('batoul_devices') || 'null');
@@ -250,7 +261,6 @@ if(!allDevices || allDevices.length === 0) {
   allDevices = defaultDevices;
   localStorage.setItem('batoul_devices', JSON.stringify(allDevices));
 } else {
-  // للتأكد من أن الأجهزة القديمة تحتوي على حقل الحالة
   allDevices.forEach(d => { if(!d.condition) d.condition = "جديد"; });
 }
 
@@ -315,7 +325,10 @@ function render(){
   }).join('');
 }
 
-function openAdmin(){ document.getElementById('adminModal').style.display='flex'; }
+function openAdmin(){ 
+  document.getElementById('adminModal').style.display='flex'; 
+  if(adData.active) { document.getElementById('adText').value = adData.text; }
+}
 function closeAdmin(){ document.getElementById('adminModal').style.display='none'; document.getElementById('loginBox').style.display='block'; document.getElementById('adminBox').style.display='none'; document.getElementById('adminPass').value=''; }
 function checkPass(){ 
   if(document.getElementById('adminPass').value === currentPassword){ 
@@ -346,12 +359,21 @@ function addDevice(){
 }
 
 function renderAdmin(){ 
-  document.getElementById('adminList').innerHTML=allDevices.map((d,i)=>`<div class="admin-item"><span><b>[${d.condition}]</b> <b>${d.brand}</b> - ${d.name} - <b style="color:#00b4d8">${d.price}$</b></span><div style="display:flex;gap:6px"><button class="btn btn-green" onclick="editPrice(${i})">تعديل</button><button class="btn btn-red" onclick="delDevice(${i})">حذف</button></div></div>`).join(''); 
+  document.getElementById('adminList').innerHTML=allDevices.map((d,i)=>`<div class="admin-item"><span><b>[${d.condition}]</b> <b>${d.brand}</b> - ${d.name} - <b style="color:#00b4d8">${d.price}$</b></span><div style="display:flex;gap:6px"><button class="btn btn-green" onclick="editDevice(${i})">تعديل</button><button class="btn btn-red" onclick="delDevice(${i})">حذف</button></div></div>`).join(''); 
 }
 
-function editPrice(i){ 
-  let np=prompt('السعر الجديد لـ '+allDevices[i].name, allDevices[i].price); 
-  if(np){ allDevices[i].price=parseFloat(np); save(); render(); renderAdmin(); } 
+function editDevice(i){
+  let d = allDevices[i];
+  let nn = prompt('تعديل اسم الجهاز:', d.name);
+  let np = prompt('تعديل السعر بالدولار:', d.price);
+  if(nn !== null && np !== null) {
+    allDevices[i].name = nn.trim();
+    allDevices[i].price = parseFloat(np);
+    save();
+    render();
+    renderAdmin();
+    alert('تم التعديل بنجاح ✅');
+  }
 }
 
 function delDevice(i){ 
