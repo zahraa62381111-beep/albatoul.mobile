@@ -3,710 +3,363 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>البتول - حمص المخرم</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>بورصة أسعار الأجهزة في حمص - منصة البتول</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
 body{background:#0f172a;color:#fff}
-.edge-light{position:fixed;z-index:9998;pointer-events:none;box-shadow:0 0 12px #00b4d8, 0 0 25px rgba(0,180,216,.6)}
-.edge-light.top,.edge-light.bottom{left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00b4d8,#00e5ff,#fff,#00b4d8,transparent);background-size:200% 100%;animation:moveLight 2.5s linear infinite}
-.edge-light.left,.edge-light.right{top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,#00b4d8,#00e5ff,#fff,#00b4d8,transparent);background-size:100% 200%;animation:moveLightV 2.5s linear infinite}
-.edge-light.top{top:0}.edge-light.bottom{bottom:0}.edge-light.left{left:0}.edge-light.right{right:0}
-@keyframes moveLight{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes moveLightV{0%{background-position:0 -200%}100%{background-position:0 200%}}
-.pulse-img{animation:pulseBorder 0.8s ease}
-@keyframes pulseBorder{0%{box-shadow:0 0 0 0 rgba(0,180,216,0.8)}50%{box-shadow:0 0 0 18px rgba(0,180,216,0);transform:scale(1.02)}100%{box-shadow:0 0 0 0 rgba(0,180,216,0)}}
-header{padding:18px 8%;background:rgba(15,23,42,.9);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;color:#00b4d8;font-size:26px}.logo span{color:#fff}
-.header-actions{display:flex;gap:12px;align-items:center}
-.views-badge{background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.3);padding:6px 14px;border-radius:20px;font-size:.85rem;color:#00b4d8;font-weight:800}
-.admin-btn-header{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);color:#eab308;padding:6px 14px;border-radius:20px;font-size:.85rem;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px}
-.hero{min-height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 8% 40px;background:radial-gradient(800px 400px at 50% 0%,#1e293b,#0f172a)}
+header{padding:18px 8%;background:rgba(15,23,42,.95);position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.logo{font-weight:900;color:#00b4d8;font-size:22px;cursor:pointer;user-select:none}
+.hero{min-height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:160px 8% 40px}
 .hero-content{background:rgba(30,41,59,.6);padding:35px;border-radius:28px;max-width:650px;border:1px solid rgba(255,255,255,.08)}
-.hero-img{width:100%;max-height:220px;object-fit:cover;border-radius:16px;margin-bottom:15px;cursor:pointer}
-.contact-badge{background:#00b4d8;padding:10px 28px;border-radius:30px;font-weight:800;display:inline-block;margin-top:10px}
-.products{padding:80px 8%}.section-title{text-align:center;font-size:2.4rem;margin-bottom:20px}.section-title span{color:#00b4d8}
-.section-sub{text-align:center;color:#94a3b8;margin-bottom:40px}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:25px;max-width:1200px;margin:0 auto}
-.card{background:#1e293b;border-radius:22px;padding:22px;text-align:center;border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
-.card img{width:100%;height:230px;object-fit:contain;background:#0f172a;border-radius:14px;margin-bottom:12px;cursor:pointer}
-.sold-stamp{position:absolute;top:15px;right:-35px;background:#ef4444;color:#fff;padding:5px 40px;font-weight:900;transform:rotate(45deg);box-shadow:0 2px 10px rgba(0,0,0,.5);z-index:10;font-size:.9rem}
-.price{color:#00b4d8;font-weight:800;font-size:1.3rem}
-.badge{display:inline-block;margin-top:10px;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem;line-height:1.6}
-.device-title-row{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0}
-#customerGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:850px;margin:0 auto}
-#customerGrid .card{border:1px solid rgba(0,180,216,.25)}
-.customer-label{display:inline-block;background:#00b4d8;color:#fff;padding:6px 18px;border-radius:20px;font-size:.9rem;font-weight:800;margin-bottom:12px}
-.sell-section{padding:80px 8%}.sell-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
-.sell-form-box{background:#1e293b;padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,.07)}
-.input-group{margin-bottom:12px;text-align:right}.input-group label{font-weight:700;color:#cbd5e1;display:block;margin-bottom:5px}.input-group label span{color:#ef4444}
-.input-group input,.input-group select,.input-group textarea{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f172a;color:#fff;outline:none}
-.input-row,.edit-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.upload-area{border:2px dashed #00b4d8;padding:16px;border-radius:14px;text-align:center;cursor:pointer;background:rgba(0,180,216,.06)}
-#previewBox{display:none;margin-top:10px}#previewBox img{width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px}
-.radio-group{display:flex;gap:8px;flex-wrap:wrap}.radio-group label{background:#0f172a;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;display:flex;gap:5px;align-items:center}
-.error-msg{color:#f87171;font-size:.8rem;display:none;margin-top:4px}
-.btn{padding:12px 22px;border-radius:30px;font-weight:800;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-.btn-whatsapp{background:#25D366;color:#fff;width:100%}.btn-invite{background:#00b4d8;color:#fff}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
-.modal-box{background:#1e293b;padding:24px;border-radius:20px;max-width:480px;width:100%;border:1px solid rgba(255,255,255,.1);text-align:center}
+.views-badge{background:rgba(0,180,216,.2);color:#00b4d8;padding:8px 20px;border-radius:20px;font-weight:700;display:inline-block;margin-top:10px;border:1px solid rgba(0,180,216,.4)}
+.products{padding:20px 8% 60px}
+.section-title{text-align:center;font-size:2.1rem;margin-bottom:15px}.section-title span{color:#00b4d8}
+.search-container{max-width:500px;margin:0 auto 25px}
+.search-input{width:100%;padding:12px 20px;border-radius:30px;border:1px solid rgba(0,180,216,.3);background:#1e293b;color:#fff;outline:none;text-align:center;font-size:1rem}
+.main-condition-filters{display:flex;gap:15px;justify-content:center;margin-bottom:20px}
+.main-condition-filters button{padding:12px 25px;border-radius:30px;border:2px solid #00b4d8;background:#1e293b;color:#fff;font-weight:900;cursor:pointer;font-size:1.05rem}
+.main-condition-filters button.active{background:#00b4d8;color:#0f172a}
+.filters{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.filters button{padding:10px 20px;border-radius:30px;border:1px solid rgba(0,180,216,.4);background:#1e293b;color:#fff;font-weight:800;cursor:pointer}
+.filters button.active{background:#00b4d8;color:#fff}
+.subfilters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:25px}
+.subfilters button{padding:7px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.15);background:#0f172a;color:#cbd5e1;cursor:pointer}
+.subfilters button.active{background:#fff;color:#0f172a;font-weight:800}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+.card{background:#1e293b;border-radius:22px;padding:20px;text-align:center;border:1px solid rgba(255,255,255,.06);position:relative}
+.card:hover{transform:translateY(-5px);border-color:rgba(0,180,216,.3)}
+.price{color:#00b4d8;font-weight:900;font-size:1.6rem;margin:10px 0}
+.badge{display:inline-block;background:rgba(0,180,216,.15);color:#00b4d8;padding:6px 18px;border-radius:20px;font-size:.9rem}
+.brand-tag{display:inline-block;background:#eab308;color:#0f172a;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:900}
+.condition-tag{position:absolute;top:15px;left:15px;padding:4px 10px;border-radius:10px;font-size:.75rem;font-weight:800}
+.cond-new{background:#22c55e;color:#fff}
+.cond-used{background:#f97316;color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:10000;display:none;align-items:center;justify-content:center;padding:15px}
+.modal-box{background:#1e293b;padding:22px;border-radius:20px;max-width:500px;width:100%;max-height:90vh;overflow:auto}
+.modal-box input,.modal-box select{width:100%;padding:11px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0f172a;color:#fff;margin-bottom:10px;outline:none}
+.btn{padding:11px 18px;border-radius:30px;font-weight:800;border:none;cursor:pointer}
+.btn-blue{background:#00b4d8;color:#fff;width:100%}.btn-green{background:#22c55e;color:#fff}.btn-red{background:#ef4444;color:#fff}.btn-gray{background:#334155;color:#fff}
+.admin-item{background:#0f172a;padding:12px;border-radius:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 footer{text-align:center;padding:25px;background:#090d16;color:#94a3b8}
-.admin-device-item{background:#0f172a;padding:12px;border-radius:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(255,255,255,.05)}
-.admin-device-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.admin-edit-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.admin-edit-row button{padding:8px 12px;border-radius:8px;border:none;font-weight:800;cursor:pointer;font-size:.8rem;flex:1;min-width:80px}
-.approve-btn{background:#22c55e;color:#fff}.del-btn{background:#ef4444;color:#fff}.sold-btn{background:#eab308;color:#0f172a}.edit-btn{background:#00b4d8;color:#fff}
-@media(max-width:768px){.sell-container{grid-template-columns:1fr}header{flex-direction:column;gap:8px}#customerGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="edge-light top"></div><div class="edge-light bottom"></div><div class="edge-light left"></div><div class="edge-light right"></div>
-
 <header>
-    <div class="logo">البتول <span>للجوالات</span></div>
-    <div class="header-actions">
-        <button class="admin-btn-header" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> لوحة التحكم</button>
-        <div class="views-badge"><i class="fa-solid fa-eye"></i> المشاهدات: <span id="totalViews">0</span></div>
-    </div>
+<div class="logo" ondblclick="openAdmin()">منصة البتول</div>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <img src="https://i.ibb.co/Z1TFXQVF/dd46cd6b14f82e05cced6710d0664a45.jpg" class="hero-img" onclick="pulseThis(this)" alt="معرض البتول">
-        <h1>معرض <span>البتول</span></h1>
-        <p>حمص - المخرم الفوقاني - أم التين</p>
-        <div class="contact-badge"><i class="fa-solid fa-phone"></i> 0930688067</div>
-        <p style="margin-top:14px;color:#a5f3fc;font-size:.9rem">بيع • بدل • فحص مضمون</p>
-    </div>
-</section>
+<section class="hero"><div class="hero-content">
+<h1>أسعار الأجهزة في <span style="color:#00b4d8">حمص</span></h1>
+<p>مواكبة يومية لأسعار الموبايل في حمص - المخرم الفوقاني</p>
+<p style="margin-top:14px;color:#a5f3fc;font-weight:700;" id="realDate">تاريخ التحديث</p>
+<div id="viewsContainer" style="display:none;">
+<div class="views-badge" id="viewsCounterText">👀 عدد المشاهدات: 0</div>
+</div>
+</div></section>
 
 <section class="products">
-    <h2 class="section-title">جوالات <span>متوفرة</span></h2>
-    <p class="section-sub">أجهزة معرض البتول الأصلية</p>
-    <div class="cards-grid" id="storeGrid">
-        <p style="color:#94a3b8;text-align:center;grid-column:1/-1;">جاري تحميل الأجهزة...</p>
-    </div>
+<h2 class="section-title">أسعار أجهزة <span>المنصة الحالية</span></h2>
+<div class="search-container">
+<input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن جهاز معّين..." oninput="render()">
+</div>
+
+<!-- خيار جديد / مستعمل الرئيسي -->
+<div class="main-condition-filters">
+<button class="active" onclick="setCondition('جديد',this)">✨ أجهزة جديدة</button>
+<button onclick="setCondition('مستعمل',this)">🔄 أجهزة مستعملة</button>
+</div>
+
+<div class="filters" id="brandFilters">
+<button class="active" onclick="setBrand('الكل',this)">الكل</button>
+<button onclick="setBrand('XIAOMI',this)">شاومي</button>
+<button onclick="setBrand('INFINIX',this)">انفينكس</button>
+<button onclick="setBrand('POCO',this)">بوكو</button>
+</div>
+<div class="subfilters" id="catFilters"></div>
+<div class="cards-grid" id="storeGrid"></div>
 </section>
 
-<section class="products" id="customerSection" style="background:#131c31">
-    <div style="text-align:center;max-width:800px;margin:0 auto 30px">
-        <span class="customer-label"><i class="fa-solid fa-users"></i> قسم خاص بالزبائن</span>
-        <h2 class="section-title" style="margin-bottom:10px">أجهزة <span>الزبائن</span></h2>
-        <p style="color:#cbd5e1;line-height:1.8">هون بتنعرض أجهزة الزبائن يلي عرضوها للبيع من خلال الموقع.</p>
-    </div>
-    <div id="customerGrid">
-        <p style="color:#94a3b8;text-align:center;grid-column:1/-1;">جاري تحميل الأجهزة...</p>
-    </div>
-</section>
-
-<section class="sell-section">
-    <div class="sell-container">
-        <div>
-            <h2 style="font-size:2.2rem;font-weight:900">هل تريد <span style="color:#00b4d8">بيع جهازك؟</span></h2>
-            <div class="sell-form-box" style="margin-top:20px">
-                <div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('deviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="deviceImage" accept="image/*" hidden onchange="previewDeviceImage(event)"><div id="previewBox"><img id="previewImg" onclick="pulseThis(this)" alt="معاينة"></div><div class="error-msg" id="errImage">صورة الجهاز إلزامية</div></div>
-                <div class="input-group"><label>نوع الجهاز <span>*</span></label><select id="deviceModel" onchange="toggleOtherModel()"><option value="">اختر نوع الجهاز</option><option>Apple iPhone</option><option>Samsung Galaxy</option><option>Xiaomi Redmi</option><option>Xiaomi Poco</option><option>Infinix</option><option>Tecno</option><option>Realme</option><option>Honor</option><option>Huawei</option><option>Nokia</option><option>Itel</option><option>أخرى</option></select><div class="error-msg" id="errModel">اختر نوع الجهاز</div></div>
-                <div class="input-group" id="otherModelGroup" style="display:none"><label>اكتب موديل الجهاز</label><input type="text" id="otherModel" placeholder="مثال: iPhone 13 Pro Max"></div>
-                <div class="input-row"><div class="input-group"><label>الرام <span>*</span></label><select id="deviceRam"><option value="">اختر الرام</option><option>2GB</option><option>3GB</option><option>4GB</option><option>6GB</option><option>8GB</option><option>12GB</option></select><div class="error-msg" id="errRam">الرام مطلوب</div></div><div class="input-group"><label>الذاكرة <span>*</span></label><select id="deviceStorage"><option value="">اختر الذاكرة</option><option>32GB</option><option>64GB</option><option>128GB</option><option>256GB</option><option>512GB</option></select><div class="error-msg" id="errStorage">الذاكرة مطلوبة</div></div></div>
-                <div class="input-row"><div class="input-group"><label>السعر <span>*</span></label><input type="number" id="devicePrice" placeholder="100" min="1"><div class="error-msg" id="errPrice">السعر مطلوب</div></div><div class="input-group"><label>العملة <span>*</span></label><select id="deviceCurrency"><option value="$">دولار $</option><option value="ل.س">ليرة سورية ل.س</option></select></div></div>
-                <div class="input-group"><label>الكرتونة <span>*</span></label><div class="radio-group"><label><input type="radio" name="box" value="معه كرتونة"> معه</label><label><input type="radio" name="box" value="بدون كرتونة"> بدون</label></div><div class="error-msg" id="errBox">حدد الكرتونة</div></div>
-                <div class="input-group"><label>رقمك للتواصل <span>*</span></label><input type="tel" id="devicePhone" placeholder="09xxxxxxxx"><div class="error-msg" id="errPhone">رقمك إلزامي</div></div>
-                <div style="display:flex;gap:10px"><button class="btn btn-whatsapp" id="submitBtn" onclick="publishDevice()" style="flex:1.4"><i class="fa-solid fa-store"></i> اعرض جهازي للبيع</button><button class="btn btn-invite" onclick="inviteFriend()" style="flex:1"><i class="fa-solid fa-share-nodes"></i> ادعو صديقك</button></div>
-            </div>
-        </div>
-        <div style="background:linear-gradient(135deg,#1e293b,#0f172a);border-radius:22px;padding:30px;text-align:center;border:1px solid rgba(255,255,255,.06)"><i class="fa-solid fa-mobile-screen-button" style="font-size:70px;color:#00b4d8"></i><p style="margin-top:15px;color:#e2e8f0;line-height:1.8">الشراء يتم عبر واتساب صاحب الموقع فقط<br>تواصل: 0930688067</p></div>
-    </div>
-</section>
-
-<footer>البتول للجوالات - 0930688067 © 2026</footer>
-
-<div class="modal-overlay" id="successModal">
-    <div class="modal-box">
-        <div style="font-size:45px">✅</div>
-        <h3 style="margin:10px 0;color:#00b4d8;font-size:1.15rem">تم إرسال جهازك بنجاح</h3>
-        <p style="color:#e2e8f0;line-height:1.6">سيتم مراجعة جهازك من قبل الإدارة، وسيظهر على الموقع فور الموافقة عليه.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
-            <button class="btn btn-whatsapp" onclick="sendToOwnerFromModal()"><i class="fa-brands fa-whatsapp"></i> إرسال التفاصيل للمعرض</button>
-            <button class="btn" style="background:#334155;color:#fff;width:100%" onclick="closeSuccessModal()">إغلاق</button>
-        </div>
-    </div>
+<div class="modal" id="adminModal">
+<div class="modal-box">
+<h2 style="text-align:center;margin-bottom:15px">🔒 لوحة التحكم</h2>
+<div id="loginBox">
+<input type="password" id="adminPass" placeholder="كلمة المرور">
+<button class="btn btn-blue" onclick="checkPass()">دخول</button>
+<button class="btn btn-gray" style="width:100%;margin-top:8px" onclick="closeAdmin()">إغلاق</button>
+</div>
+<div id="adminBox" style="display:none">
+<h3 style="margin-bottom:10px">⚙️ تغيير كلمة المرور</h3>
+<div style="background:#0f172a;padding:12px;border-radius:12px;margin-bottom:20px;">
+<input type="password" id="newAdminPass" placeholder="كلمة المرور الجديدة">
+<button class="btn btn-green" style="width:100%" onclick="changePassword()">حفظ كلمة المرور الجديدة 🔑</button>
 </div>
 
-<div class="modal-overlay" id="adminModal">
-    <div class="modal-box" style="max-width:95%;text-align:right;max-height:85vh;overflow-y:auto">
-        <div id="adminLoginBox">
-            <h3 style="text-align:center;color:#eab308;margin-bottom:14px"><i class="fa-solid fa-lock"></i> دخول لوحة التحكم</h3>
-            <div class="input-group"><label>كلمة المرور</label><input type="password" id="adminPass" placeholder="أدخل كلمة المرور" onkeydown="if(event.key==='Enter')checkAdminLogin()"></div>
-            <div class="error-msg" id="errAdminPass" style="display:none">كلمة المرور غير صحيحة</div>
-            <div style="display:flex;gap:10px;margin-top:14px">
-                <button class="btn" style="background:#334155;color:#fff;flex:1" onclick="closeAdminModal()">إلغاء</button>
-                <button class="btn" style="background:#eab308;color:#0f172a;flex:1;font-weight:900" onclick="checkAdminLogin()">دخول</button>
-            </div>
-        </div>
-
-        <div id="adminPanelBox" style="display:none">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-                <h3 style="color:#eab308">لوحة تحكم المعرض</h3>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <button class="btn" style="background:#22c55e;color:#fff;padding:6px 12px;font-size:.8rem" onclick="openAddStoreDeviceModal()"><i class="fa-solid fa-plus"></i> إضافة جهاز للمعرض</button>
-                    <button class="btn" style="background:#ef4444;color:#fff;padding:6px 12px;font-size:.8rem" onclick="recoverOldDevices()"><i class="fa-solid fa-wrench"></i> استعادة</button>
-                    <button class="btn" style="background:#00b4d8;color:#fff;padding:6px 12px;font-size:.8rem" onclick="showChangePassSection()"><i class="fa-solid fa-key"></i> كلمة المرور</button>
-                    <button class="btn" style="background:#334155;color:#fff;padding:6px 12px;font-size:.8rem" onclick="closeAdminModal()">خروج</button>
-                </div>
-            </div>
-
-            <div id="changePassSection" style="background:#0f172a;padding:14px;border-radius:12px;margin-bottom:16px;display:none;border:1px solid rgba(234,179,8,.3)">
-                <h4 style="color:#eab308;font-size:.95rem;margin-bottom:10px">تعديل كلمة مرور لوحة التحكم</h4>
-                <div class="input-group"><label>كلمة المرور الحالية</label><input type="password" id="oldPassInput"></div>
-                <div class="input-group"><label>كلمة المرور الجديدة</label><input type="password" id="newPassInput"></div>
-                <div style="display:flex;gap:8px;margin-top:10px">
-                    <button class="btn" style="background:#22c55e;color:#fff;flex:1;padding:8px 16px;font-size:.85rem" onclick="saveNewPassword()">حفظ</button>
-                    <button class="btn" style="background:#334155;color:#fff;padding:8px 16px;font-size:.85rem" onclick="hideChangePassSection()">إلغاء</button>
-                </div>
-            </div>
-
-            <h4 style="color:#00b4d8;margin:15px 0 10px"><i class="fa-solid fa-store"></i> أجهزة المعرض (جوالات متوفرة)</h4>
-            <div id="adminStoreList"></div>
-
-            <h4 style="color:#eab308;margin:15px 0 10px"><i class="fa-solid fa-clock"></i> طلبات زبائن بانتظار الموافقة (<span id="pendingCount">0</span>)</h4>
-            <div id="pendingList"></div>
-
-            <hr style="border-color:rgba(255,255,255,.1);margin:20px 0">
-
-            <h4 style="color:#22c55e;margin:10px 0 10px"><i class="fa-solid fa-check-circle"></i> أجهزة الزبائن المنشورة (<span id="approvedCount">0</span>)</h4>
-            <div id="approvedList"></div>
-        </div>
-    </div>
+<h3 style="margin-bottom:10px">⚙️ إعدادات عداد المشاهدات</h3>
+<div style="background:#0f172a;padding:12px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+<span>حالة العدّاد: <b id="statusLabel" style="color:#22c55e">متوقف</b></span>
+<button class="btn btn-green" id="toggleViewsBtn" onclick="toggleViews()">تشغيل العدّاد</button>
 </div>
 
-<div class="modal-overlay" id="addStoreDeviceModal">
-    <div class="modal-box" style="text-align:right;">
-        <h3 style="color:#00b4d8;margin-bottom:15px;text-align:center"><i class="fa-solid fa-plus"></i> إضافة جهاز للمعرض</h3>
-        <div class="input-group"><label>صورة الجهاز <span>*</span></label><div class="upload-area" onclick="document.getElementById('storeDeviceImage').click()"><i class="fa-solid fa-cloud-arrow-up"></i><br>اضغط لرفع الصورة</div><input type="file" id="storeDeviceImage" accept="image/*" hidden onchange="previewStoreDeviceImage(event)"><div id="storePreviewBox" style="display:none;margin-top:10px"><img id="storePreviewImg" style="width:100%;max-height:180px;object-fit:contain;background:#0f172a;border-radius:10px;" alt="معاينة"></div></div>
-
-        <div class="input-group"><label>الموديل <span>*</span></label><input type="text" id="storeModel" placeholder="مثال: iPhone 13 Pro Max"></div>
-        <div class="input-row">
-            <div class="input-group"><label>الرام <span>*</span></label><input type="text" id="storeRam" placeholder="مثال: 6GB"></div>
-            <div class="input-group"><label>الذاكرة <span>*</span></label><input type="text" id="storeStorage" placeholder="مثال: 128GB"></div>
-        </div>
-        <div class="input-row">
-            <div class="input-group"><label>السعر <span>*</span></label><input type="number" id="storePrice" min="1"></div>
-            <div class="input-group"><label>العملة</label><select id="storeCurrency"><option value="$">دولار $</option><option value="ل.س">ليرة سورية</option></select></div>
-        </div>
-        <div class="input-group"><label>حالة الكرتونة</label><input type="text" id="storeBox" placeholder="مثال: معه كرتونة"></div>
-
-        <div style="display:flex;gap:10px;margin-top:20px">
-            <button class="btn" style="background:#22c55e;color:#fff;flex:1" id="saveStoreBtn" onclick="saveStoreDevice(event)">إضافة الجهاز ونشره</button>
-            <button class="btn" style="background:#334155;color:#fff" onclick="document.getElementById('addStoreDeviceModal').style.display='none'">إلغاء</button>
-        </div>
-    </div>
+<h3>➕ إضافة جهاز جديد</h3>
+<select id="newCondition"><option value="جديد">جهاز جديد ✨</option><option value="مستعمل">جهاز مستعمل 🔄</option></select>
+<select id="newBrand"><option value="XIAOMI">XIAOMI</option><option value="INFINIX">INFINIX</option><option value="POCO">POCO</option></select>
+<input id="newCat" placeholder="الفئة: مثلا Redmi Note">
+<input id="newName" placeholder="اسم الجهاز: مثلا Note 15 8/256GB">
+<input id="newPrice" type="number" placeholder="السعر بالدولار: مثلا 237">
+<button class="btn btn-blue" onclick="addDevice()">إضافة الجهاز ✅</button>
+<h3 style="margin:20px 0 10px">📋 كل الأجهزة - تعديل / حذف</h3>
+<div id="adminList"></div>
+<button class="btn btn-gray" style="width:100%;margin-top:10px" onclick="closeAdmin()">إغلاق</button>
+</div>
+</div>
 </div>
 
-<div class="modal-overlay" id="editDeviceModal">
-    <div class="modal-box">
-        <h3 style="color:#00b4d8;margin-bottom:15px"><i class="fa-solid fa-pen-to-square"></i> تعديل بيانات الجهاز</h3>
-        <input type="hidden" id="editDeviceId">
-
-        <div class="input-group"><label>الموديل</label><input type="text" id="editModel"></div>
-        <div class="edit-row">
-            <div class="input-group"><label>الرام</label><input type="text" id="editRam"></div>
-            <div class="input-group"><label>الذاكرة</label><input type="text" id="editStorage"></div>
-        </div>
-        <div class="edit-row">
-            <div class="input-group"><label>السعر</label><input type="number" id="editPrice" min="1"></div>
-            <div class="input-group"><label>العملة</label><select id="editCurrency"><option value="$">دولار</option><option value="ل.س">ليرة</option></select></div>
-        </div>
-        <div class="input-group">
-            <label>حالة الجهاز</label>
-            <select id="editStatus" style="font-weight:bold">
-                <option value="approved">متوفر (ظاهر للجميع)</option>
-                <option value="sold">مباع (يظهر ختم أحمر)</option>
-                <option value="pending">إلغاء النشر (مخفي)</option>
-            </select>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:20px">
-            <button class="btn" style="background:#22c55e;color:#fff;flex:1" onclick="saveEditedDevice()">حفظ التعديلات</button>
-            <button class="btn" style="background:#334155;color:#fff" onclick="document.getElementById('editDeviceModal').style.display='none'">إلغاء</button>
-        </div>
-    </div>
-</div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCCbgvXpKpKYukVclJp8I1b2cJo1HxIZI",
-    authDomain: "albatoul-d85b7.firebaseapp.com",
-    projectId: "albatoul-d85b7",
-    storageBucket: "albatoul-d85b7.firebasestorage.app",
-    messagingSenderId: "297915951560",
-    appId: "1:297915951560:web:14662d0e1b13a4efab8fd"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  window.db = db;
-  window.collection = collection;
-  window.addDoc = addDoc;
-  window.onSnapshot = onSnapshot;
-  window.doc = doc;
-  window.updateDoc = updateDoc;
-  window.deleteDoc = deleteDoc;
-
-  // إصلاح: إضافة معالج أخطاء لـ onSnapshot
-  window.onSnapshot(window.collection(window.db, "devices"), (snapshot) => {
-    const devices = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-    window.allDevicesCache = devices;
-
-    try { if (typeof window.renderCustomerSection === 'function') window.renderCustomerSection(); } catch(e) { console.error(e); }
-    try { if (typeof window.renderAdminLists === 'function') window.renderAdminLists(); } catch(e) { console.error(e); }
-    try { if (typeof window.renderStoreSection === 'function') window.renderStoreSection(); } catch(e) { console.error(e); }
-  }, (error) => {
-    console.error("Firebase error:", error);
-    const msg = '<p style="color:#f87171;text-align:center;grid-column:1/-1;">تعذر تحميل الأجهزة. تحقق من الاتصال بالإنترنت.</p>';
-    const s = document.getElementById('storeGrid'); if (s) s.innerHTML = msg;
-    const c = document.getElementById('customerGrid'); if (c) c.innerHTML = msg;
-  });
-</script>
+<footer>منصة البتول - حمص - المخرم الفوقاني</footer>
 
 <script>
-const DEFAULT_PASSWORD = "1234";
-let CURRENT_ADMIN_PASS = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
-const OWNER_WHATSAPP = "963930688067";
-const OWNER_PHONE_CLEAN = "930688067";
-let customerImageData = null;
-let storeImageData = null;
-window.allDevicesCache = [];
-let lastSubmittedDevice = null;
-
-// إصلاح: تعريف __IS_OWNER__ مبكراً حتى لا يفشل openAdminModal
-window.__IS_OWNER__ = new URLSearchParams(window.location.search).get('admin') === '1';
-
-function pulseThis(el) { if (!el) return; el.classList.add('pulse-img'); setTimeout(() => el.classList.remove('pulse-img'), 800); }
-function inviteFriend() {
-    const url = 'https://wa.me/?text=' + encodeURIComponent('شاهد معرض البتول للجوالات: ' + window.location.href);
-    window.open(url, '_blank');
+// --- التاريخ الحقيقي التلقائي ---
+function updateRealDate() {
+  let options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+  let today = new Date().toLocaleDateString('ar-SY', options);
+  document.getElementById('realDate').innerText = "تاريخ التحديث: " + today;
 }
-function toggleOtherModel() { document.getElementById('otherModelGroup').style.display = (document.getElementById('deviceModel').value === 'أخرى') ? 'block' : 'none'; }
+updateRealDate();
 
-// إصلاح: استخدام window.open بدل location.href
-function buyViaWhatsApp(model, otherModel) {
-    const msg = 'مرحباً، أرغب بشراء: ' + model + ' ' + (otherModel || '');
-    const url = `https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
+// --- كلمة المرور المخزنة ---
+let currentPassword = localStorage.getItem('batoul_password') || '12345';
+function changePassword() {
+  let np = document.getElementById('newAdminPass').value.trim();
+  if(!np){ alert('الرجاء إدخال كلمة المرور الجديدة'); return; }
+  localStorage.setItem('batoul_password', np);
+  currentPassword = np;
+  document.getElementById('newAdminPass').value = '';
+  alert('تم تغيير كلمة المرور بنجاح ✅');
 }
 
-function updateViews() {
-    let views = parseInt(localStorage.getItem('siteViews') || '0');
-    if (!sessionStorage.getItem('viewCounted')) {
-        views += 1;
-        localStorage.setItem('siteViews', views);
-        sessionStorage.setItem('viewCounted', '1');
-    }
-    const el = document.getElementById('totalViews');
-    if (el) el.textContent = views;
+// --- نظام عداد المشاهدات الحقيقي ---
+let viewSettings = JSON.parse(localStorage.getItem('batoul_views_settings') || '{"active": false, "count": 1250}');
+
+function checkViewsStatus() {
+  let container = document.getElementById('viewsContainer');
+  let statusLabel = document.getElementById('statusLabel');
+  let toggleBtn = document.getElementById('toggleViewsBtn');
+
+  if(viewSettings.active) {
+    container.style.display = 'block';
+    statusLabel.innerText = "يعمل";
+    statusLabel.style.color = "#22c55e";
+    toggleBtn.innerText = "إقاف العدّاد";
+    toggleBtn.className = "btn btn-red";
+    document.getElementById('viewsCounterText').innerText = "👀 عدد المشاهدات: " + viewSettings.count;
+  } else {
+    container.style.display = 'none';
+    statusLabel.innerText = "متوقف";
+    statusLabel.style.color = "#ef4444";
+    toggleBtn.innerText = "تشغيل العدّاد";
+    toggleBtn.className = "btn btn-green";
+  }
 }
 
-function compressImage(file, callback) {
-    const reader = new FileReader();
-    reader.onload = ev => {
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            let maxW = 600;
-            let scale = maxW / img.width; if (scale > 1) scale = 1;
-            canvas.width = img.width * scale;
-            canvas.height = img.height * scale;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            let quality = 0.7;
-            let data = canvas.toDataURL('image/jpeg', quality);
-            while (data.length > 700000 && quality > 0.3) {
-                quality -= 0.1;
-                data = canvas.toDataURL('image/jpeg', quality);
-            }
-            callback(data);
-        };
-        img.onerror = () => callback(null);
-        img.src = ev.target.result;
-    };
-    reader.onerror = () => callback(null);
-    reader.readAsDataURL(file);
+function toggleViews() {
+  viewSettings.active = !viewSettings.active;
+  if(viewSettings.active && !sessionStorage.getItem('counted_view')) {
+    viewSettings.count++;
+    sessionStorage.setItem('counted_view', 'true');
+  }
+  localStorage.setItem('batoul_views_settings', JSON.stringify(viewSettings));
+  checkViewsStatus();
 }
 
-function previewDeviceImage(e) {
-    if(!e.target.files[0]) return;
-    compressImage(e.target.files[0], data => {
-        if (!data) { alert('تعذر قراءة الصورة، جرب صورة أخرى'); return; }
-        customerImageData = data;
-        document.getElementById('previewImg').src = data;
-        document.getElementById('previewBox').style.display = 'block';
-        document.getElementById('errImage').style.display = 'none';
-    });
+if(viewSettings.active && !sessionStorage.getItem('counted_view')) {
+  viewSettings.count++;
+  sessionStorage.setItem('counted_view', 'true');
+  localStorage.setItem('batoul_views_settings', JSON.stringify(viewSettings));
 }
-function previewStoreDeviceImage(e) {
-    if(!e.target.files[0]) return;
-    compressImage(e.target.files[0], data => {
-        if (!data) { alert('تعذر قراءة الصورة، جرب صورة أخرى'); return; }
-        storeImageData = data;
-        document.getElementById('storePreviewImg').src = data;
-        document.getElementById('storePreviewBox').style.display = 'block';
-    });
-}
+checkViewsStatus();
 
-function isValidPhone(phone) {
-    const cleaned = String(phone).replace(/[\s\-]/g, '');
-    return /^09\d{8}$/.test(cleaned) || /^\+?9639\d{8}$/.test(cleaned) || /^9\d{8}$/.test(cleaned);
-}
+// --- بيانات الأجهزة ---
+let defaultDevices=[
+{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20E 4/64GB", price:125},
+{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20 4/64GB", price:129},
+{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 10 Plus 4/128GB", price:135},
+{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 10 Plus 8/128GB", price:140},
+{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20 4/128GB", price:149},
+{condition:"جديد", brand:"INFINIX", cat:"اقتصادية - Smart", name:"Smart 20 8/256GB", price:169},
+{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60i 5G 4/128GB", price:150},
+{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60i 5G 8/256GB", price:196},
+{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60 Pro 8/256GB", price:230},
+{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 60 Pro+ 8/256GB", price:230},
+{condition:"جديد", brand:"INFINIX", cat:"متوسطة - Hot", name:"Hot 70 Pro 8/256GB", price:330},
+{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note Edge 8/256GB", price:271},
+{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 8/256GB", price:364},
+{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 Pro 8/256GB", price:395},
+{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 Pro 12/256GB", price:460},
+{condition:"جديد", brand:"INFINIX", cat:"Note", name:"Note 60 Ultra 12/256GB", price:660},
+{condition:"جديد", brand:"INFINIX", cat:"ألعاب - GT", name:"GT 50 Pro 12/256GB", price:482},
+{condition:"جديد", brand:"INFINIX", cat:"ألعاب - GT", name:"GT 50 Pro 12/512GB", price:532},
+{condition:"جديد", brand:"INFINIX", cat:"تابلت", name:"XPad 20 8/256GB", price:215},
+{condition:"جديد", brand:"INFINIX", cat:"تابلت", name:"XPad 30E 8/256GB", price:250},
+{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A5 3/64GB", price:109},
+{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A7 Pro 4/64GB", price:113},
+{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A5 4/128GB", price:119},
+{condition:"جديد", brand:"XIAOMI", cat:"اقتصادية - A", name:"A7 Pro 4/128GB", price:128},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15C 4/128GB", price:135},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15C 8/256GB", price:162},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15 8/256GB", price:164},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi", name:"Redmi 15 8/256GB - نسخة 204$", price:204},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 14 4/256GB", price:213},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 14S 8/256GB", price:230},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 8/256GB", price:237},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 14S 12/256GB", price:270},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro 8/256GB", price:335},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro 12/256GB", price:358},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro 12/512GB", price:382},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro+ 12/256GB", price:420},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro Max 12/256GB", price:425},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 17 Pro Max 12/512GB", price:455},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro+ 12/512GB", price:495},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro 12/256GB", price:498},
+{condition:"جديد", brand:"XIAOMI", cat:"Redmi Note", name:"Note 15 Pro 12/512GB", price:540},
+{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17T 12/256GB", price:560},
+{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17T Pro 12/512GB", price:710},
+{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17 12/256GB", price:765},
+{condition:"جديد", brand:"XIAOMI", cat:"رائدة - Xiaomi", name:"Xiaomi 17 12/512GB", price:815},
+{condition:"جديد", brand:"POCO", cat:"اقتصادية - Poco", name:"Poco C71 4/64GB", price:111},
+{condition:"جديد", brand:"POCO", cat:"اقتصادية - Poco", name:"Poco C71 4/128GB", price:125},
+{condition:"جديد", brand:"POCO", cat:"متوسطة - Poco", name:"Poco M7 4/128GB", price:152},
+{condition:"جديد", brand:"POCO", cat:"متوسطة - Poco", name:"Poco M7 8/256GB", price:180},
+{condition:"جديد", brand:"POCO", cat:"متوسطة - Poco", name:"Poco M7 Pro 5G 8/256GB", price:210},
+{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco X8 Pro 12/256GB", price:438},
+{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco X8 Pro Max 12/512GB", price:538},
+{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco F8 Pro 12/256GB", price:570},
+{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco F8 Pro 12/512GB", price:660},
+{condition:"جديد", brand:"POCO", cat:"أداء - Poco", name:"Poco F9 Pro 12/512GB", price:740},
+{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 8/256GB", price:215},
+{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 4G 8/256GB", price:240},
+{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 Pro 8/256GB", price:295},
+{condition:"جديد", brand:"XIAOMI", cat:"تابلت", name:"Redmi Pad 2 Pro 5G 8/256GB", price:330},
+{condition:"جديد", brand:"POCO", cat:"تابلت", name:"Poco Pad X1 8/256GB", price:350},
+{condition:"جديد", brand:"XIAOMI", cat:"ساعات", name:"Mi Band 10", price:56},
+{condition:"جديد", brand:"XIAOMI", cat:"ساعات", name:"Xiaomi Watch S4", price:95},
+{condition:"جديد", brand:"XIAOMI", cat:"ساعات", name:"Xiaomi Watch 5", price:110}
+];
 
-async function publishDevice() {
-    const btn = document.getElementById('submitBtn');
-    const model = document.getElementById('deviceModel').value;
-    const modelText = document.getElementById('otherModel').value.trim();
-    const ram = document.getElementById('deviceRam').value;
-    const storage = document.getElementById('deviceStorage').value;
-    const price = document.getElementById('devicePrice').value;
-    const box = document.querySelector('input[name="box"]:checked')?.value;
-    const phone = document.getElementById('devicePhone').value.trim();
-    const currency = document.getElementById('deviceCurrency').value;
-
-    let ok = true;
-    const check = (id, cond) => { document.getElementById(id).style.display = cond ? 'none' : 'block'; if(!cond) ok = false; };
-    // إصلاح: التحقق من السعر كرقم موجب
-    const priceNum = Number(price);
-    check('errImage', !!customerImageData); check('errModel', !!model);
-    check('errRam', !!ram); check('errStorage', !!storage);
-    check('errPrice', price !== '' && !isNaN(priceNum) && priceNum > 0);
-    check('errBox', !!box);
-    check('errPhone', !!phone && isValidPhone(phone));
-    if(!ok) return;
-
-    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
-
-    try {
-        const docRef = await window.addDoc(window.collection(window.db, "devices"), {
-            image: customerImageData, model, otherModel: modelText, ram, storage,
-            price: priceNum, currency, box, phone, status: 'pending', type: 'customer', createdAt: new Date()
-        });
-        lastSubmittedDevice = { id: docRef.id, model, otherModel: modelText, ram, storage, price: priceNum, currency, box, phone };
-        document.getElementById('successModal').style.display = 'flex';
-        document.getElementById('deviceModel').value = ''; document.getElementById('otherModel').value = '';
-        document.getElementById('otherModelGroup').style.display = 'none';
-        document.getElementById('deviceRam').value = ''; document.getElementById('deviceStorage').value = '';
-        document.getElementById('devicePrice').value = ''; document.getElementById('devicePhone').value = '';
-        document.querySelectorAll('input[name="box"]').forEach(el => el.checked = false);
-        document.getElementById('previewBox').style.display = 'none'; customerImageData = null;
-    } catch (error) {
-        alert('حدث خطأ أثناء الإرسال.\nالسبب: ' + error.message + '\nتأكد من قواعد الأمان في Firebase.');
-    } finally {
-        btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-store"></i> اعرض جهازي للبيع';
-    }
-}
-
-async function saveStoreDevice(ev) {
-    const model = document.getElementById('storeModel').value.trim();
-    const ram = document.getElementById('storeRam').value.trim();
-    const storage = document.getElementById('storeStorage').value.trim();
-    const price = document.getElementById('storePrice').value;
-    const box = document.getElementById('storeBox').value.trim();
-    const currency = document.getElementById('storeCurrency').value;
-    const priceNum = Number(price);
-
-    if(!storeImageData || !model || !ram || !storage || price === '' || isNaN(priceNum) || priceNum <= 0) {
-        alert('يرجى تعبئة جميع الحقول المطلوبة بشكل صحيح وإضافة صورة');
-        return;
-    }
-
-    // إصلاح: استخدام زر ثابت بدل ev.target
-    const btn = document.getElementById('saveStoreBtn');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = 'جاري الإضافة...'; btn.disabled = true;
-
-    try {
-        await window.addDoc(window.collection(window.db, "devices"), {
-            image: storeImageData, model, otherModel: '', ram, storage,
-            price: priceNum, currency, box: box || 'غير محدد', phone: OWNER_WHATSAPP,
-            status: 'approved', type: 'store', createdAt: new Date()
-        });
-        alert('✅ تم إضافة الجهاز للمعرض ونشره بنجاح!');
-        document.getElementById('addStoreDeviceModal').style.display = 'none';
-        document.getElementById('storeModel').value = ''; document.getElementById('storeRam').value = '';
-        document.getElementById('storeStorage').value = ''; document.getElementById('storePrice').value = '';
-        document.getElementById('storeBox').value = ''; document.getElementById('storePreviewBox').style.display = 'none';
-        storeImageData = null;
-    } catch(e) {
-        alert('حدث خطأ أثناء الإضافة.\nالسبب: ' + e.message);
-    } finally {
-        btn.innerHTML = originalHTML; btn.disabled = false;
-    }
-}
-function openAddStoreDeviceModal() { document.getElementById('addStoreDeviceModal').style.display = 'flex'; }
-
-function sendToOwnerFromModal() {
-    if(!lastSubmittedDevice) { closeSuccessModal(); return; }
-    const d = lastSubmittedDevice;
-    const msg = `مرحباً، قمت بعرض جهازي للبيع:\n${d.model} ${d.otherModel || ''}\nالرام: ${d.ram} | الذاكرة: ${d.storage}\nالسعر: ${d.price} ${d.currency}\nالكرتونة: ${d.box}\nرقمي: ${d.phone}`;
-    window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-    closeSuccessModal();
-}
-function closeSuccessModal() { document.getElementById('successModal').style.display = 'none'; }
-
-// إصلاح: صورة بديلة عند فشل التحميل
-function generateDeviceCard(d) {
-    const safeImg = d.image || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBmMTcyYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmaWxsPSIjMDBiNGQ4IiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+2YTYp9it2KjYqTwvdGV4dD48L3N2Zz4=';
-    const safeModel = String(d.model || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const safeOther = String(d.otherModel || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const safeOtherJs = String(d.otherModel || '').replace(/'/g, "\\'").replace(/"/g,'&quot;');
-    const safeModelJs = String(d.model || '').replace(/'/g, "\\'");
-    const soldClass = d.status === 'sold' ? 'text-decoration:line-through;color:#94a3b8' : '';
-    return `
-        <div class="card">
-            ${d.status === 'sold' ? '<div class="sold-stamp">مباع</div>' : ''}
-            <img src="${safeImg}" alt="${safeModel}" onclick="pulseThis(this)" onerror="this.src='${safeImg}'">
-            <div class="device-title-row">
-                <strong>${safeModel} ${safeOther}</strong>
-            </div>
-            <div class="price" style="${soldClass}">${d.price} ${d.currency}</div>
-            <div class="badge">الرام: ${d.ram} | الذاكرة: ${d.storage}</div><br>
-            <div class="badge">${d.box}</div>
-            <div style="margin-top:15px">
-                ${d.status === 'sold'
-                  ? `<button class="btn" style="background:#334155;color:#94a3b8;width:100%;cursor:not-allowed" disabled><i class="fa-solid fa-ban"></i> تم البيع</button>`
-                  : `<button onclick="buyViaWhatsApp('${safeModelJs}', '${safeOtherJs}')" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل لشراء الجهاز</button>`
-                }
-            </div>
-        </div>
-    `;
+let allDevices = JSON.parse(localStorage.getItem('batoul_devices') || 'null');
+if(!allDevices || allDevices.length === 0) {
+  allDevices = defaultDevices;
+  localStorage.setItem('batoul_devices', JSON.stringify(allDevices));
+} else {
+  // للتأكد من أن الأجهزة القديمة تحتوي على حقل الحالة
+  allDevices.forEach(d => { if(!d.condition) d.condition = "جديد"; });
 }
 
-window.renderStoreSection = function() {
-    const grid = document.getElementById('storeGrid');
-    if (!grid) return;
-    const devices = window.allDevicesCache.filter(d => d.type === 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
-    if(devices.length === 0){
-        grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة معرض مضافة حالياً</p>';
-        return;
-    }
-    grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
-};
+function save(){ localStorage.setItem('batoul_devices', JSON.stringify(allDevices)); }
+let currentCondition='جديد', currentBrand='الكل', currentCat='الكل';
 
-window.renderCustomerSection = function() {
-    const grid = document.getElementById('customerGrid');
-    if (!grid) return;
-    const devices = window.allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold' || !d.status));
-    if(devices.length === 0){
-        grid.innerHTML = '<p style="color:#94a3b8;text-align:center;grid-column:1/-1;">لا يوجد أجهزة زبائن معروضة حالياً</p>';
-        return;
-    }
-    grid.innerHTML = devices.map(d => generateDeviceCard(d)).join('');
-};
-
-function openAdminModal() {
-    if (!window.__IS_OWNER__) return;
-    CURRENT_ADMIN_PASS = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
-    document.getElementById('adminLoginBox').style.display = 'block';
-    document.getElementById('adminPanelBox').style.display = 'none';
-    document.getElementById('adminPass').value = '';
-    document.getElementById('errAdminPass').style.display = 'none';
-    document.getElementById('changePassSection').style.display = 'none';
-    document.getElementById('adminModal').style.display = 'flex';
+function setCondition(cond, btn){
+  currentCondition = cond;
+  currentCat = 'الكل';
+  document.querySelectorAll('.main-condition-filters button').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  renderCats();
+  render();
 }
 
-function closeAdminModal() {
-    document.getElementById('adminModal').style.display = 'none';
-    document.getElementById('adminLoginBox').style.display = 'block';
-    document.getElementById('adminPanelBox').style.display = 'none';
-    document.getElementById('adminPass').value = '';
-    document.getElementById('errAdminPass').style.display = 'none';
-    document.getElementById('changePassSection').style.display = 'none';
+function setBrand(b,btn){ 
+  currentBrand=b; 
+  currentCat='الكل'; 
+  document.querySelectorAll('#brandFilters button').forEach(x=>x.classList.remove('active')); 
+  btn.classList.add('active'); 
+  renderCats(); 
+  render(); 
 }
 
-function checkAdminLogin() {
-    const storedPass = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
-    const inputPass = document.getElementById('adminPass').value;
-    if (inputPass === storedPass) {
-        CURRENT_ADMIN_PASS = storedPass;
-        document.getElementById('adminLoginBox').style.display = 'none';
-        document.getElementById('adminPanelBox').style.display = 'block';
-        document.getElementById('errAdminPass').style.display = 'none';
-        document.getElementById('adminPass').value = '';
-    } else {
-        document.getElementById('errAdminPass').style.display = 'block';
-        document.getElementById('adminPass').value = '';
-    }
+function renderCats(){ 
+  let cats=[...new Set(allDevices.filter(d=>(d.condition===currentCondition) && (currentBrand==='الكل'||d.brand===currentBrand)).map(d=>d.cat))]; 
+  let html=`<button class="${currentCat==='الكل'?'active':''}" onclick="setCat('الكل',this)">الكل</button>`; 
+  cats.forEach(c=>{ html+=`<button class="${currentCat===c?'active':''}" onclick="setCat('${c}',this)">${c}</button>` }); 
+  document.getElementById('catFilters').innerHTML=html; 
 }
 
-function showChangePassSection() { document.getElementById('changePassSection').style.display = 'block'; }
-function hideChangePassSection() {
-    document.getElementById('changePassSection').style.display = 'none';
-    document.getElementById('oldPassInput').value = '';
-    document.getElementById('newPassInput').value = '';
+function setCat(c,btn){ 
+  currentCat=c; 
+  document.querySelectorAll('#catFilters button').forEach(x=>x.classList.remove('active')); 
+  btn.classList.add('active'); 
+  render(); 
 }
 
-function saveNewPassword() {
-    const oldP = document.getElementById('oldPassInput').value;
-    const newP = document.getElementById('newPassInput').value;
-    const storedPass = localStorage.getItem('albatoulAdminPass') || DEFAULT_PASSWORD;
-    if (oldP !== storedPass) { alert('كلمة المرور الحالية خاطئة'); return; }
-    if (newP.length < 4) { alert('يجب أن تكون 4 أحرف على الأقل'); return; }
-    if (newP === storedPass) { alert('كلمة المرور الجديدة مطابقة للقديمة'); return; }
-    localStorage.setItem('albatoulAdminPass', newP);
-    CURRENT_ADMIN_PASS = newP;
-    document.getElementById('oldPassInput').value = '';
-    document.getElementById('newPassInput').value = '';
-    alert('✅ تم تغيير كلمة المرور بنجاح!');
-    hideChangePassSection();
+function render(){
+  let query = document.getElementById('searchInput').value.toLowerCase().trim();
+  let list = allDevices.filter(d=>{
+    let matchCondition = (d.condition === currentCondition);
+    let matchBrand = (currentBrand==='الكل'||d.brand===currentBrand);
+    let matchCat = (currentCat==='الكل'||d.cat===currentCat);
+    let matchSearch = d.name.toLowerCase().includes(query) || d.brand.toLowerCase().includes(query) || d.cat.toLowerCase().includes(query);
+    return matchCondition && matchBrand && matchCat && matchSearch;
+  });
+  if(list.length===0){ 
+    document.getElementById('storeGrid').innerHTML=`<p style="grid-column:1/-1;text-align:center;color:#94a3b8;padding:20px">لا يوجد أجهزة تطابق البحث.</p>`; 
+    return; 
+  }
+  document.getElementById('storeGrid').innerHTML=list.map(d=>{
+    let condClass = d.condition === 'مستعمل' ? 'cond-used' : 'cond-new';
+    let condText = d.condition === 'مستعمل' ? 'مستعمل' : 'جديد';
+    return `<div class="card">
+      <span class="condition-tag ${condClass}">${condText}</span>
+      <span class="brand-tag">${d.brand}</span>
+      <h3>${d.name}</h3>
+      <div class="price">${d.price}$</div>
+      <span class="badge">${d.cat}</span>
+    </div>`;
+  }).join('');
 }
 
-function generateAdminItem(d) {
-    const safeImg = d.image || '';
-    const safeModel = String(d.model || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const safeOther = String(d.otherModel || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    return `
-        <div class="admin-device-item">
-            <div class="admin-device-header">
-                <div style="display:flex;gap:10px;align-items:center">
-                    <img src="${safeImg}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;${d.status === 'sold' ? 'opacity:0.5;' : ''}" alt="">
-                    <div>
-                        <strong style="display:block;font-size:.9rem">${safeModel} ${safeOther} ${d.status === 'sold' ? '<span style="color:#ef4444;font-size:.7rem">(مباع)</span>' : ''}</strong>
-                        <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="admin-edit-row">
-                <button class="edit-btn" onclick="openEditModal('${d.id}')">تعديل</button>
-                <button class="sold-btn" onclick="markAsSold('${d.id}')">${d.status === 'sold' ? 'إرجاع' : 'تم البيع'}</button>
-                <button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button>
-            </div>
-        </div>
-    `;
+function openAdmin(){ document.getElementById('adminModal').style.display='flex'; }
+function closeAdmin(){ document.getElementById('adminModal').style.display='none'; document.getElementById('loginBox').style.display='block'; document.getElementById('adminBox').style.display='none'; document.getElementById('adminPass').value=''; }
+function checkPass(){ 
+  if(document.getElementById('adminPass').value === currentPassword){ 
+    document.getElementById('loginBox').style.display='none'; 
+    document.getElementById('adminBox').style.display='block'; 
+    renderAdmin(); 
+  } else { 
+    alert('كلمة المرور غلط!'); 
+  } 
 }
 
-window.renderAdminLists = function() {
-    const storeDevices = window.allDevicesCache.filter(d => d.type === 'store' && d.status !== 'pending');
-    const adminStoreList = document.getElementById('adminStoreList');
-    if (adminStoreList) {
-        adminStoreList.innerHTML = storeDevices.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا يوجد أجهزة معرض</p>' : storeDevices.map(d => generateAdminItem(d)).join('');
-    }
-
-    const pending = window.allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'pending' || !d.status));
-    const pendingCountEl = document.getElementById('pendingCount');
-    if (pendingCountEl) pendingCountEl.textContent = pending.length;
-    const pendingList = document.getElementById('pendingList');
-    if (pendingList) {
-        if(pending.length === 0){
-            pendingList.innerHTML = '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد طلبات معلقة</p>';
-        } else {
-            pendingList.innerHTML = pending.map(d => `
-                <div class="admin-device-item">
-                    <div class="admin-device-header">
-                        <div style="display:flex;gap:10px;align-items:center">
-                            <img src="${d.image || ''}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;" alt="">
-                            <div>
-                                <strong style="display:block;font-size:.9rem">${String(d.model||'').replace(/</g,'&lt;')} ${String(d.otherModel||'').replace(/</g,'&lt;')}</strong>
-                                <span style="font-size:.8rem;color:#00b4d8">${d.price} ${d.currency} • ${d.phone}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="admin-edit-row">
-                        <button class="approve-btn" onclick="approveDevice('${d.id}')">موافقة ونشر</button>
-                        <button class="del-btn" onclick="deleteDevice('${d.id}')">حذف</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
-
-    const approved = window.allDevicesCache.filter(d => d.type !== 'store' && (d.status === 'approved' || d.status === 'sold'));
-    const approvedCountEl = document.getElementById('approvedCount');
-    if (approvedCountEl) approvedCountEl.textContent = approved.length;
-    const approvedList = document.getElementById('approvedList');
-    if (approvedList) {
-        approvedList.innerHTML = approved.length === 0 ? '<p style="color:#94a3b8;text-align:center;font-size:.9rem">لا توجد أجهزة زبائن منشورة</p>' : approved.map(d => generateAdminItem(d)).join('');
-    }
-};
-
-async function recoverOldDevices() {
-    if(!confirm('هل تريد استعادة الأجهزة القديمة؟')) return;
-    if (!window.allDevicesCache || window.allDevicesCache.length === 0) {
-        alert('لا توجد أجهزة في الذاكرة. انتظر تحميل البيانات ثم حاول مجدداً.');
-        return;
-    }
-    let count = 0;
-    for (let d of window.allDevicesCache) {
-        if (!d.status || !d.type) {
-            try {
-                // إصلاح: تحقق أدق من رقم صاحب المتجر
-                const phoneClean = String(d.phone || '').replace(/[\s\-+]/g, '');
-                const isOwner = phoneClean.includes(OWNER_PHONE_CLEAN);
-                const type = d.type || (isOwner ? "store" : "customer");
-                await window.updateDoc(window.doc(window.db, "devices", d.id), {
-                    status: d.status || "approved",
-                    type: type
-                });
-                count++;
-            } catch(e) { console.error(e); }
-        }
-    }
-    alert(count > 0 ? `✅ تم استعادة ${count} جهاز.` : `لم يتم العثور على أجهزة بحاجة للاستعادة.`);
+function addDevice(){ 
+  let cond=document.getElementById('newCondition').value;
+  let b=document.getElementById('newBrand').value; 
+  let c=document.getElementById('newCat').value.trim(); 
+  let n=document.getElementById('newName').value.trim(); 
+  let p=parseFloat(document.getElementById('newPrice').value); 
+  if(!b||!c||!n||!p){ alert('عبي كل الحقول'); return; } 
+  allDevices.push({condition:cond, brand:b, cat:c, name:n, price:p}); 
+  save(); 
+  renderCats(); 
+  render(); 
+  renderAdmin(); 
+  alert('تمت الإضافة ✅'); 
+  document.getElementById('newCat').value=''; 
+  document.getElementById('newName').value=''; 
+  document.getElementById('newPrice').value=''; 
 }
 
-async function approveDevice(id) {
-    try { await window.updateDoc(window.doc(window.db, "devices", id), { status: "approved" }); }
-    catch(e) { alert('خطأ: ' + e.message); }
+function renderAdmin(){ 
+  document.getElementById('adminList').innerHTML=allDevices.map((d,i)=>`<div class="admin-item"><span><b>[${d.condition}]</b> <b>${d.brand}</b> - ${d.name} - <b style="color:#00b4d8">${d.price}$</b></span><div style="display:flex;gap:6px"><button class="btn btn-green" onclick="editPrice(${i})">تعديل</button><button class="btn btn-red" onclick="delDevice(${i})">حذف</button></div></div>`).join(''); 
 }
 
-async function markAsSold(id) {
-    const dev = window.allDevicesCache.find(d => d.id === id);
-    if (!dev) { alert('لم يتم العثور على الجهاز.'); return; }
-    const newStatus = dev.status === 'sold' ? 'approved' : 'sold';
-    try { await window.updateDoc(window.doc(window.db, "devices", id), { status: newStatus }); }
-    catch(e) { alert('خطأ: ' + e.message); }
+function editPrice(i){ 
+  let np=prompt('السعر الجديد لـ '+allDevices[i].name, allDevices[i].price); 
+  if(np){ allDevices[i].price=parseFloat(np); save(); render(); renderAdmin(); } 
 }
 
-async function deleteDevice(id) {
-    if(!confirm('هل أنت متأكد من الحذف نهائياً؟')) return;
-    try { await window.deleteDoc(window.doc(window.db, "devices", id)); }
-    catch(e) { alert('خطأ: ' + e.message); }
+function delDevice(i){ 
+  if(confirm('متأكد بدك تحذف '+allDevices[i].name+' ؟')){ allDevices.splice(i,1); save(); renderCats(); render(); renderAdmin(); } 
 }
 
-function openEditModal(id) {
-    const d = window.allDevicesCache.find(dev => dev.id === id);
-    if(!d) return;
-    document.getElementById('editDeviceId').value = d.id;
-    document.getElementById('editModel').value = d.model || '';
-    document.getElementById('editRam').value = d.ram || '';
-    document.getElementById('editStorage').value = d.storage || '';
-    document.getElementById('editPrice').value = d.price || '';
-    document.getElementById('editCurrency').value = d.currency || '$';
-    document.getElementById('editStatus').value = d.status || 'approved';
-    document.getElementById('editDeviceModal').style.display = 'flex';
-}
-async function saveEditedDevice() {
-    const id = document.getElementById('editDeviceId').value;
-    const priceNum = Number(document.getElementById('editPrice').value);
-    if (isNaN(priceNum) || priceNum <= 0) { alert('السعر غير صالح'); return; }
-    try {
-        await window.updateDoc(window.doc(window.db, "devices", id), {
-            model: document.getElementById('editModel').value,
-            ram: document.getElementById('editRam').value,
-            storage: document.getElementById('editStorage').value,
-            price: priceNum,
-            currency: document.getElementById('editCurrency').value,
-            status: document.getElementById('editStatus').value
-        });
-        alert('تم الحفظ!'); document.getElementById('editDeviceModal').style.display = 'none';
-    } catch(e) { alert('خطأ: ' + e.message); }
-}
-
-window.addEventListener('load', function() {
-    const adminBtn = document.querySelector('.admin-btn-header');
-    if (adminBtn && !window.__IS_OWNER__) adminBtn.style.display = 'none';
-    updateViews();
-});
+renderCats(); 
+render();
 </script>
 </body>
 </html>
